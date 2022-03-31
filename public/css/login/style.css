@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+body {
+    background-color: hsl(178.75, 100%, 28.24%);
+    font-family: 'Poppins' !important;
+    /* background: url(/image/login/bg1.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; */
+}
+
+.kotakTengah {
+    border-radius: 1rem;
+    width: 45rem;
+    height: 25rem;
+    background-color: #F7F7F7 !important;
+    top: 50%;
+    left: 50%;
+    margin-top: -12.5rem;
+    margin-left: -22.5rem;
+    text-align: center;
+    position: absolute;
+    box-shadow: 0px 1px 20px 5px rgba(2, 2, 2, 0.2);
+}
+
+ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+li {
+    height: 20rem;
+}
+
+.li1 {
+    padding-top: 2.5rem;
+}
+
+.li2 {
+    padding-top: 3rem;
+    text-align: center;
+}
+
+li img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.box-wrapped {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.box-wrapped li {
+    flex: auto;
+    width: 50%;
+
+}
+
+/* css form */
+.myForm {
+    display: grid;
+    grid-template-columns: [labels] 5rem [controls] 1fr;
+    grid-auto-flow: row;
+    grid-gap: .8em;
+    padding: .2em;
+    margin-left: 0px;
+    padding: 1em 4em 0 0;
+
+}
+
+.myForm>label {
+    grid-column: labels;
+    grid-row: auto;
+    font-size: .95rem;
+    text-align: left;
+    padding-top: 0.35em;
+}
+
+.myForm>input,
+.myForm>button,
+span {
+    grid-column: controls;
+    grid-row: auto;
+    border-radius: .2rem;
+}
+
+.myForm .input-form {
+    border: 1px solid grey;
+    width: 100%;
+    margin-bottom: 1rem;
+    display: -ms-flexbox;
+    display: flex;
+    border-radius : .5rem;
+
+}
+
+.input-form .icon {
+    padding: 10px;
+    color: whitesmoke;
+    min-width: 1rem;
+    text-align: center;
+    background-color: rgb(128, 203, 196);
+    border-top-left-radius : .5rem;
+    border-bottom-left-radius : .5rem;
+}
+
+.input-form input {
+    border: none;
+    outline: none;
+    color: rgb(69, 90, 100);
+    border-top-right-radius : .5rem;
+    border-bottom-right-radius : .5rem;
+    padding-left: .5rem;
+}
+
+
+.myForm>button {
+    background-color: rgb(229, 57, 53);
+    color: white;
+    width: 45%;
+    text-align: center;
+    padding: 0.7em;
+    margin-bottom: 0.5rem;
+    margin-left: 2.5rem;
+    font-weight: 700;
+    border: none;
+    box-shadow: 0 .2rem #666;
+}
+
+.myForm>button:hover {
+    background-color: rgb(183, 28, 28)
+}
+
+.myForm>button:active {
+    background-color: rgb(198, 40, 40);
+    box-shadow: 0 .1rem #666;
+    transform: translateY(4px);
+}
+
+span {
+    font-size: .8rem;
+}
+
+span a {
+    text-decoration: none;
+    color: rgb(198, 40, 40);
+    font-weight: 600;
+}
+
+@media (max-width:640px) {
+    .kotakTengah {
+        width: 22rem !important;
+        margin-left: -11rem !important;
+        top: 50%;
+        left: 50%;
+
+    }
+
+    .myForm {
+
+        margin-left: 1.5rem !important;
+        margin-right: 0rem !important;
+    }
+
+    .myForm>button {
+        margin-left: 1rem;
+    }
+
+    .box-wrapped li {
+        flex: auto;
+        /* Set the width to 50% */
+        width: 100%;
+
+    }
+
+    .li1 {
+        display: none;
+    }
+
+}
