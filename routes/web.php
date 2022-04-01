@@ -21,49 +21,49 @@ Route::get('/singup', function () {
 });
 
 Route::get('/', function () {
-    return view('page/dashboard');
+    return view('adminpage/dashboard');
 });
 
 Route::get('/kelolaAkun', function () {
-    return view('page/kelolaAkun');
+    return view('adminpage/kelolaAkun');
 });
 
 Route::get('/kelolaWisata', function () {
-    return view('page/kelolaWisata');
+    return view('adminpage/kelolaWisata');
 });
 
 Route::get('/kelolaKategori', function () {
-    return view('page/kelolaKategori');
+    return view('adminpage/kelolaKategori');
 });
 
 Route::get('/kelolaFasilitas', function () {
-    return view('page/kelolaFasilitas');
+    return view('adminpage/kelolaFasilitas');
 });
 
 Route::get('/kelolaPenginapan', function () {
-    return view('page/kelolaPenginapan');
+    return view('adminpage/kelolaPenginapan');
 });
 
 Route::get('/kelola360', function () {
-    return view('page/kelola360');
+    return view('adminpage/kelola360');
 });
 
 Route::get('/kelolaKomentar', function () {
-    return view('page/kelolaKomentar');
+    return view('adminpage/kelolaKomentar');
 });
 
 Route::get('/pesanKontak', function () {
-    return view('page/pesanKontak');
+    return view('adminpage/pesanKontak');
 });
 
 Route::get('/laporanTransaksi', function () {
-    return view('page/laporanTransaksi');
+    return view('adminpage/laporanTransaksi');
 });
 
 Route::get('/halamanPengunjung', function () {
-    return view('page/halamanPengunjung');
+    return view('adminpage/halamanPengunjung');
 });
 
 Route::get('/sliders', function () {
-    return view('page/sliders');
+    return view('adminpage/sliders');
 });

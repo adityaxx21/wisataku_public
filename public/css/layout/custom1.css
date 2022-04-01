@@ -1,7 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-*{
-font-family: 'Poppins';
-}
+@charset "UTF-8";
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url("https://netdna.bootstrapcdn.com/bootstrap/3.0.0/fonts/glyphicons-halflings-regular.eot");
+  src: url("https://netdna.bootstrapcdn.com/bootstrap/3.0.0/fonts/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("https://netdna.bootstrapcdn.com/bootstrap/3.0.0/fonts/glyphicons-halflings-regular.woff") format("woff"), url("https://netdna.bootstrapcdn.com/bootstrap/3.0.0/fonts/glyphicons-halflings-regular.ttf") format("truetype"), url("https://netdna.bootstrapcdn.com/bootstrap/3.0.0/fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular") format("svg"); }
 
 .glyphicon {
   position: relative;
@@ -1011,7 +1012,6 @@ font-family: 'Poppins';
   width: 230px;
   padding: 0;
   position: absolute;
-  font-family: 'Poppins' !important;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1022,7 +1022,13 @@ font-family: 'Poppins';
   position: fixed; }
 
 body .container.body .right_col {
-  background: #F7F7F7; }
+  background: #F7F7F7; 
+  position: absolute !important;
+  width: 100%;
+  /* z-index: -1000;
+  margin-top: 2rem;
+  margin-left: 0px !important; */
+}
 
 .nav-md .container.body .right_col {
   padding: 10px 20px 0;
@@ -1250,7 +1256,7 @@ table.no-margin .progress {
 .grid_slider .col-md-6 {
   padding: 0 40px; }
 
-h1, .h1, h2, .h2{
+h1, .h1, h2, .h2, h3, .h3 {
   margin-top: 10px;
   margin-bottom: 10px; }
 
@@ -1418,7 +1424,9 @@ a:hover, a:focus {
   display: block;
   height: 55px;
   margin: 0;
-  padding-left: 10px; }
+  text-align: center;
+  border-bottom: .1rem solid;
+}
 
 .site_title:hover, .site_title:focus {
   text-decoration: none; }
@@ -4968,3 +4976,7 @@ ul.notifications {
 
 .calendar-exibit .calendar-table {
   padding: 0 0 4px 0; }
+
+.site_title{
+  text-align: center !important;
+}
