@@ -2,33 +2,33 @@
 
 @section('container')
     <div class="box">
-      <h3>Dashboard Page</h3>
+      <h3>Dashboard <span class="title">Page</span></h3>
         <div class="card">
-            <h4>Jumlah Wisata</h4>
+            <h4>Jumlah  <span class="title">Wisata</span></h4>
             <hr />
             <p>0000</p>
 
         </div>
         <div class="card">
-            <h2>Jumlah Akun</h2>
+            <h2>Jumlah  <span class="title">Akun</span></h2>
             <hr />
             <p>0000</p>
 
         </div>
         <div class="card">
-            <h2>Jumlah Transaksi</h2>
+            <h2>Jumlah  <span class="title">Transaksi</span></h2>
             <hr />
             <p>0000</p>
 
         </div>
         <div class="card">
-            <h2>Jumlah Kategori</h2>
+            <h2>Jumlah  <span class="title">Kategori</span></h2>
             <hr />
             <p>0000</p>
 
         </div>
         <div class="card">
-            <h2>Jumlag 360</h2>
+            <h2>Jumlag  <span class="title">360</span></h2>
             <hr />
             <p>0000</p>
 

@@ -24,7 +24,7 @@
           <li><a href="/kelola360"><i class="fa fa-file-image-o"></i> Kelola 360 </a></li>
           <li><a><i class="fa fa-envelope"></i> Pesan Masuk <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
-              <li><a href="/kelolaKomentar"><i class="fa fa-comments-o"></i> Pesan Komentar </a></li>
+              <li><a href="/pesanKomentar"><i class="fa fa-comments-o"></i> Pesan Komentar </a></li>
               <li><a href="/pesanKontak"><i class="fa fa-envelope-square"></i> Pesan Kontak </a></li>
             </ul>
           </li>

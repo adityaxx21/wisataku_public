@@ -21,49 +21,83 @@ Route::get('/singup', function () {
 });
 
 Route::get('/', function () {
-    return view('adminpage/dashboard');
+    return view('adminpage/dashboard', [
+        "title" => "Dashboard"
+    ]);
 });
 
+// kelola akun
 Route::get('/kelolaAkun', function () {
-    return view('adminpage/kelolaAkun');
+    return view('adminpage/kelolaAkun/kelolaAkun', [
+        "title" => "Kelola Akun"
+    ]);
 });
+
+
+Route::get('/tambahAkun', function () {
+    return view('adminpage/kelolaAkun/tambahAkun', [
+        "title" => "Form Tambah Akun"
+    ]);
+});
+
+// end kelola akun
 
 Route::get('/kelolaWisata', function () {
-    return view('adminpage/kelolaWisata');
+    return view('adminpage/kelolaWisata', [
+        "title" => "Kelola Wisata"
+    ]);
 });
 
 Route::get('/kelolaKategori', function () {
-    return view('adminpage/kelolaKategori');
+    return view('adminpage/kelolaKategori', [
+        "title" => "Kelola Kategori"
+    ]);
 });
 
 Route::get('/kelolaFasilitas', function () {
-    return view('adminpage/kelolaFasilitas');
+    return view('adminpage/kelolaFasilitas', [
+        "title" => "Kelola Fasilitas"
+    ]);
 });
 
 Route::get('/kelolaPenginapan', function () {
-    return view('adminpage/kelolaPenginapan');
+    return view('adminpage/kelolaPenginapan', [
+        "title" => "Kelola Penginapan"
+    ]);
 });
 
 Route::get('/kelola360', function () {
-    return view('adminpage/kelola360');
+    return view('adminpage/kelola360', [
+        "title" => "Kelola 360"
+    ]);
 });
 
-Route::get('/kelolaKomentar', function () {
-    return view('adminpage/kelolaKomentar');
+Route::get('/pesanKomentar', function () {
+    return view('adminpage/pesanKomentar', [
+        "title" => "Pesan Komentar"
+    ]);
 });
 
 Route::get('/pesanKontak', function () {
-    return view('adminpage/pesanKontak');
+    return view('adminpage/pesanKontak', [
+        "title" => "Pesan Kontak"
+    ]);
 });
 
 Route::get('/laporanTransaksi', function () {
-    return view('adminpage/laporanTransaksi');
+    return view('adminpage/laporanTransaksi', [
+        "title" => "Laporan Transaksi"
+    ]);
 });
 
 Route::get('/halamanPengunjung', function () {
-    return view('adminpage/halamanPengunjung');
+    return view('adminpage/halamanPengunjung', [
+        "title" => "Halaman Pengunjung"
+    ]);
 });
 
 Route::get('/sliders', function () {
-    return view('adminpage/sliders');
+    return view('adminpage/sliders', [
+        "title" => "Sliders"
+    ]);
 });
