@@ -1,3 +1,8 @@
+.container-card{  
+  width: 100%;
+  padding-left: .25rem;
+}
+
 .box h3{
   font-weight: 700;
   color: #0d6352;
@@ -11,7 +16,7 @@
 
 .card {
     background-color: white;
-    width: 15em;
+    width: 13.5em;
     display: inline-flex;
     flex-direction: column;
     padding: 1.5rem;
@@ -32,7 +37,7 @@
   .card h5 {
     margin: 0px;
     padding: 0px 0px 10px 0px;
-    font-size: 1.27em;
+    font-size: 1.09em;
     color: #282828;
     text-align: center;
     font-weight: 600;
@@ -49,18 +54,37 @@
     /* custom */
   }
   .card p {
-    margin: 15px 0px 0px 0px;
+    /* margin: 15px 0px 0px 0px; */
     font-family: "Noto Sans KR", sans-serif;
     font-weight: 100;
     letter-spacing: -0.25px;
-    line-height: 1.25;
-    font-size: 4rem;
+    font-size: 3rem;
     word-break: break-all;
     word-wrap: pre-wrap;
     color: #282828;
     animation-name: p-show;
     animation-duration: 1.5s;
+    text-align: center;
   }
+
+.upfile{
+  /* background-color: black; */
+  border: 1px solid rgba(42, 72, 88,0.3);
+  width: 90%;
+  background-color: white;
+  border-radius: 0.3rem;
+}
+
+.upfile label {
+  margin:0px !important;
+  background-color: #2A3F54;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  font-size: .7rem;
+}
+
 
   @keyframes line-show {
     from {

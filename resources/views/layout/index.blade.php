@@ -16,6 +16,8 @@
     <link href="/css/layout/custom.css" rel="stylesheet">
     <link rel="stylesheet" href="css/adminPage/dashboard/style.css">
     <link rel="stylesheet" href="css/adminPage/kelolaakun/style.css">
+    <link rel="stylesheet" href="css/adminPage/kelolaWisata/style.css">
+    <link rel="stylesheet" href="css/adminPage/kelolaWisata/dataTables.bootstrap.min.css">
 
     <title>Halaman {{ $title }}</title>
   </head>
@@ -74,6 +76,11 @@
   
   <!-- Custom Theme Scripts -->
   <script src="js/layout/custom.js"></script>
+  <script src="/js/adminPage/kelolaWisata/jquery.dataTables.js"></script>
+  <script src="/js/adminPage/kelolaWisata/dataTables.bootstrap.min.js"></script>
+  <script src="js/adminPage/formUpload/bootstrap-wysiwyg.min.js"></script>
+  <script src="js/adminPage/formUpload/jquery.hotkeys.js"></script>
+  <script src="js/adminPage/formUpload/prettify.js"></script>
 
   </body>
 </html>

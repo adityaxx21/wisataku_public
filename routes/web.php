@@ -42,9 +42,17 @@ Route::get('/tambahAkun', function () {
 
 // end kelola akun
 
+
+// Kelola Wisata
 Route::get('/kelolaWisata', function () {
-    return view('adminpage/kelolaWisata', [
+    return view('adminpage/kelolaWisata/kelolaWisata', [
         "title" => "Kelola Wisata"
+    ]);
+});
+
+Route::get('/tambahWisata', function () {
+    return view('adminpage/kelolaWisata/tambahWisata', [
+        "title" => "Form Tambah Wisata"
     ]);
 });
 

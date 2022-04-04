@@ -4,12 +4,18 @@
     left: 50.5%;
     transform: translate(-50%, 5%);
     text-align: center;
+    display: contents;
+}
+
+
+.tabel-akun{
+    padding-right: 5rem !important;
+    padding-left: 5rem !important;
 }
 
 .btn-tambahakun{
     text-align: left !important;
-    left: 50.5% !important;
-    transform: translate(50%, 50%) !important;
+    margin-top: 2rem;
 }
 
 .btn{
@@ -26,7 +32,9 @@ td span{
     .x_content{
         font-size: 9.5px;
     }
-    
+    .btn{
+        font-size: 9.5px;
+    }
 }
 
 /* tambah akun */
@@ -47,7 +55,8 @@ td span{
 
 .tambahAkun .form-upload{
     width: 100%;
-    margin-left: 2.5rem;
+    margin-left: 1.5rem;
+    margin-right: 0rem !important;
 }
 
 .form-group{
@@ -62,7 +71,7 @@ td span{
 
 .form-upload .form-control{
     font-size: 0.9rem;
-    width: 80% !important;
+    width: 90%;
     border-radius: .3rem;
     margin-bottom: 1rem;
 }
@@ -78,6 +87,6 @@ td span{
 }
 
 .button-form{
-    margin-left: 2.5rem;
+    margin-left: 1.5rem;
     text-align: left;
 }

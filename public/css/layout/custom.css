@@ -4982,8 +4982,10 @@ ul.notifications {
     margin-top: 1rem;
     padding-top: 3rem !important;
     padding-bottom: 7rem !important;
-    padding-left: 0rem !important;
+    padding-left: 1.3rem !important;
     border-radius: 0.3rem;
+    padding-right: 1.3rem !important;
+    
   }
 
   .btn-header{
@@ -4991,4 +4993,8 @@ ul.notifications {
     float: left;
     padding-top: 6px;
     padding-bottom: 6px;
+  }
+
+  .table {
+    border-radius: .3rem !important;
   }

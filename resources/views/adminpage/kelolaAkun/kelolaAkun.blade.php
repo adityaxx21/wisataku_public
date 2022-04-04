@@ -1,7 +1,7 @@
 @extends('layout.index')
 
 @section('container')
-    <div class="box">
+    <div class="box tabel-akun">
         <h3>Kelola <span class="title akun">Akun</span></h3>
         <a href="/tambahAkun" class="btn btn-success btn-tambahakun"><i class="fa fa-plus-circle"><span> Tambah Akun</span></i></a>
         <div class="x_content">
