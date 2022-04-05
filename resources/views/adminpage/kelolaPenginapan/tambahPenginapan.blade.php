@@ -2,7 +2,7 @@
 
 @section('container')
     <div class="box tambahAkun">
-        <h3>Tambah <span class="title akun">Wisata</span></h3>
+        <h3>Tambah <span class="title akun">Penginapan</span></h3>
         <form action="" method="post">
             <div class="form-upload">
                 <div class="row">
@@ -15,25 +15,11 @@
                         </div>
                     </div>
                     <div class="col-md-12 col-sm-12  form-group">
-                        <label for="namaWisata" class="label-form">Nama Wisata</label>
-                        <input type="text" name="namaWisata" placeholder="Nama Wisata" class="form-control" required
+                        <label for="namaPenginapan" class="label-form">Nama Penginapan</label>
+                        <input type="text" name="namaPenginapan" placeholder="Nama Penginapan" class="form-control" required
                             id="namaWisata">
                     </div>
 
-                    <div class="col-md-6 col-sm-12  form-group">
-                        <label for="kategoriWisata" class="label-form">Kategori</label>
-                        <select id="kategoriWisata" name="kategoriWisata" class="form-control duacol" required="">
-                            <option value=""></option>
-                            <option value="pegunungan">Wisata Pegunungan</option>
-                            <option value="monumen">Wisata Monumen</option>
-                        </select>
-                    </div>
-
-                    <div class="col-md-6 col-sm-12  form-group">
-                        <label for="jamOperasi" class="label-form">Jam Operasi</label>
-                        <input type="text" name="jamOperasi" placeholder="Jam Operasi" class="form-control duacol"
-                            required>
-                    </div>
 
                     <div class="col-md-12 col-sm-12  form-group">
                         <label for="deskripsi" class="label-form">Deskripsi</label>
@@ -117,13 +103,9 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6 col-sm-12  form-group">
-                        <label for="tiketDewasa" class="label-form">Harga Tiket Dewasa</label>
-                        <input type="text" name="tiketDewasa" placeholder="Harga Tiket Dewasa" class="form-control duacol" required>
-                    </div>
-                    <div class="col-md-6 col-sm-12  form-group">
-                        <label for="tiketAnak" class="label-form">Harga Tiket Anak-anak</label>
-                        <input type="text" name="tiketAnak" placeholder="Harga Tiket Dewasa" class="form-control duacol" required>
+                    <div class="col-md-12 col-sm-12  form-group">
+                        <label for="hargaPenginapan" class="label-form">Harga Penginapan</label>
+                        <input type="text" name="hargaPenginapan" placeholder="Harga Tiket Dewasa" class="form-control duacol" required>
                     </div>
 
                     <div class="col-md-12 col-sm-12  form-group">
@@ -132,21 +114,6 @@
                     </div>
 
                     
-                    <div class="col-md-4 col-sm-12  form-group">
-                        <label for="parkirmotor" class="label-form">Harga Parkir Motor</label>
-                        <input type="text" name="parkirmotor" placeholder="Parkir Motor" class="form-control trikol" required>
-                    </div>
-                    
-                    <div class="col-md-4 col-sm-12  form-group">
-                        <label for="parkirmobil" class="label-form">Harga Parkir Mobil</label> 
-                        <input type="text" name="parkirmobil" placeholder="Parkir Mobil" class="form-control trikol" required>
-                    </div>
-                    
-                    <div class="col-md-4 col-sm-12  form-group">
-                        <label for="parkirumum" class="label-form">Harga Parkir Umum</label>
-                        <input type="text" name="parkirumum" placeholder="Parkir Umum" class="form-control trikol" required>
-                    </div>
-
                     <div class="col-md-6 col-sm-12  form-group">
                         <label for="lat" class="label-form">Latitude</label>
                         <input type="text" name="lat" placeholder="Latitude" class="form-control duacol" required>
@@ -163,9 +130,7 @@
                 <button type="submit" class="btn btn-success"><i class="fa fa-save"><span> Simpan</span></i></button>
                 <button type="button" class="btn btn-warning reset"><i class="fa fa-repeat"><span>
                             Reset</span></i></button>
-                <a href="/kelolaWisata" class="btn btn-danger"><i class="fa fa-close"><span> Kembali</span></i></a>
-                <a href="/setupFasilitas"  class="btn btn-primary newSetupFasilitas"><i class="fa fa-plus-circle"><span>
-                    Setup Fasilitas</span></i></a>
+                <a href="/kelolaPenginapan" class="btn btn-danger"><i class="fa fa-close"><span> Kembali</span></i></a>
             </div>
             
         </form>
@@ -173,6 +138,6 @@
 
 
     <script src="js/adminPage/formUpload/script.js"></script>
-    {{-- <script src="js/layout/custom.js"></script> --}}
+    
     
 @endsection
