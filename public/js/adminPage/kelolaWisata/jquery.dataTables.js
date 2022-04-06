@@ -987,8 +987,8 @@
 			
 			// Map the initialisation options onto the settings object
 			_fnMap( oSettings.oFeatures, oInit, [
-				"bPaginate",
 				"bFilter",
+				"bPaginate",
 				"bSort",
 				"bSortMulti",
 				"bInfo",
@@ -1061,10 +1061,10 @@
 				 */
 				$.extend( oClasses, DataTable.ext.oJUIClasses, oInit.oClasses );
 			
-				if ( oInit.sDom === defaults.sDom && defaults.sDom === "lfrtip" )
+				if ( oInit.sDom === defaults.sDom && defaults.sDom === "frtip" )
 				{
 					/* Set the DOM to use a layout suitable for jQuery UI's theming */
-					oSettings.sDom = '<"H"lfr>t<"F"ip>';
+					oSettings.sDom = '<"H"fr>t<"F"ip>';
 				}
 			
 				if ( ! oSettings.renderer ) {
@@ -1785,8 +1785,8 @@
 		_fnCompatMap( init, 'orderFixed',    'aaSortingFixed' );
 		_fnCompatMap( init, 'paging',        'bPaginate' );
 		_fnCompatMap( init, 'pagingType',    'sPaginationType' );
-		_fnCompatMap( init, 'pageLength',    'iDisplayLength' );
 		_fnCompatMap( init, 'searching',     'bFilter' );
+		_fnCompatMap( init, 'pageLength',    'iDisplayLength' );
 	
 		// Boolean initialisation of x-scrolling
 		if ( typeof init.sScrollX === 'boolean' ) {
@@ -3621,16 +3621,13 @@
 				insert = insert.parent();
 			}
 			// @todo Move options into their own plugins?
-			else if ( cOption == 'l' && features.bPaginate && features.bLengthChange )
-			{
-				/* Length */
-				featureNode = _fnFeatureHtmlLength( oSettings );
-			}
+			
 			else if ( cOption == 'f' && features.bFilter )
 			{
 				/* Filter */
 				featureNode = _fnFeatureHtmlFilter( oSettings );
 			}
+			
 			else if ( cOption == 'r' && features.bProcessing )
 			{
 				/* pRocessing */
@@ -11813,7 +11810,7 @@
 		 *      } );
 		 *    } );
 		 */
-		"sDom": "lfrtip",
+		"sDom": 'flrtip',
 	
 	
 		/**
@@ -12927,7 +12924,7 @@
 			 * set a default use {@link DataTable.defaults}.
 			 *  @type boolean
 			 */
-			"bLengthChange": false,
+			// "bLengthChange": false,
 	
 			/**
 			 * Pagination enabled or not. Note that if this is disabled then length
@@ -14344,7 +14341,7 @@
 		"sInfo": "dataTables_info",
 		"sPaging": "dataTables_paginate paging_", /* Note that the type is postfixed */
 		// "sLength": "dataTables_length",
-		"sProcessing": "dataTables_processing",
+		// "sProcessing": "dataTables_processing",
 	
 		/* Sorting */
 		"sSortAsc": "sorting_asc",

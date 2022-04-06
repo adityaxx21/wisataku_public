@@ -1,0 +1,23 @@
+div.dataTables_wrapper div.dataTables_filter label {
+    display: none;
+}
+
+.table-responsive label{
+    float: left;
+    display: inline-flex;
+    align-items: center;
+    font-size: .9rem;
+    margin-left: 1rem;
+}
+
+.form-control { 
+    margin-left: .2rem;
+    border-radius: .3rem ;
+}
+
+.right-side{
+    float: right;
+    display: inline-flex;
+    margin-bottom: 0rem !important;
+    align-items: center;
+}

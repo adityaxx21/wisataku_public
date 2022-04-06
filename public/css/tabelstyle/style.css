@@ -1,0 +1,114 @@
+/* Kelola Wisata */
+
+.row .dataTables_length{
+    text-align: left !important;
+}
+.row .dataTables_length label{    
+    font-weight: 800 !important;
+}
+
+.x_content{
+    padding-top: 1rem !important;
+    background: transparent;
+    /* margin-top: 0px !important; */
+}
+
+/* .content-akun .title */
+
+.table{
+    background-color: white;
+    border: none !important;
+    border-radius: .3rem !important;
+}
+
+.table thead th,.table-bordered td, .table-bordered th{
+    border: none !important;
+    align-items: center;
+    /* vertical-align: middle; */
+}
+
+.dataTables_paginate a {
+    padding: 6px 9px !important;
+    background:white !important;
+    border-color: #ddd !important;
+}
+
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter{
+    margin-top: 0rem !important;
+    
+}
+/* 
+.dataTables_wrapper .dataTables_length{
+    display: none;
+} */
+
+.dataTables_wrapper .dataTables_filter{
+    float: right;
+}
+
+.btn-tambah {
+    margin-top: .8rem !important;
+    margin-left: .5rem;
+    margin-bottom: 0rem !important;
+    float: left;
+  }
+
+
+.col-alamat{
+    width: 50%;
+}
+
+
+.dataTables_wrapper .dataTables_filter input {
+    border-radius: .3rem;
+}
+.box-akun{
+    display: contents !important;
+    margin-left: 3rem !important;
+}
+.content-akun{
+    padding-left: 3rem !important;
+    padding-right: 3rem !important;
+    background-color: rgb(221, 237, 237)!important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-top: 2rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    margin-bottom: 4rem;
+    border-radius: 0.3rem;
+}
+
+.content-akun h3 {
+    font-weight: 700;
+    color: #0d6352;
+    margin-bottom: 3rem;
+}
+
+table.table-bordered.dataTable tbody th, table.table-bordered.dataTable tbody td {
+    border-bottom-width: 0;
+    vertical-align: middle;
+}
+
+.custom-file {
+    width: 85% !important;
+  }
+
+@media (max-width:540px) {
+    .x_content{
+        font-size: 9.5px;
+    }
+    .btn{
+        font-size: 9.5px;
+    }
+      
+  .form-group .duacol{
+    width: 100 !important;
+  }
+
+  .form-group .trikol{
+    width: 100 !important;
+  }
+  
+}
+

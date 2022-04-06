@@ -6,11 +6,17 @@
             <div class="row">
                 <div class="col-sm-12 content-akun">
                     <h3>Kelola <span class="title">360</span></h3>
-                    <a href="/tambah360" class="btn btn-success btn-tambahwisata"><i class="fa fa-plus-circle"><span>
-                                Tambah
-                                360</span></i></a>
+                    <div class="col-md-6 col-sm-12  form-group">
+                        <a href="/tambah360" class="btn btn-success btn-tambah"><i class="fa fa-plus-circle"><span>
+                            Tambah
+                            360</span></i></a>
+                    </div>
+                    <div class="col-md-6 col-sm-12  form-group ">
+                        <label class="right-side">Search: <input type="search" class="form-control input-sm " placeholder=""
+                                aria-controls="datatable-fixed-header"></label>
+                    </div>
                     <div class="card-box table-responsive">
-                        <table id="datatable-fixed-header" class="table table-striped table-bordered" style="width:100%">
+                        <table id="tambah" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
                                     <th class="col-no">No</th>
