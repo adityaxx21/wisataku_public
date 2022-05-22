@@ -1,0 +1,30 @@
+.mid-title{
+    padding-left: 7rem !important;
+    padding-right:7rem !important
+}
+
+canvas{
+    background-color:white;
+    padding:3rem;
+    align-items: center;
+    width: 70%;
+}
+
+.jenisLaporan{
+    float: left !important;
+    width: 200px !important;
+}
+
+.download{
+    float: right !important;
+    font-size: 30px;
+    margin-top: 5px;
+    margin-right: 15px;
+    
+}
+
+.box-chart{
+    padding-left: 3rem ;
+    padding-right: 3rem ;
+    padding-bottom: 2rem ;
+}

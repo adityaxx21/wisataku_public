@@ -1,0 +1,118 @@
+.title{
+    color: rgb(229, 57, 53);
+}
+
+.pengunjung{
+    padding-left:4rem !important;
+    padding-right:4rem !important;
+}
+
+.dataTables_wrapper .dataTables_filter {
+    display: none;
+}
+
+.has-search .form-control {
+    padding-left: 2.375rem;
+}
+
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+    top: -.5rem !important;
+}
+
+.btn{
+    font-size: .8rem;
+    padding-left:.5rem;
+    padding-right:.5rem;
+    padding-top: .3rem !important;
+    padding-bottom: .3rem !important;
+}
+
+.btn-pending{
+    background-color: yellow;
+    border-radius: .2rem;
+    border:solid .1rem #FFEB3B;
+}
+
+.btn-pending:hover{
+    background-color: #FDD835;
+    
+}
+
+.col1{
+    width: 30% !important;
+}
+
+.info-tagihan{
+    background-color: #FFB74D;
+    color: #BF360C;
+}
+
+.bayar-sukses{
+    color: #1B5E20;
+    background-color: #A5D6A7;
+}
+
+.lihat-tiket{
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: .1rem !important;
+    padding-bottom: .1rem !important;
+}
+
+
+/* rating */
+.rating-css div {
+    color: #ffe400;
+    font-size: 10px;
+    font-family: sans-serif;
+    font-weight: 100;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 20px 0;
+    float: left;
+  }
+  .rating-css input {
+    display: none;
+  }
+  .rating-css input + label {
+    font-size:2rem;
+    text-shadow: 1px 1px 0 #8f8420;
+    cursor: pointer;
+  }
+  .rating-css input:checked + label ~ label {
+    color: #b4afaf;
+  }
+  .rating-css label:active {
+    transform: scale(0.8);
+    transition: 0.3s ease;
+  }
+
+/* End of Star Rating */
+
+.ulasan{
+    margin-top: 0px !important;
+}
+
+.ulasan textarea{
+    width: 50%;
+    
+}
+
+
+/* button Input*/
+#input-btn {
+    padding-left: 1rem;    
+    padding-right: 1rem;    
+    text-align: center;
+    cursor: pointer;
+  }

@@ -19,13 +19,26 @@
     <link rel="stylesheet" href="css/tabelstyle/style.css">
     <link rel="stylesheet" href="css/adminPage/kelolaakun/style.css">
     <link rel="stylesheet" href="css/adminPage/kelolaWisata/style.css">
-    <link rel="stylesheet" href="css/adminPage/kelolaKategori/style.css">
     <link rel="stylesheet" href="css/adminPage/pesanKomentar/style.css">
-
+    <link rel="stylesheet" href="css/adminPage/laporanTransaksi/style.css">
     <link rel="stylesheet" href="css/adminPage/kelolaWisata/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="css/adminPage/kelolaWisata/switchery.min.css">
+    <link rel='stylesheet'
+        href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css'
+        type='text/css' />
 
-    <title>Halaman {{ $title }}</title>
+    {{-- ajax --}}
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    {{-- map --}}
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css' rel='stylesheet' />
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <title>{{ $title }}</title>
 </head>
 
 <body class="nav-md">
@@ -40,9 +53,9 @@
             <div class="top_nav">
                 <div class="nav_menu">
                     <div class="nav toggle">
-                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                        <a id="menu_toggle" ><i class="fa fa-bars"></i></a>
                     </div>
-                    <button type="button" class="btn btn-info btn-header"
+                    <button type="button" class="btn btn-info btn-header" onclick="location.replace('/')"
                         style="display: {{ $title == 'Dashboard' ? 'none' : 'inline-block' }}"><i
                             class="fa fa-arrow-left"><span> Lihat Website</span></i></button>
                     <nav class="nav navbar-nav">
@@ -50,17 +63,11 @@
                             <li class="nav-item dropdown open" style="padding-left: 15px;">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true"
                                     id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                                    nama user
+                                    {{session()->get('username')}}
                                 </a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right"
                                     aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="javascript:;"> Profile</a>
-                                    <a class="dropdown-item" href="javascript:;">
-                                        <span class="badge bg-red pull-right">50%</span>
-                                        <span>Settings</span>
-                                    </a>
-                                    <a class="dropdown-item" href="javascript:;">Halp</a>
-                                    <a class="dropdown-item" href="login.html"><i
+                                    <a class="dropdown-item" href="/logout"><i
                                             class="fa fa-sign-out pull-right"></i> Log Out</a>
                                 </div>
                             </li>
@@ -88,24 +95,28 @@
 
 
         <!-- Custom Theme Scripts -->
-        <script src="/js/adminPage/kelolaWisata/jquery.dataTables.js"></script>
-        <script src="/js/adminPage/kelolaWisata/dataTables.bootstrap.min.js"></script>
+        <script src="js/tabelku/jquery.dataTables.js"></script>
+        <script src="js/tabelku/dataTables.bootstrap.min.js"></script>
         <script src="js/formUpload/icheck.min.js"></script>
         <script src="js/formUpload/bootstrap-wysiwyg.min.js"></script>
         <script src="js/formUpload/jquery.hotkeys.js"></script>
         <script src="js/formUpload/prettify.js"></script>
         <script src="js/formUpload/switchery.js"></script>
         <script src="js/layout/custom.js"></script>
+        <script src='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js'></script>
+        <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js'></script>
+        @stack('mapscript')
         <script>
             var table = $('#tabelku').DataTable();
 
             // #myInput is a <input type="text"> element
             $('.input-sm').on('keyup', function() {
-              var value = $('.input-sm').val();
-              table.search(this.value).draw();
+                var value = $('.input-sm').val();
+                table.search(this.value).draw();
                 console.log(value);
             });
         </script>
+
 </body>
 
 </html>

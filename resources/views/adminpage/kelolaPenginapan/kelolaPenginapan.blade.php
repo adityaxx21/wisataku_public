@@ -8,12 +8,12 @@
                     <h3>Kelola <span class="title">Penginapan</span></h3>
                     <div class="col-md-6 col-sm-12  form-group">
                         <a href="/tambahPenginapan" class="btn btn-success btn-tambah"><i class="fa fa-plus-circle"><span>
-                            Tambah
-                            Penginapan</span></i></a>
+                                    Tambah
+                                    Penginapan</span></i></a>
                     </div>
                     <div class="col-md-6 col-sm-12  form-group ">
-                        <label class="right-side">Search: <input type="search" class="form-control input-sm " placeholder=""
-                                aria-controls="datatable-fixed-header"></label>
+                        <label class="right-side">Search: <input type="search" class="form-control input-sm "
+                                placeholder="" aria-controls="datatable-fixed-header"></label>
                     </div>
                     <div class="card-box table-responsive">
                         <table id="tabelku" class="table table-striped table-bordered" style="width:100%">
@@ -31,55 +31,43 @@
 
 
                             <tbody>
+                                <?php 
+                                    foreach ($penginapan as $key => $value){
+                                    ?>
                                 <tr>
-                                    <td>1</td>
-                                    <td><img src="https://dummyimage.com/200x100/34a08b/000" alt=""></td>
-                                    <td>Hotel Grand Surya</td>
-                                    <td>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae in ex tenetur
-                                        rerum itaque aperiam voluptas obcaecati id illo enim?
+                                    <td>{{ $key + 1 }}</td>
+                                    <td><img src="{{ asset("$value->gambar") }}" alt="" width="200px" height="200px"></td>
+
+                                    <td>{{ $value->nama_penginapan }}</td>
+                                    <td>{{ $value->alamat }}
                                     </td>
                                     <td>
-                                        <button type="button" class="btn btn-primary"><i class="fa fa-pencil"><span>
-                                                    Edit</span></i></button>
-                                        <button type="button" class="btn btn-danger"><i class="fa fa-trash"><span>
-                                                    Hapus</span></i></button>
+
+                                        <a type="button" class="btn btn-primary" style="width:76.92px"
+                                            href="/editPenginapan/{{ $value->id }}"><i class="fa fa-pencil"><span>
+                                                    Edit</span></i></a>
+
+                                        <form action='kelolaPenginapan/delete/{{ $value->id }}' method='post'>
+                                            @method('delete');
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger"
+                                                onclick="return confirm('Are You Sure About This ? ')">
+                                                <i class="fa fa-trash">
+                                                    <span>Hapus</span>
+                                                </i>
+                                            </button>
+                                        </form>
+
                                     </td>
 
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td><img src="https://dummyimage.com/200x100/34a08b/000" alt=""></td>
-                                    <td>Hotel Lotus Garden</td>
-                                    <td>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae in ex tenetur
-                                        rerum itaque aperiam voluptas obcaecati id illo enim?
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary"><i class="fa fa-pencil"><span>
-                                                    Edit</span></i></button>
-                                        <button type="button" class="btn btn-danger"><i class="fa fa-trash"><span>
-                                                    Hapus</span></i></button>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td><img src="https://dummyimage.com/200x100/34a08b/000" alt=""></td>
-                                    <td>Hotel Bukit Daun</td>
-                                    <td>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae in ex tenetur
-                                        rerum itaque aperiam voluptas obcaecati id illo enim?
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary"><i class="fa fa-pencil"><span>
-                                                    Edit</span></i></button>
-                                        <button type="button" class="btn btn-danger"><i class="fa fa-trash"><span>
-                                                    Hapus</span></i></button>
-                                    </td>
-
-                                </tr>
+                                <?php } ?>
+                                
                             </tbody>
                         </table>
                     </div>
                 </div>
+
             </div>
         </div>
 

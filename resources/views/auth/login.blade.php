@@ -16,7 +16,8 @@
             </li>
             <li class="li2">
                 <h3>Masuk</h3>
-                <form class="myForm">
+                <form class="myForm" method="POST" action="/login">
+                    @csrf
                     <label for="username">Username </label>
                     <div class="input-form">
                         <i class="fa fa-envelope icon"></i>
@@ -31,12 +32,16 @@
 
                     <button>Masuk</button>
                 </form>
-                <span>Belum punya akun? <a href="/singup">Daftar</a></span>
+                <span>Belum punya akun? <a href="/signup">Daftar</a></span>
             </li>
             
         </ul>
         
-
+        @if (session('alert-notif'))
+        <script>
+            alert("{{ session('alert-notif') }}")
+        </script>
+        @endif
     </div>
 	
 </body>

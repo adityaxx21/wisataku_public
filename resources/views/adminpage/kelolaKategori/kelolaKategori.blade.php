@@ -30,62 +30,32 @@
 
 
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td><img src="https://dummyimage.com/200x100/34a08b/000" alt=""></td>
-                                <td>Wisata Monumen</td>
-                                <td>
-                                    <button type="button" class="btn btn-primary"><i class="fa fa-pencil"><span>
-                                                Edit</span></i></button>
-                                    <button type="button" class="btn btn-danger"><i class="fa fa-trash"><span>
-                                                Hapus</span></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td><img src="https://dummyimage.com/200x100/34a08b/000" alt=""></td>
-                                <td>Wisata Pegunungan</td>
-                                <td>
-                                    <button type="button" class="btn btn-primary"><i class="fa fa-pencil"><span>
-                                                Edit</span></i></button>
-                                    <button type="button" class="btn btn-danger"><i class="fa fa-trash"><span>
-                                                Hapus</span></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td><img src="https://dummyimage.com/200x100/34a08b/000" alt=""></td>
-                                <td>Bioskop</td>
-                                <td>
-                                    <button type="button" class="btn btn-primary"><i class="fa fa-pencil"><span>
-                                                Edit</span></i></button>
-                                    <button type="button" class="btn btn-danger"><i class="fa fa-trash"><span>
-                                                Hapus</span></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td><img src="https://dummyimage.com/200x100/34a08b/000" alt=""></td>
-                                <td>Wisata Religi</td>
-                                <td>
-                                    <button type="button" class="btn btn-primary"><i class="fa fa-pencil"><span>
-                                                Edit</span></i></button>
-                                    <button type="button" class="btn btn-danger"><i class="fa fa-trash"><span>
-                                                Hapus</span></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td><img src="https://dummyimage.com/200x100/34a08b/000" alt=""></td>
-                                <td>Bioskop</td>
-                                <td>
-                                    <button type="button" class="btn btn-primary"><i class="fa fa-pencil"><span>
-                                                Edit</span></i></button>
-                                    <button type="button" class="btn btn-danger"><i class="fa fa-trash"><span>
-                                                Hapus</span></i></button>
-                                </td>
-                            </tr>
+                            <?php  $no = 0;
+                                foreach ($kategori_wisata  as $value) {
+                                    $no++;
+                                    ?>
                             
+                            <tr>
+                                <td>{{$no}}</td>
+                                <td><img src="{{asset("$value->gambar")}}" alt="" width="200px" height="200px"></td>
+                                <td>{{$value->nama_wisata}}</td>
+                                <td>
+                                    <a href="/editKategori/{{ $value->id }}" class="btn btn-primary"><i
+                                        class="fa fa-pencil"><span>
+                                            Edit</span></i></a>
+                                <form action='/kelolaKategori/delete/{{ $value->id }}' method='post'>
+                                    @method('delete');
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger"
+                                        onclick="return confirm('Are You Sure About This ? ')">
+                                        <i class="fa fa-trash">
+                                            <span>Hapus</span>
+                                        </i>
+                                    </button>
+                                </form>
+                            </td>
+                            </tr>
+                            <?php } ?>
                             
 
                         </tbody>

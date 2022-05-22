@@ -7,14 +7,27 @@
                 <div class="col-sm-12 content-akun">
                     <h3>Pesan <span class="title">Komentar</span></h3>
                     <div class="card-box table-responsive">
-                        <label>Search: <input type="search" class="form-control input-sm" placeholder="" aria-controls="datatable-fixed-header"></label>
+                        <label>Search: <input type="search" class="form-control input-sm" placeholder=""
+                                aria-controls="datatable-fixed-header" ></label>
+                        <input id="date-picker" class="date-picker form-control" placeholder="dd-mm-yyyy" type="date"
+                            required="required" onfocus="this.type='date'" onclick="this.type='date'" value="{{ (new DateTime())->format('d-m-Y'); }}">
+                        <script>
+
+                            function timeFunctionLong(input) {
+                                setTimeout(function() {
+                                    input.type = 'text';
+                                }, 60000);
+                            }
+                        </script>
                         <table id="tabelku" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
                                     <th class="col-no">No</th>
-                                    <th>Nama Wisata</th>
-                                    <th>Kategori</th>
-                                    <th class="col-alamat">Alamat</th>
+                                    <th>Tanggal</th>
+                                    <th>Nama wisata</th>
+                                    <th>Nama Pengunjung</th>
+                                    <th>Rating</th>
+                                    <th>Komentar</th>
                                     <th>Aksi</th>
 
 
@@ -23,204 +36,24 @@
 
 
                             <tbody>
+                                <?php 
+                                    foreach ($pesan as $key => $value) {
+                                    ?>
                                 <tr>
-                                    <td>1</td>
-                                    <td>Simpang Lima Gumul</td>
-                                    <td>Wisata Monumen</td>
-                                    <td>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae in ex tenetur
-                                        rerum itaque aperiam voluptas obcaecati id illo enim?
-                                    </td>
+                                    <td>{{$key+1}}</td>
+                                    <td>{{date("d-m-Y", strtotime($value->created_at))}}</td>
+                                    <td>{{$value->nama_wisata}}</td>
+                                    <td>{{$value->username}}</td>
+                                    <td>{{$value->rating}}</td>
+                                    <td>{{$value->pesan}}</td>
                                     <td>
-                                        <button type="button" class="btn btn-primary"><i class="fa fa-pencil"><span>
-                                                    Edit</span></i></button>
-                                        <button type="button" class="btn btn-danger"><i class="fa fa-trash"><span>
-                                                    Hapus</span></i></button>
-                                        <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle"><span>
-                                                    Setup Fasilitas</span></i></button>
+                                        <a href="/balasKomentar/{{$value->id_pesan_komentar}}" type="button" class="btn btn-success"><i class="fa fa-paper-plane"><span>
+                                                    Balas Komentar</span></i></a>
                                     </td>
 
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Gunung Kelud</td>
-                                    <td>Wisata Pegunungan</td>
-                                    <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere nulla quam quo,
-                                        molestiae illum ducimus cum sint exercitationem excepturi eveniet amet dolores
-                                        eaque aut officia.</td>
-                                    <td><button type="button" class="btn btn-primary"><i class="fa fa-pencil"><span>
-                                                    Edit</span></i></button>
-                                        <button type="button" class="btn btn-danger"><i class="fa fa-trash"><span>
-                                                    Hapus</span></i></button>
-                                        <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle"><span>
-                                                    Setup Fasilitas</span></i></button>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Simpang Lima Gumul</td>
-                                    <td>Wisata Monumen</td>
-                                    <td>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae in ex tenetur
-                                        rerum itaque aperiam voluptas obcaecati id illo enim?
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary"><i class="fa fa-pencil"><span>
-                                                    Edit</span></i></button>
-                                        <button type="button" class="btn btn-danger"><i class="fa fa-trash"><span>
-                                                    Hapus</span></i></button>
-                                        <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle"><span>
-                                                    Setup Fasilitas</span></i></button>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Gunung Kelud</td>
-                                    <td>Wisata Pegunungan</td>
-                                    <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere nulla quam quo,
-                                        molestiae illum ducimus cum sint exercitationem excepturi eveniet amet dolores
-                                        eaque aut officia.</td>
-                                    <td><button type="button" class="btn btn-primary"><i class="fa fa-pencil"><span>
-                                                    Edit</span></i></button>
-                                        <button type="button" class="btn btn-danger"><i class="fa fa-trash"><span>
-                                                    Hapus</span></i></button>
-                                        <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle"><span>
-                                                    Setup Fasilitas</span></i></button>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>Simpang Lima Gumul</td>
-                                    <td>Wisata Monumen</td>
-                                    <td>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae in ex tenetur
-                                        rerum itaque aperiam voluptas obcaecati id illo enim?
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary"><i class="fa fa-pencil"><span>
-                                                    Edit</span></i></button>
-                                        <button type="button" class="btn btn-danger"><i class="fa fa-trash"><span>
-                                                    Hapus</span></i></button>
-                                        <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle"><span>
-                                                    Setup Fasilitas</span></i></button>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>Gunung Kelud</td>
-                                    <td>Wisata Pegunungan</td>
-                                    <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere nulla quam quo,
-                                        molestiae illum ducimus cum sint exercitationem excepturi eveniet amet dolores
-                                        eaque aut officia.</td>
-                                    <td><button type="button" class="btn btn-primary"><i class="fa fa-pencil"><span>
-                                                    Edit</span></i></button>
-                                        <button type="button" class="btn btn-danger"><i class="fa fa-trash"><span>
-                                                    Hapus</span></i></button>
-                                        <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle"><span>
-                                                    Setup Fasilitas</span></i></button>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td>Simpang Lima Gumul</td>
-                                    <td>Wisata Monumen</td>
-                                    <td>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae in ex tenetur
-                                        rerum itaque aperiam voluptas obcaecati id illo enim?
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary"><i class="fa fa-pencil"><span>
-                                                    Edit</span></i></button>
-                                        <button type="button" class="btn btn-danger"><i class="fa fa-trash"><span>
-                                                    Hapus</span></i></button>
-                                        <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle"><span>
-                                                    Setup Fasilitas</span></i></button>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td>Gunung Kelud</td>
-                                    <td>Wisata Pegunungan</td>
-                                    <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere nulla quam quo,
-                                        molestiae illum ducimus cum sint exercitationem excepturi eveniet amet dolores
-                                        eaque aut officia.</td>
-                                    <td><button type="button" class="btn btn-primary"><i class="fa fa-pencil"><span>
-                                                    Edit</span></i></button>
-                                        <button type="button" class="btn btn-danger"><i class="fa fa-trash"><span>
-                                                    Hapus</span></i></button>
-                                        <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle"><span>
-                                                    Setup Fasilitas</span></i></button>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td>9</td>
-                                    <td>Simpang Lima Gumul</td>
-                                    <td>Wisata Monumen</td>
-                                    <td>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae in ex tenetur
-                                        rerum itaque aperiam voluptas obcaecati id illo enim?
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary"><i class="fa fa-pencil"><span>
-                                                    Edit</span></i></button>
-                                        <button type="button" class="btn btn-danger"><i class="fa fa-trash"><span>
-                                                    Hapus</span></i></button>
-                                        <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle"><span>
-                                                    Setup Fasilitas</span></i></button>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td>10</td>
-                                    <td>Gunung Kelud</td>
-                                    <td>Wisata Pegunungan</td>
-                                    <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere nulla quam quo,
-                                        molestiae illum ducimus cum sint exercitationem excepturi eveniet amet dolores
-                                        eaque aut officia.</td>
-                                    <td><button type="button" class="btn btn-primary"><i class="fa fa-pencil"><span>
-                                                    Edit</span></i></button>
-                                        <button type="button" class="btn btn-danger"><i class="fa fa-trash"><span>
-                                                    Hapus</span></i></button>
-                                        <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle"><span>
-                                                    Setup Fasilitas</span></i></button>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td>11</td>
-                                    <td>Simpang Lima Gumul</td>
-                                    <td>Wisata Monumen</td>
-                                    <td>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae in ex tenetur
-                                        rerum itaque aperiam voluptas obcaecati id illo enim?
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary"><i class="fa fa-pencil"><span>
-                                                    Edit</span></i></button>
-                                        <button type="button" class="btn btn-danger"><i class="fa fa-trash"><span>
-                                                    Hapus</span></i></button>
-                                        <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle"><span>
-                                                    Setup Fasilitas</span></i></button>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td>12</td>
-                                    <td>Gunung Kelud</td>
-                                    <td>Wisata Pegunungan</td>
-                                    <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere nulla quam quo,
-                                        molestiae illum ducimus cum sint exercitationem excepturi eveniet amet dolores
-                                        eaque aut officia.</td>
-                                    <td><button type="button" class="btn btn-primary"><i class="fa fa-pencil"><span>
-                                                    Edit</span></i></button>
-                                        <button type="button" class="btn btn-danger"><i class="fa fa-trash"><span>
-                                                    Hapus</span></i></button>
-                                        <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle"><span>
-                                                    Setup Fasilitas</span></i></button>
-                                    </td>
-
-                                </tr>
+                                <?php } ?>
+                               
 
                             </tbody>
                         </table>
@@ -231,5 +64,4 @@
 
 
     </div>
-   
 @endsection

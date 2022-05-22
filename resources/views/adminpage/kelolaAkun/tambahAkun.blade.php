@@ -1,10 +1,11 @@
 @extends('layout.index')
 
 @section('container')
-<div class="box tambahAkun">
-    <h3>Tambah <span class="title akun">Akun</span></h3>
-    <form action="" method="post">
-        <div class="form-upload">
+    <div class="box tambahAkun">
+        <h3>Tambah <span class="title akun">Akun</span></h3>
+        <form action="/tambahAkun" method="post">
+            @csrf
+            <div class="form-upload">
                 <div class="row">
                     <div class="col-md-6 col-sm-12  form-group">
                         <label for="nama" class="label-form">Nama</label>
@@ -28,21 +29,20 @@
                     <div class="col-md-6 col-sm-12  form-group">
                         <label for="role" class="label-form">Level User</label>
                         <select id="role" name="role" class="form-control role" required="">
-                            <option value=""></option>
-                            <option value="admin">Admin</option>
-                            <option value="pengelola">Pengelola Wisata</option>
+                            <?php foreach($hak_akses as $key => $value) {?>
+                            <option value={{ $value->hak_akses }}>{{ $value->jenis_akses }}</option>
+                            <?php }?>
                         </select>
                     </div>
                 </div>
             </div>
             <div class="button-form">
                 <button type="submit" class="btn btn-success"><i class="fa fa-save"><span> Simpan</span></i></button>
-                <button type="button" class="btn btn-warning reset"><i class="fa fa-repeat"><span> Reset</span></i></button>
+                <button type="button" class="btn btn-warning reset"><i class="fa fa-repeat"><span>
+                            Reset</span></i></button>
                 <a href="/kelolaAkun" class="btn btn-danger"><i class="fa fa-close"><span> Kembali</span></i></a>
             </div>
         </form>
     </div>
     <script src="js/adminPage/formUpload/script.js"></script>
-    
 @endsection
-

@@ -7,7 +7,7 @@ div.dataTables_wrapper div.dataTables_filter label {
     display: inline-flex;
     align-items: center;
     font-size: .9rem;
-    margin-left: 1rem;
+    
 }
 
 .form-control { 
@@ -20,4 +20,17 @@ div.dataTables_wrapper div.dataTables_filter label {
     display: inline-flex;
     margin-bottom: 0rem !important;
     align-items: center;
+}
+
+input#date-picker{
+    width: 20% !important;
+    float: left !important;
+    text-align: center;
+}
+
+@media (max-width:640px) {
+  input#date-picker{
+    width: 100%;
+    margin-left: 1rem;
+  }
 }

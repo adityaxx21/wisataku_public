@@ -1,0 +1,473 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;1,100;1,300&display=swap");
+
+* {
+    font-family: "Poppins";
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    text-transform: capitalize;
+    -webkit-transition: 0.2s linear;
+    transition: 0.2s linear;
+}
+
+a {
+    text-decoration: none !important;
+    color: black;
+}
+
+.active {
+    color: #00bcd4 !important;
+    font-weight: 1000 !important;
+}
+
+hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    color: #263238 !important;
+    font-weight: 600;
+}
+
+.top-title {
+    color: #e57373;
+    font-weight: 300;
+    font-size: 1.7rem;
+}
+.navbar-light .navbar-nav .nav-link {
+    color: #263238;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-top: 0.5rem;
+}
+.navbar-light .navbar-nav .nav-link:hover {
+    color: #00bcd4 !important;
+}
+
+.navbar-light .navbar-toggler {
+    margin-left: auto !important;
+}
+
+/* search */
+.search {
+    width: 50px;
+    box-sizing: border-box;
+    border: none;
+    font-size: 12px;
+    background-color: transparent;
+    background-image: url("../../image/website/searchicon1.png");
+    background-position: 30px 15px;
+    background-size: 1.2rem;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+.icon-search {
+    font-size: 0px !important;
+}
+
+/* end search */
+
+@media (max-width: 991px) {
+    html {
+        font-size: 55%;
+        scroll-padding-top: 7rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .search:focus {
+        top: 15px;
+        left: 28rem;
+        position: absolute;
+        background-color: #f8f9fa;
+        background-image: url("../../image/website/searchicon1.png");
+        background-position: 5px 10px;
+        background-size: 1.4rem;
+        width: 20%;
+        float: left !important;
+        z-index: 1000;
+    }
+}
+
+@media (max-width: 768px) {
+    .category {
+        width: 100% !important;
+    }
+
+    .search {
+        margin-top: 10px;
+        width: 100%;
+        box-sizing: border-box;
+        border: none;
+        font-size: 12px;
+        background-color: transparent;
+        background-image: url(../../image/website/searchicon1.png);
+        background-position: 5px 6px;
+        background-size: 1.5rem;
+        background-repeat: no-repeat;
+        padding: 3px 0px 3px 30px;
+        -webkit-transition: width 0.4s ease-in-out;
+        transition: width 0.4s ease-in-out;
+    }
+
+    .myform {
+        margin-left: 0px;
+        margin-right: 10px !important;
+    }
+
+    .has-search .form-control {
+        padding-left: 2.375rem;
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 450px) {
+    html {
+        font-size: 50%;
+    }
+    .heading {
+        font-size: 3rem;
+    }
+}
+
+/* slider terpopuler */
+
+@media (max-width: 991.98px) {
+    .padding {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .padding {
+        padding: 1rem;
+    }
+
+    .mapboxgl-ctrl-directions {
+        height: 350px;
+    }
+}
+
+.padding {
+    padding: 5rem;
+}
+
+.card {
+    padding: 1rem;
+    position: relative;
+    display: flex;
+    width: 600px;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid #d2d2dc;
+    -webkit-box-shadow: 0px 0px 5px 0px rgb(249, 249, 250);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(212, 182, 212, 1);
+    box-shadow: 0px 0px 5px 0px rgb(161, 163, 164);
+}
+
+.card:hover {
+    background-color: #ffecb3;
+}
+
+.image-card {
+    width: 100%;
+    height: 200px;
+}
+
+.card-body {
+    flex: 1 1 auto;
+    font-size: 0.875rem;
+    padding-left: 0px !important;
+}
+
+.category {
+    padding-left: 1.25rem !important;
+}
+
+p {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.5rem;
+    color: black;
+}
+
+h4 {
+    line-height: 0.2 !important;
+}
+
+.items {
+    width: 90%;
+    margin: 0px auto;
+}
+
+.slick-slide {
+    margin: 10px;
+}
+
+.media iframe,
+.media-content {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border: 0;
+    border-radius: inherit;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-color: rgba(120, 120, 120, 0.1);
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.media-content:before {
+    content: "";
+    position: absolute;
+    height: 10%;
+    width: 90%;
+    left: 5%;
+    bottom: 0;
+    background: inherit;
+    background-position-y: 100%;
+    filter: blur(10px);
+}
+
+.circle .media-content:before {
+    width: 40%;
+    left: 30%;
+}
+
+.profile-image {
+    width: 100%;
+    height: 200px;
+    border-top-left-radius: 11px !important;
+    border-top-right-radius: 11px;
+}
+
+.card-title {
+    font-size: 19px;
+    font-weight: 900;
+}
+
+.slick-next:before {
+    color: gray;
+}
+
+.slick-prev:before {
+    color: gray;
+}
+
+.bg-popular {
+    background: url("../../image/website/jembatan.jpg") no-repeat center center
+        fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.bg-popular .bg-cover {
+    background-color: rgba(245, 245, 245, 0.85);
+}
+.bg-footer {
+    background: url("../../image/website/SLG.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.bg-footer .bg-cover {
+    background-color: rgba(245, 245, 245, 0.85);
+}
+
+.text-footer {
+    color: #37474f !important;
+}
+
+.border-bottom {
+    border-bottom: 2px solid #bdc3c7 !important;
+}
+
+.myform {
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.3rem 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 400;
+    line-height: 1;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.filter {
+    display: flex; /*  <====  ADDED  */
+}
+
+.search-box {
+    float: right;
+}
+
+.has-search .form-control {
+    padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+}
+
+/* Halaman Detail */
+.container-detail {
+    padding: 0px 3rem 0px 3rem !important;
+}
+
+.card-detail {
+    border-radius: 0.2rem;
+    padding: 1rem;
+    position: relative;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid #d2d2dc;
+    -webkit-box-shadow: 0px 0px 0px 0px rgb(249 249 250);
+    -moz-box-shadow: 0px 0px 0px 0px rgba(212, 182, 212, 1);
+    box-shadow: 0px 0px 0px 0px rgb(161 163 164);
+}
+
+/* fasilitas */
+
+.card-fasilitas {
+    padding: 1rem;
+}
+
+.cards {
+    max-width: 100%;
+    margin: 0 auto;
+    display: grid;
+    grid-gap: 1rem;
+}
+
+/* Screen larger than 600px? 2 column */
+@media (min-width: 300px) {
+    .cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Screen larger than 900px? 3 columns */
+@media (min-width: 900px) {
+    .cards {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+.comment {
+    width: 100% !important;
+}
+
+.comment:hover {
+    background-color: white;
+}
+
+/* rating */
+.rating-css {
+    color: #ffe400;
+    font-size: 0.8rem;
+    font-family: sans-serif;
+    font-weight: 100;
+    text-transform: uppercase;
+    float: left;
+}
+
+/* End of Star Rating */
+
+.balasan {
+    margin-left: 1rem;
+    padding: 0.5rem 0.5rem 0.5rem 1rem;
+    background-color: #bbdefb;
+}
+
+/* mapbox */
+
+.hr {
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.btn-app {
+    display: inline;
+    position: relative;
+    padding: 10px 10px 3px 10px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-radius: 10rem;
+    text-align: center;
+    color: white;
+    background-color: #7e57c2;
+}
+
+
+.box{
+  background-color: rgb(221, 237, 237)!important;
+  width: 100%;
+  display:inline-table;
+  border: none !important;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-top: 1rem;
+  padding-top: 3rem !important;
+  padding-bottom: 7rem !important;
+  padding-left: 1.3rem !important;
+  border-radius: 0.3rem;
+  padding-right: 1.3rem !important;
+  
+}
+
+.btn-cetak{
+  float: right;
+}
+
+
+
+/* hubungi kami */
+
+.contact{
+    width: 80%;
+    border-radius: 0px;
+    border: 0;
+    outline: 0;
+    border-bottom: 1px solid #B0BEC5;
+}

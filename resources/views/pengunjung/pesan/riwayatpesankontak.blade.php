@@ -1,0 +1,54 @@
+@extends('pengunjung.layout.homePengunjung')
+@section('pengunjung')
+    <div class="box pengunjung mb-5">
+        <div class="x_content">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3>Riwayat <span class="title">Pesan Kontak</span></h3>
+
+                    <div class="card-box table-responsive">
+                        <table id="tabelku" class="table table-striped table-bordered" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th class="col-no">No</th>
+                                    <th>Tanggal</th>
+                                    <th>Nama</th>
+                                    <th>Email</th>
+                                    <th>No Telp</th>
+                                    <th>Pesan</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+                                @foreach ($pesan as $key=>$value)
+                                <tr>
+                                    <td>{{$key+1}}</td>
+                                    <td>{{date("d/m/Y", strtotime($value->created_at))}}</td>
+                                    <td>{{$value->username}}</td>
+                                    <td>{{$value->email}}</td>
+                                    <td>{{$value->no_hp}}</td>
+                                    <td>{{$value->pesan}}</td>
+                                    <td>
+                                        <a href="/hapusPesanKontak/{{$value->id_pesan_kontak}}"  class="btn btn-danger"><i class="fa fa-trash"><span>
+                                                    Hapus</span></i></a>
+                                    </td>
+
+                                </tr>
+                                @endforeach
+
+                               
+                        
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+
+    <script src="js/pengunjung/script.js"></script>
+@endsection

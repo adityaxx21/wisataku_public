@@ -31,3 +31,11 @@ for(var i=0; i<resetButton.length; i++){
   actualBtn.addEventListener('change', function(){
     fileChosen.textContent = this.files[0].name
   })
+
+  function fill_it() {
+    $('#editor-one').bind('keyup change', function(event) {
+        var currentValue = $(this).html();
+        $('#descr').val(currentValue);
+    });
+
+}

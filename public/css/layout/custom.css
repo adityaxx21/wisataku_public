@@ -4998,3 +4998,13 @@ ul.notifications {
   .table {
     border-radius: .3rem !important;
   }
+
+  .mid-title h3{
+    text-align: center !important;
+  }
+
+  
+  .laporanTransaksi{
+    float: none !important;
+    display: inline-flex !important;
+  }

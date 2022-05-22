@@ -7,31 +7,31 @@
             <div class="card">
                 <h4>Jumlah <span class="title">Wisata</span></h4>
                 <hr />
-                <p>0000</p>
+                <p>{{$jumlah_wisata}}</p>
 
             </div>
             <div class="card">
                 <h2>Jumlah <span class="title">Akun</span></h2>
                 <hr />
-                <p>0000</p>
+                <p>{{$jumlah_akun}}</p>
 
             </div>
             <div class="card">
                 <h2>Jumlah <span class="title">Transaksi</span></h2>
                 <hr />
-                <p>0000</p>
+                <p>{{$jumlah_transaksi}}</p>
 
             </div>
             <div class="card">
                 <h2>Jumlah <span class="title">Kategori</span></h2>
                 <hr />
-                <p>0000</p>
+                <p>{{$jumlah_kategori}}</p>
 
             </div>
             <div class="card">
-                <h2>Jumlag <span class="title">360</span></h2>
+                <h2>Jumlah <span class="title">360</span></h2>
                 <hr />
-                <p>0000</p>
+                <p>{{$jumlah_360}}</p>
 
             </div>
         </div>

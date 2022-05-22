@@ -128,3 +128,8 @@ textarea.form-control {
       margin-bottom: 5rem;
   }
   
+
+  /* maps */
+  canvas.mapboxgl-canvas {
+    padding: 3px;
+}

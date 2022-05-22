@@ -3,13 +3,14 @@
 @section('container')
     <div class="box tambahAkun">
         <h3>Tambah <span class="title akun">Fasilitas</span></h3>
-        <form action="" method="post">
+        <form  method="POST" action="/tambahFasilitas" enctype="multipart/form-data">
+            @csrf
             <div class="form-upload">
                 <div class="row">
                     <div class="col-md-12 col-sm-12  form-group">
                         <label for="nama" class="label-form">Gambar</label>
                         <div class="form-group upfile">
-                            <input type="file" id="actual-btn" hidden />
+                            <input type="file" id="actual-btn" name="gambar" hidden />
                             <label for="actual-btn">Pilih File</label>
                             <span id="file-chosen">Tidak ada file</span>
                         </div>
