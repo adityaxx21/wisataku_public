@@ -28,18 +28,42 @@ class WisataTransaksi_Controller extends Controller
     {
         $data['title'] = 'Halaman Wisata';
         $data['kategori'] = DB::table('tb_kategori_wisata')->get();
-        $id_wis = $request->get('kategoriWisata');
-        // echo ($id_wis);
-        if ( $id_wis != "") {
-            $fil_wisata = ['id_wisata',$id_wis];
+        $data['range'] = DB::table('tb_range_harga')->get();
+        $data['id_wis'] = $request->get('kategoriWisata');
+        $data['range_harga'] = $request->get('kategoriHarga');
+        $data['nama_wisata'] = $request->get('search');
+
+        $fil_wisata = array();
+        if ( $data['id_wis'] != "") {
+            $fil_wisata[] = ['id_wisata', $data['id_wis']];
+        } if ($data['range_harga'] != "") {
+            foreach ($data['range'] as $key => $value) {
+                if ($value->label == $data['range_harga']) {
+                    $fil_wisata[] = ['tiketDewasa','<', $value->harga_max];
+                    $fil_wisata[] = ['tiketDewasa','>=', $value->harga_min];
+                    $fil_wisata[] = ['tiketAnak','<', $value->harga_max];
+                    $fil_wisata[] = ['tiketAnak','>=', $value->harga_min];
+                }
+            }
+        } if ($data['nama_wisata'] != ""){
+            $fil_wisata[] = ['nama_wisata','LIKE', '%'.$data['nama_wisata'].'%'];
+        } 
+        try {
+            $data['wisata'] = DB::table('tb_tambah_wisata')->where($fil_wisata)->get(); 
+        } catch (\Throwable $th) {
+            $data['wisata'] = DB::table('tb_tambah_wisata')->where([])->get();
         }
-        $data['wisata'] = DB::table('tb_tambah_wisata')->where([ ])->get();
         foreach ($data['wisata'] as $key => $value) {
             $rating[$key] = DB::table('tb_pesan_komentar')->where([['id_wisata', $value->id], ['no_pesan', 1]])->average('rating');
             $jumlah[$key] = DB::table('tb_pesan_komentar')->where([['id_wisata', $value->id], ['no_pesan', 1]])->count();
         }
-        $data['jumlah'] = $jumlah;
-        $data['rating'] = $rating;
+        try {
+            $data['jumlah'] = $jumlah;
+            $data['rating'] = $rating;
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+        $data['wisata'] = DB::table('tb_tambah_wisata')->where($fil_wisata)->get(); 
         return view('pengunjung.website.kategorinavbar', $data);
     }
 

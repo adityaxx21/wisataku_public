@@ -6,31 +6,37 @@
                 {{-- Filter Kategori --}}
                 <form action="/wisata" method="GET" id="submit">
                     @csrf
-                    Kategori : <select id="kategoriWisata" name="kategoriWisata" class="myform ml-1 mr-5" required="" onchange="submit(submit)">
+                    Kategori : <select id="kategoriWisata" name="kategoriWisata" class="myform ml-1 mr-5">
                         <option value=""></option>
                         @foreach ($kategori as $item)
-                            <option value="{{ $item->id }}" {{ request('kategoriWisata') === $item->id ? 'selected' : null }}>
-                                Wisata {{ $item->nama_wisata }}</option>
+                            <option value="{{ $item->id_wisata }}" {{ $id_wis == $item->id_wisata ? 'selected' : null }}>
+                                Wisata {{ $item->nama_wisata }} </option>
                         @endforeach
                     </select>
     
                     {{-- Filter Harga --}}
-                    Harga : <select id="kategoriHarga" name="kategoriHarga" class="myform myform ml-1 mr-5" required="">
+                    Harga : <select id="kategoriHarga" name="kategoriHarga" class="myform myform ml-1 mr-5" > 
                         <option value=""></option>
-                        <option value="murah">0 - 10.000</option>
-                        <option value="sedang">10.000 - 50.000</option>
-                        <option value="mahal">60.000 - 100.000</option>
+                        @foreach ($range as $item)
+                        <option value="{{ $item->label }}" {{ $range_harga == $item->label ? 'selected' : null }}>
+                            {{$item->harga_min}} - {{$item->harga_max}}</option>
+                        @endforeach
                         
                     </select>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-3">
     
                     {{-- search --}}
                     <div class="form-group has-search">
                         <span class="fa fa-search form-control-feedback"></span>
-                        <input type="text" class="form-control" placeholder="Search" name="search">
+                        <input type="text" class="form-control" placeholder="Search" name="search" value="{{isset($nama_wisata) ? $nama_wisata : null}}">
                     </div>
     
+                </div>
+                <div class="col-sm-1">
+    
+                    {{-- search --}}
+                    <button type="submit"><i class="bi bi-search">Search</i></button>
                 </div>
                 </form>
  
