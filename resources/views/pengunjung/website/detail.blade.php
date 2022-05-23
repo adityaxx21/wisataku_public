@@ -28,12 +28,11 @@
                             @endforeach
                         @endforeach
                         {{-- item fasilitas --}}
-
-
-
+            
                     </div>
 
-
+                    <span class="mt-4 mb-2 font-weight-bold"><i class="fa-solid fa-circle-play mr-2"></i>Lihat 360 :</span>
+                    <a href="#"><img src="/image/website/SLG.jpg" height="100" alt=""></a>
 
                     <span class="mt-4 mb-2 font-weight-bold"><i class="fa fa-bed"></i> Penginapan Terdekat :</span>
                     <span>Keterangan :</span>
