@@ -6,11 +6,10 @@
         <form action="" method="post">
             <div class="form-upload">
                 <div class="row">
-                   
+
                     <div class="col-md-12 col-sm-12  form-group">
                         <label for="judul" class="label-form">Judul</label>
-                        <input type="text" name="judul" placeholder="Judul" class="form-control" required
-                            id="judul">
+                        <input type="text" name="judul" placeholder="Judul" class="form-control" required id="judul">
                     </div>
 
 
@@ -86,12 +85,23 @@
                             <div id="editor-one" class="editor-wrapper"></div>
 
                             <textarea name="deskrisi" id="descr" style="display:none;"></textarea>
+                            <script>
+                                var deskripsi = {{ $wisata->deskripsi }}
+                                $(document).ready(function() {
+                                    $("#editor-one").html(deskripsi);
+                                });
 
+                                function fill_it() {
+                                    $('#editor-one').bind('keyup change', function(event) {
+                                        var currentValue = $(this).html();
+                                        $('#descr').val(currentValue);
+                                    });
+                            </script>
                         </div>
                     </div>
 
-                    
-                    
+
+
 
                 </div>
             </div>
@@ -101,12 +111,10 @@
                             Reset</span></i></button>
                 <a href="" class="btn btn-danger"><i class="fa fa-close"><span> Kembali</span></i></a>
             </div>
-            
+
         </form>
     </div>
 
 
     <script src="js/adminPage/formUpload/script.js"></script>
-    
-    
 @endsection

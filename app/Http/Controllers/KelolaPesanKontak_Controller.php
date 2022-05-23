@@ -56,10 +56,11 @@ class KelolaPesanKontak_Controller extends Controller
             'hak_akses' => session()->get('hak_akses'),
             'username' => session()->get('username'),
             'email' => "",
+            'no_hp' => "",
             'pesan' => $request->post('balasanPesan'),
             'created_at' => $sav_date,
         );
-        print_r ($data_insert);
+        // print_r ($data_insert);
         DB::table('tb_pesan_kontak')->insert($data_insert);
         return redirect('/balasPesan');
     }

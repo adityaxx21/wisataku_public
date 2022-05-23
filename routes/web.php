@@ -5,7 +5,7 @@ use App\Http\Controllers\Registrasi_Controller;
 use App\Http\Controllers\Dashboard_Controller;
 use App\Http\Controllers\DashboardPengunjung_Controller;
 use App\Http\Controllers\DashboardWisata_Controller;
-use App\Http\Controllers\HalamanUtama_Pengunjung;
+use App\Http\Controllers\KelolaHalamanPengunjung_Controller;
 use App\Http\Controllers\KelolaWisata_Controller;
 use App\Http\Controllers\KelolaKategori_Controller;
 use App\Http\Controllers\KelolaFasilitas_Controller;
@@ -150,12 +150,9 @@ Route::get('/laporanTransaksi', [LaporanTransaksi_Controller::class, 'laporan_tr
 
 
 // end laporan transaksi
+Route::get('/halamanPengunjung', [KelolaHalamanPengunjung_Controller::class, 'index']);
+Route::post('/halamanPengunjung', [KelolaHalamanPengunjung_Controller::class, 'index_post']);
 
-Route::get('/halamanPengunjung', function () {
-    return view('adminpage/halamanPengunjung', [
-        "title" => "Halaman Pengunjung"
-    ]);
-});
 // View::composer('layout.index', ProfileComposer_Controller::class);
 
 //Slider

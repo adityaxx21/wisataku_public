@@ -21,7 +21,7 @@ class DashboardPengunjung_Controller extends Controller
             ->leftJoin('user_reg', 'user_reg.uname', '=', 'tb_transaksi.uname')
             ->leftJoin('tb_status_transaksi', 'tb_status_transaksi.id_status', '=', 'tb_transaksi.id_status_pemb')
             ->leftJoin('tb_tambah_wisata', 'tb_tambah_wisata.id', '=', 'tb_transaksi.id_wisata')
-            ->where([['tb_transaksi.uname', session()->get('username')],['tb_transaksi.is_deleted',1]])
+            ->where([['tb_transaksi.uname', session()->get('username')], ['tb_transaksi.is_deleted', 1]])
             // ->groupBy('tb_tambah_wisata.id')
             ->get();
         // print_r( $data['data_wisata']);
@@ -52,11 +52,55 @@ class DashboardPengunjung_Controller extends Controller
             ->where('tb_transaksi.id', $id)
             // ->groupBy('tb_tambah_wisata.id')
             ->first();
+        $data['no_invoice'] = $id;
+        // $hargaTiket =  ($data['transaksi']->tiketDewasa*$data['transaksi']->jumlah_tiket_dewasa)+($data['transaksi']->tiketAnak*$data['transaksi']->jumlah_tiket_anak);
+        // $hargaKendaraan =  ($data['transaksi']->parkirmotor*$data['transaksi']->jumlah_motor)+($data['transaksi']->parkirmobil*$data['transaksi']->jumlah_mobil)+($data['transaksi']->parkirumum*$data['transaksi']->jumlah_kendaraan_umum);
+        $aray = array();
+        if ($data['transaksi']->jumlah_tiket_dewasa != 0) {
+            $aray[] = [
+                'id' => 'a1',
+                'price' => $data['transaksi']->tiketDewasa,
+                'quantity' => $data['transaksi']->jumlah_tiket_dewasa,
+                'name' => 'Jumlah Tiket Dewasa'
+            ];
+        }
+        if ($data['transaksi']->jumlah_tiket_anak != 0) {
+            $aray[] = [
+                'id' => 'b1',
+                'price' => $data['transaksi']->tiketAnak,
+                'quantity' => ($data['transaksi']->jumlah_tiket_anak),
+                'name' => 'Jumlah Tiket Anak'
+            ];
+        }
+        if ($data['transaksi']->jumlah_motor != 0) {
+            $aray[] = [
+                'id' => 'c1',
+                'price' => $data['transaksi']->parkirmotor,
+                'quantity' => $data['transaksi']->jumlah_motor,
+                'name' => 'Jumlah Motor'
+            ];
+        }
 
+        if ($data['transaksi']->jumlah_mobil != 0) {
+            $aray[] = [
+                'id' => 'd1',
+                'price' => $data['transaksi']->parkirmobil,
+                'quantity' => $data['transaksi']->jumlah_mobil,
+                'name' => 'Jumlah Mobil'
+            ];
+        }
+        if ($data['transaksi']->jumlah_kendaraan_umum != 0) {
+            $aray[] = [
+                'id' => 'e1',
+                'price' => $data['transaksi']->parkirumum,
+                'quantity' => ($data['transaksi']->jumlah_kendaraan_umum),
+                'name' => 'Jumlah Tiket Anak'
+            ];
+        }
         // Set your Merchant Server Key
-        \Midtrans\Config::$serverKey = 'Mid-server-PdcfAopvqbjNANEmps76DNUj';
+        \Midtrans\Config::$serverKey = 'SB-Mid-server-HHVxnaKotmFizvbMyeHMi5hA';
         // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-        \Midtrans\Config::$isProduction = true;
+        \Midtrans\Config::$isProduction = false;
         // Set sanitization on (default)
         \Midtrans\Config::$isSanitized = true;
         // Set 3DS transaction for credit card to true
@@ -66,21 +110,9 @@ class DashboardPengunjung_Controller extends Controller
         $params = array(
             'transaction_details' => array(
                 'order_id' => rand(),
-                'gross_amount' => 700,
+                'gross_amount' => $data['transaksi']->gross_amount,
             ),
-            'item_details' => array(
-                [
-                    'id' => 'a1',
-                    'price' => 100,
-                    'quantity' => ($data['transaksi']->jumlah_tiket_dewasa + $data['transaksi']->jumlah_tiket_anak),
-                    'name' => 'Jumlah Tiket'
-                ], [
-                    'id' => 'b1',
-                    'price' => 100,
-                    'quantity' => ($data['transaksi']->jumlah_motor + $data['transaksi']->jumlah_mobil + $data['transaksi']->jumlah_kendaraan_umum),
-                    'name' => 'Jumlah Kendaraan'
-                ]
-            ),
+            'item_details' => $aray,
             'customer_details' => array(
                 'first_name' => $data['transaksi']->uname,
                 'email' => $data['transaksi']->email,
@@ -88,6 +120,7 @@ class DashboardPengunjung_Controller extends Controller
 
             ),
         );
+
 
         $data['snapToken'] = \Midtrans\Snap::getSnapToken($params);
 
@@ -99,7 +132,7 @@ class DashboardPengunjung_Controller extends Controller
     public function detail_post(Request $request)
     {
         if (session()->get('username') == "") {
-            return redirect('/login')->with('alert-notif','Anda Harus Login Terlebih Dahulu');
+            return redirect('/login')->with('alert-notif', 'Anda Harus Login Terlebih Dahulu');
         }
         $id = session()->get('glob_id');
         $json = json_decode($request->get('json'));
@@ -115,7 +148,6 @@ class DashboardPengunjung_Controller extends Controller
             'payment_code' =>  isset($json->payment_code) ? $json->payment_code : null,
             'pdf_url' => isset($json->pdf_url) ? $json->pdf_url : null,
             'updated_at' => $sav_date,
-            "qr_gambar" => '\qr_transaksi\\' . $id
         );
         $order = DB::table('tb_transaksi')->where('tb_transaksi.id', $id)->update($get_data);
         return $order ? redirect(url('/pengunjungDashboard/detail'))->with('alert-success', 'Order berhasil dibuat') : redirect(url('/pengunjungDashboard/detail'))->with('alert-failed', 'Terjadi kesalahan');
@@ -130,7 +162,7 @@ class DashboardPengunjung_Controller extends Controller
         $data['title'] = "Halaman Dashboard Ulas";
         if ($this->panggil_ulas($id) == null) {
             # code...
-        } 
+        }
         $data['pesan'] = $this->panggil_ulas($id);
 
         // print_r( $data['pesan']);
@@ -139,12 +171,12 @@ class DashboardPengunjung_Controller extends Controller
     public function panggil_ulas($id)
     {
         $data = DB::table('tb_pesan_komentar')
-        ->selectRaw('tb_pesan_komentar.*,tb_tambah_wisata.nama_wisata as nama_wisata')
-        ->leftJoin('tb_tambah_wisata', 'tb_tambah_wisata.id', '=', 'tb_pesan_komentar.id_wisata')
-        ->where('tb_pesan_komentar.id_transaksi', $id)
-        ->first();
+            ->selectRaw('tb_pesan_komentar.*,tb_tambah_wisata.nama_wisata as nama_wisata')
+            ->leftJoin('tb_tambah_wisata', 'tb_tambah_wisata.id', '=', 'tb_pesan_komentar.id_wisata')
+            ->where('tb_pesan_komentar.id_transaksi', $id)
+            ->first();
 
-        return($data);
+        return ($data);
     }
 
     public function ulas_post(Request $request)
@@ -164,14 +196,8 @@ class DashboardPengunjung_Controller extends Controller
     }
 
     public function delete($id)
-    {   
-        DB::table('tb_transaksi')->where('id',$id)->update(['is_deleted'=>0]);
+    {
+        DB::table('tb_transaksi')->where('id', $id)->update(['is_deleted' => 0]);
         return redirect('/pengunjungDashboard/transaksi');
     }
-
-
-    
-
-
-   
 }

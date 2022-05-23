@@ -17,7 +17,7 @@ class WisataPenginapan_Controller extends Controller
     public function penginapan_post(Request $request)
     {
         $data['title'] =  "Halaman Penginapan";
-        $data['penginapan'] = DB::table('tb_penginapan')->where('nama_penginapan', 'LIKE', $request->input('search') . '%')->get();
+        $data['penginapan'] = DB::table('tb_penginapan')->where('nama_penginapan', 'LIKE','%'. $request->input('search') . '%')->get();
         if ($request->input('search') == "") {
             $data['penginapan'] = DB::table('tb_penginapan')->get();
         }

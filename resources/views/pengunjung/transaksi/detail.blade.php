@@ -66,7 +66,7 @@
                                         <br />
                                         <meta name="viewport" content="width=device-width, initial-scale=1">
                                         <!-- @TODO: replace SET_YOUR_CLIENT_KEY_HERE with your client key -->
-                                        <script type="text/javascript" src="https://app.midtrans.com/snap/snap.js" data-client-key="Mid-client-uyb5rEus3lvtOYH-"                                                                            "></script>
+                                        <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-p3ZANgkDvn4BQswk"                                                                            "></script>
                                         <!-- Note: replace with src="https://app.midtrans.com/snap/snap.js" for Production environment -->
 
                                         <button id="pay-button" class="btn btn-primary lihat-tiket mt-3"><span>Lihat Tiket</span></button>

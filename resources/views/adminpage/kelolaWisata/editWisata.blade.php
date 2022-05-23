@@ -117,7 +117,7 @@
                                 });
                             </script>
                             <div id="editor-one" class="editor-wrapper" onkeyup="fill_it()">
-                               
+                                {{$wisata->deskripsi}}
                             </div>
 
                                 <textarea name="deskrisi" id="descr" style="display:none;">{{ $wisata->deskripsi }}</textarea>
