@@ -21,7 +21,6 @@
                             @foreach ($total_transaksi as $key => $item)
                                 <script>
                                     chart_data[{{ $key }}] = {{$item}};
-                                    alert( chart_data[{{ $key }}]);
                                 </script>
                             @endforeach
 

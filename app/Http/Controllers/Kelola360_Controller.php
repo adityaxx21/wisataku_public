@@ -22,19 +22,20 @@ class Kelola360_Controller extends Controller
     public function tambah_360()
     {
         $data['title'] = "Form Tambah Gambar 360";
-
+        $data['wisata'] = DB::table('tb_tambah_wisata')->get();
         return view("adminpage.kelola360.tambah360", $data);
     }
 
     public function create_360(Request $request)
     {
-        $max_num =  DB::table('tb_gambar360')->max('id_gambar360');
+        $max_num =  $request->input('id_wisata');
+        
 
         $sav_date            =date("Y-m-d H:i:s");
 
         $get_data = array(
-            'id_gambar360' => $max_num+1 ,
-            'nama_wisata' =>  $request->post('namaWisata'),
+            'id_gambar360' => $max_num ,
+            'nama_wisata' =>  (DB::table('tb_tambah_wisata')->where('id',$max_num)->value('nama_wisata')),
             'url_360' =>  $request->post('link360'),
             'created_at' => $sav_date,
         );
@@ -69,6 +70,7 @@ class Kelola360_Controller extends Controller
         $id = session()->get('glob_id');
         $data['title'] = "Kelola Gambar 360";
         $data['gambar360'] = DB::table('tb_gambar360')->where('id',  $id)->first();
+        $data['wisata'] = DB::table('tb_tambah_wisata')->get();
         // print_r( $data['penginapan']);
         return view("adminpage.kelola360.edit360", $data);
     }
@@ -77,10 +79,11 @@ class Kelola360_Controller extends Controller
     public function edit_360(Request $request)
     {
         $id = session()->get('glob_id');
+        $max_num =  $request->input('id_wisata');
         $sav_date            =date("Y-m-d H:i:s");
-
         $get_data = array(
-            'nama_wisata' =>  $request->post('namaWisata'),
+            'id_gambar360' => $max_num ,
+            'nama_wisata' =>  (DB::table('tb_tambah_wisata')->where('id',$max_num)->value('nama_wisata')),
             'url_360' =>  $request->post('link360'),
             'updated_at' => $sav_date,
         );
@@ -98,13 +101,11 @@ class Kelola360_Controller extends Controller
             $get_data = array_merge($get_data, array('gambar' =>  $img_loc . $name_img));
         }
 
-
-
         $saved =  DB::table('tb_gambar360')->where('id', $id)->update($get_data);
 
         if ($saved) {
             $request->session()->forget('glob_id');
-            echo ('Success');
+            // echo ('Success');
         }
         return redirect('/kelola360');
     }

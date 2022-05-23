@@ -13,8 +13,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css" integrity="sha384-/frq1SRXYH/bSyou/HUp/hib7RVN1TawQYja658FEOodR/FQBKVqT9Ol+Oz3Olq5" crossorigin="anonymous">
-    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css"
+        integrity="sha384-/frq1SRXYH/bSyou/HUp/hib7RVN1TawQYja658FEOodR/FQBKVqT9Ol+Oz3Olq5" crossorigin="anonymous">
+
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css"
@@ -42,8 +43,9 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <div class="search-form">
-                        <form action="">
-                            <input type="search" name="" placeholder="search here..." id="search-box"
+                        <form action="/search" method="POST">
+                            @csrf
+                            <input type="search" name="search-box" placeholder="search here..." id="search-box"
                                 class="search">
                             <i for="search-box" class="fa fa-search icon-search"></i>
                         </form>
@@ -60,7 +62,8 @@
                         Wisata</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/penginapan" class="nav-link  {{ $title == 'Penginapan' ? 'active' : '' }}" href="/penginapan">
+                    <a href="/penginapan" class="nav-link  {{ $title == 'Penginapan' ? 'active' : '' }}"
+                        href="/penginapan">
                         Penginapan</a>
                 </li>
                 <li class="nav-item">
@@ -68,26 +71,27 @@
                         Map</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/hubungikami" class="nav-link  {{ $title == 'Hubungi Kami' ? 'active' : '' }}" href="/hubungikami">
+                    <a href="/hubungikami" class="nav-link  {{ $title == 'Hubungi Kami' ? 'active' : '' }}"
+                        href="/hubungikami">
                         Hubungi Kami</a>
                 </li>
-                @if ( session()->get('username') == null)
-                <li class="nav-item">
-                    <a href="/login" class="nav-link  {{ $title == 'Login' ? 'active' : '' }}" href="/login">
-                        Login</a>
-                </li>
+                @if (session()->get('username') == null)
+                    <li class="nav-item">
+                        <a href="/login" class="nav-link  {{ $title == 'Login' ? 'active' : '' }}" href="/login">
+                            Login</a>
+                    </li>
                 @else
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="{{ URL::asset(session()->get('gambar')) }}"
-                            width="25" height="25" class="rounded-circle">
-                        {{session()->get('username')}} </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="/pengunjungDashboard/transaksi">Dashboard</a>
-                        <a class="dropdown-item" href="/logout">Log Out</a>
-                    </div>
-                </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="{{ URL::asset(session()->get('gambar')) }}" width="25" height="25"
+                                class="rounded-circle">
+                            {{ session()->get('username') }} </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="/pengunjungDashboard/transaksi">Dashboard</a>
+                            <a class="dropdown-item" href="/logout">Log Out</a>
+                        </div>
+                    </li>
                 @endif
             </ul>
         </div>
@@ -127,7 +131,7 @@
                     <a href="" class="me-4 text-reset mr-2">
                         <i class="fa-brands fa-instagram"></i>
                     </a>
-                    
+
                 </div>
                 <!-- Right -->
             </section>
@@ -186,7 +190,19 @@
         </div>
     </footer>
     <!-- Footer -->
-
+    <script>
+        function findme() {
+            $.ajax({
+                type: 'POST',
+                url: '/search',
+                data: {
+                    input: $('#search-box').val(),
+                },
+                success: function(data) {
+                }
+            });
+        }
+    </script>
 </body>
 <script src="{{ URL::asset('js/website/script.js') }}"></script>
 @stack('map')

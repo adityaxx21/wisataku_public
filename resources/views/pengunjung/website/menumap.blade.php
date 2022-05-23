@@ -1,6 +1,5 @@
 @extends('pengunjung.website.layoutWebsite')
 @section('content')
-
     <div class="container">
         <div class="card-detail mt-3">
             <div class="mb-4">
@@ -11,43 +10,48 @@
             <div id='map_wisata' style='width: 100%; height: 600px;'></div>
         </div>
     </div>
+    <script type="text/javascript">
+        var lat_long = [];
+        var title = [];
+        var desk = [];
+    </script>
+    @foreach ($wisata as $key => $item)
+        <script>
+            lat_long[{{ $key }}] = ['{{ $item->long }}', '{{ $item->lat }}']
+            title[{{ $key }}] = '{{ $item->nama_wisata }}'
+            desk[{{ $key }}] = '{{ $item->alamat }}'
+        </script>
+    @endforeach
 
     @push('direction')
         <script>
-             // Map peresebaran wisata
-             mapboxgl.accessToken =
+            const v = [];
+            for (let i = 0; i < desk.length; i++) {
+                v[i] = {
+                    geometry: {
+                        type: "Point",
+                        coordinates: lat_long[i],
+                    },
+                    properties: {
+                        title: title[i],
+                        description: desk[i],
+                    },
+                }
+
+            }
+            // Map peresebaran wisata
+            mapboxgl.accessToken =
                 "pk.eyJ1IjoiYWZmYW5kMDgiLCJhIjoiY2wxc2xweDJlMHhsNzNmbzNjbHh4b2x1ZiJ9.0QmipmGiXP91O01rclSKNw";
             const map = new mapboxgl.Map({
                 container: "map_wisata",
                 // scrollZoom: false,
                 style: "mapbox://styles/mapbox/streets-v11",
-                center: [112.011864,-7.822840],
+                center: [112.011864, -7.822840],
                 zoom: 10,
             });
 
-        // data wisata
-            const geojson = [{
-                    geometry: {
-                        type: "Point",
-                        coordinates: [112.2563310046358, -7.92893545569504],
-                    },
-                    properties: {
-                        title: "Gunung Kelud",
-                        description: "Kab. Kediri",
-                    },
-                },
-                {
-                    geometry: {
-                        type: "Point",
-                        coordinates: [112.06475420000001,-7.807697300000001],
-                    },
-                    properties: {
-                        title: "Simpang Lima Gumul",
-                        description: "Alamat",
-                    },
-                },
-            //    tambahkan data di sini
-            ];
+            // data wisata
+            const geojson = v;
 
             for (const feature of geojson) {
 
@@ -68,6 +72,5 @@
 
             // end map penginapan terdekat
         </script>
-        
     @endpush
 @endsection

@@ -8,9 +8,16 @@
             <div class="form-upload">
                 <div class="row">
                     <div class="col-md-12 col-sm-12  form-group">
-                        <label for="namaWisata" class="label-form">Nama Wisata</label>
-                        <input type="text" name="namaWisata" id="namaWisata" placeholder="Nama Kategori" class="form-control" required
-                        id="namaWisata" value="{{$gambar360->nama_wisata}}">
+                        <label class="label-form">Pilih Wisata</label>
+                        <select id="id_wisata" name="id_wisata" class="form-control" required="" >
+                            @foreach ($wisata as $item)
+                            @if ($item->id == $gambar360->id_gambar360)
+                            <option value="{{$item->id}}" selected>{{$item->nama_wisata}}</option> 
+                            @else
+                            <option value="{{$item->id}}">{{$item->nama_wisata}}</option> 
+                            @endif
+                            @endforeach
+                        </select>
                     </div>
                     <div class="col-md-12 col-sm-12  form-group">
                         <label class="label-form">Gambar</label>

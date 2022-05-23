@@ -98,6 +98,9 @@ class DashboardPengunjung_Controller extends Controller
 
     public function detail_post(Request $request)
     {
+        if (session()->get('username') == "") {
+            return redirect('/login')->with('alert-notif','Anda Harus Login Terlebih Dahulu');
+        }
         $id = session()->get('glob_id');
         $json = json_decode($request->get('json'));
         $sav_date            = date("Y-m-d H:i:s");

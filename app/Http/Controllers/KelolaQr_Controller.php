@@ -36,14 +36,6 @@ class KelolaQr_Controller extends Controller
        $input_id = $request->input('scanner');
        $is_attend = $request->input('status_pem');
        DB::table('tb_transaksi')->where('id', $input_id)->update(['is_attend'=>0]);
-       $to      = 'nobody@example.com';
-       $subject = 'the subject';
-       $message = 'hello';
-       $headers = 'From: webmaster@example.com'       . "\r\n" .
-                    'Reply-To: webmaster@example.com' . "\r\n" .
-                    'X-Mailer: PHP/' . phpversion();
-   
-       mail($to, $subject, $message, $headers);
     //    $get_data = DB::table('tb_transaksi')->where('id',$input_id)->first();
     //    return redirect('/QrTransaksi',$data);
         // echo json_encode(array('status'=>TRUE, 'data'=>$data));

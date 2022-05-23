@@ -31,6 +31,8 @@
                                     <td>{{$value->no_hp}}</td>
                                     <td>{{$value->pesan}}</td>
                                     <td>
+                                        <a href="/balasKontak/{{$value->id_pesan_kontak}}" type="button" class="btn btn-success"><i class="fa fa-paper-plane"><span>
+                                            Balas</span></i></a>
                                         <a href="/hapusPesanKontak/{{$value->id_pesan_kontak}}"  class="btn btn-danger"><i class="fa fa-trash"><span>
                                                     Hapus</span></i></a>
                                     </td>

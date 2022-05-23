@@ -9,14 +9,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap -->
-    <link href="/css/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{URL::asset('/css/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="/css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{{URL::asset('/css/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
 
     <!-- Custom Theme Style -->
-    <link href="/css/layout/custom.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/pengunjung/style.css">
-    <link rel="stylesheet" href="/css/tabelstyle/style.css">
+    <link href="{{URL::asset('/css/layout/custom.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{URL::asset('/css/pengunjung/style.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('/css/tabelstyle/style.css')}}">
 
     <title>Halaman {{ $title }}</title>
 </head>
@@ -72,13 +72,13 @@
         </div>
 
         <!-- jQuery -->
-        <script src="/js/layout/jquery.min.js"></script>
+        <script src="{{URL::asset('/js/layout/jquery.min.js')}}"></script>
 
 
         <!-- Bootstrap -->
-        <script src="/js/layout/bootstrap.bundle.min.js"></script>
-        <script src="/js/tabelku/jquery.dataTables.js"></script>
-        <script src="/js/tabelku/dataTables.bootstrap.min.js"></script>
+        <script src="{{URL::asset('/js/layout/bootstrap.bundle.min.js')}}"></script>
+        <script src="{{URL::asset('/js/tabelku/jquery.dataTables.js')}}"></script>
+        <script src="{{URL::asset('/js/tabelku/dataTables.bootstrap.min.js')}}"></script>
         @stack('datatable')
         @stack('button_input')
 

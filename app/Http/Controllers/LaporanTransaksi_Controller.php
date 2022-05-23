@@ -11,6 +11,7 @@ class LaporanTransaksi_Controller extends Controller
     public function laporan_transaksi()
     {
         $data['title'] = "Laporan Transaksi";
+        $data['kategori'] = DB::table('tb_kategori_wisata')->get();
         // $data['transaksi'] = DB::table('tb_transaksi')->get();
         $data['bulan'] = array('attem' => ['Januari','Februari','Maret']);
         $data['bejibun'] = [100,200,300,400,500,600,700];

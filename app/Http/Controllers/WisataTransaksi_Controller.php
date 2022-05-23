@@ -20,13 +20,20 @@ class WisataTransaksi_Controller extends Controller
         $data['kategori_wisata'] = DB::table('tb_kategori_wisata')->get();
         $data['setel_fasilitas'] = DB::table('tb_setel_fasisilitas')->select('id_fasilitas')->where('id_fasilitas_tersedia', $data['wisata']->id_fasilitas_tersedia)->get();
         $data['komentar'] =  DB::table('tb_pesan_komentar')->where([['id_wisata', $id], ['no_pesan', 1]])->get();
+        $data['gambar360'] = DB::table('tb_gambar360')->where('id_gambar360',$id)->get();
         return view('pengunjung.website.detail', $data);
     }
 
-    public function wisata()
+    public function wisata(Request $request)
     {
         $data['title'] = 'Halaman Wisata';
-        $data['wisata'] = DB::table('tb_tambah_wisata')->get();
+        $data['kategori'] = DB::table('tb_kategori_wisata')->get();
+        $id_wis = $request->get('kategoriWisata');
+        // echo ($id_wis);
+        if ( $id_wis != "") {
+            $fil_wisata = ['id_wisata',$id_wis];
+        }
+        $data['wisata'] = DB::table('tb_tambah_wisata')->where([ ])->get();
         foreach ($data['wisata'] as $key => $value) {
             $rating[$key] = DB::table('tb_pesan_komentar')->where([['id_wisata', $value->id], ['no_pesan', 1]])->average('rating');
             $jumlah[$key] = DB::table('tb_pesan_komentar')->where([['id_wisata', $value->id], ['no_pesan', 1]])->count();
@@ -53,6 +60,9 @@ class WisataTransaksi_Controller extends Controller
 
     public function pesantiket_post(Request $request, $id)
     {
+        if (session()->get('username') == "") {
+            return redirect('/login')->with('alert-notif','Anda Harus Login Terlebih Dahulu');
+        }
         $data['wisata'] = DB::table('tb_tambah_wisata')->where('id', $id)->first();
         $get_email = DB::table('user_reg')->where('uname', session()->get('username'))->value('Email');
         $hargaTiket =  $data['wisata']->tiketDewasa * $request->input('tiketdewasa') + $data['wisata']->tiketAnak * $request->input('tiketanak');
@@ -175,6 +185,9 @@ class WisataTransaksi_Controller extends Controller
 
     public function detailpesanan_post(Request $request, $id)
     {
+        if (session()->get('username') == "") {
+            return redirect('/login')->with('alert-notif','Anda Harus Login Terlebih Dahulu');
+        }
         // $id = session()->get('glob_id');
         $json = json_decode($request->get('json'));
         $sav_date            = date("Y-m-d H:i:s");
@@ -199,6 +212,8 @@ class WisataTransaksi_Controller extends Controller
 
     }
 
+    
+
     public function detailtiket($id)
     {
         $data['title'] = "Pesan Tiket";
@@ -216,4 +231,26 @@ class WisataTransaksi_Controller extends Controller
         // print_r($data['user']);
         return view('pengunjung.website.invoice', $data);
     }
+
+    // public function search_me(Request $request)
+    // {
+    //     $data['title'] = "Pencarian";
+    //     $data['kategori'] = DB::table('tb_kategori_wisata')->get();
+    //     if ($request->get('city')) {
+    //         $city = $request->get('city');
+    //         $stores->whereHas(
+    //             'city',
+    //             function ($query) use ($city) {
+    //                 $query->where('name', 'LIKE', "%{$city}%");
+    //             }
+    //         );
+    //     } else {
+    //     }
+
+    //     // if ($request->get('keyword')) {
+    //     //     $stores->search($request->keyword);
+    //     // }
+
+    //     return view('pengunjung.website.kategorinavbar',$data);
+    // }
 }

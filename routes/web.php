@@ -19,6 +19,7 @@ use App\Http\Controllers\KelolaQr_Controller;
 use App\Http\Controllers\PengunjungEditAkun_Controller;
 use App\Http\Controllers\PengunjungKomentar_Controller;
 use App\Http\Controllers\PengunjungPesan_Controller;
+use App\Http\Controllers\WisataHubungiKami_Controller;
 use App\Http\Controllers\WisataKategori_Controller;
 use App\Http\Controllers\WisataPenginapan_Controller;
 use App\Http\Controllers\WisataTransaksi_Controller;
@@ -179,6 +180,8 @@ Route::POST('/QrTransaksi', [KelolaQr_Controller::class, 'post_QR']);
 //Halaman Wisata Start
 Route::get('/', [DashboardWisata_Controller::class,'index']);
 Route::get('/website', [DashboardWisata_Controller::class,'website']);
+Route::post('/search', [DashboardWisata_Controller::class,'search_me_post']);
+Route::get('/search/{name}', [DashboardWisata_Controller::class,'search_me']);
 Route::get('/search', function () {
     return view('pengunjung/website/search', [
         "title" => "Halaman Pengunjung"
@@ -187,6 +190,7 @@ Route::get('/search', function () {
 
 //Transaksi Wisata 
 Route::get('/wisata', [WisataTransaksi_Controller::class,'wisata']);
+Route::get('/wisata/search/{harga}{nama}', [WisataTransaksi_Controller::class,'wisata']);
 Route::get('/detail/{id}', [WisataTransaksi_Controller::class,'detail']);
 Route::get('/carirute/{id}', [WisataTransaksi_Controller::class,'carirute']);
 Route::get('/pesantiket/{id}', [WisataTransaksi_Controller::class,'pesantiket']);
@@ -195,6 +199,7 @@ Route::get('/detailpesanan/{id}', [WisataTransaksi_Controller::class,'detailpesa
 Route::post('/detailpesanan/{id}', [WisataTransaksi_Controller::class,'detailpesanan_post']);
 Route::get('/detailtiket/{id}', [WisataTransaksi_Controller::class,'detailtiket']);
 Route::get('/invoice/{id}', [WisataTransaksi_Controller::class,'invoice']);
+
 // Route::get('/detailtiket/{id}', [WisataTransaksi_Controller::class,'detailtiket_post']);
 
 //Penginapan Wisata
@@ -210,7 +215,8 @@ Route::get('/kategori/{nama}', [WisataKategori_Controller::class,'kategori']);
 Route::get('/map', [DashboardWisata_Controller::class,'map']);
 
 
-Route::get('/hubungikami', [DashboardWisata_Controller::class,'hubungikami']);
+Route::get('/hubungikami', [WisataHubungiKami_Controller::class,'hubungikami']);
+Route::post('/hubungikami', [WisataHubungiKami_Controller::class,'hubungikami_post']);
 
 // Route::get('/carirute', [DashboardWisata_Controller::class,'detail']);
 
@@ -255,6 +261,8 @@ Route::get('/hapusPesanKomentar/{id}', [PengunjungKomentar_Controller::class,'ha
 
 //Halaman Pesan Kontak
 Route::get('/pengunjungDashboard/pesan', [PengunjungPesan_Controller::class,'riwayat_kontak']);
+Route::get('/balasKontak/{id}', [PengunjungPesan_Controller::class,'keola']);
+Route::post('/balasKontak/{id}', [PengunjungPesan_Controller::class,'balasKontak_post']);
 Route::get('/hapusPesanKontak/{id}', [PengunjungPesan_Controller::class,'hapus_pesan_kontak']);
 
 //Halaman Profil
