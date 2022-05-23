@@ -111,89 +111,89 @@
                                 </div>
                             </div>
                             <script>
-                                var deskripsi = {{$wisata->deskripsi}}
+                                var deskripsi = {{ $wisata->deskripsi }}
                                 $(document).ready(function() {
                                     $("#editor-one").html(deskripsi);
                                 });
                             </script>
                             <div id="editor-one" class="editor-wrapper" onkeyup="fill_it()">
-                                {{$wisata->deskripsi}}
+                                {{ $wisata->deskripsi }}
                             </div>
 
-                                <textarea name="deskrisi" id="descr" style="display:none;">{{ $wisata->deskripsi }}</textarea>
+                            <textarea name="deskrisi" id="descr" >{{ $wisata->deskripsi }}</textarea>
 
-                            </div>
                         </div>
-
-                        <div class="col-md-6 col-sm-12  form-group">
-                            <label for="tiketDewasa" class="label-form">Harga Tiket Dewasa</label>
-                            <input type="text" name="tiketDewasa" placeholder="Harga Tiket Dewasa"
-                                class="form-control duacol" value="{{ $wisata->tiketDewasa }}" required>
-                        </div>
-                        <div class="col-md-6 col-sm-12  form-group">
-                            <label for="tiketAnak" class="label-form">Harga Tiket Anak-anak</label>
-                            <input type="text" name="tiketAnak" placeholder="Harga Tiket Dewasa" class="form-control duacol"
-                                value="{{ $wisata->tiketAnak }}" required>
-                        </div>
-
-                        <div class="col-md-12 col-sm-12  form-group">
-                            <label for="alamat" class="label-form">Alamat</label>
-                            <textarea class="resizable_textarea form-control" name="alamat"
-                                placeholder="Masukkan Alamat">{{ $wisata->alamat }}</textarea>
-                        </div>
-
-
-                        <div class="col-md-4 col-sm-12  form-group">
-                            <label for="parkirmotor" class="label-form">Harga Parkir Motor</label>
-                            <input type="text" name="parkirmotor" placeholder="Parkir Motor" class="form-control trikol"
-                                value="{{ $wisata->parkirmotor }}" required>
-                        </div>
-
-                        <div class="col-md-4 col-sm-12  form-group">
-                            <label for="parkirmobil" class="label-form">Harga Parkir Mobil</label>
-                            <input type="text" name="parkirmobil" placeholder="Parkir Mobil" class="form-control trikol"
-                                value="{{ $wisata->parkirmobil }}" required>
-                        </div>
-
-                        <div class="col-md-4 col-sm-12  form-group">
-                            <label for="parkirumum" class="label-form">Harga Parkir Umum</label>
-                            <input type="text" name="parkirumum" placeholder="Parkir Umum" class="form-control trikol"
-                                value="{{ $wisata->parkirumum }}" required>
-                        </div>
-
-                        <div class="col-md-6 col-sm-12  form-group">
-                            <label for="lat" class="label-form">Latitude</label>
-                            <input type="text" id="lat" name="lat" placeholder="Latitude" class="form-control duacol"
-                                required value="{{ $wisata->lat }}">
-                        </div>
-                        <div class="col-md-6 col-sm-12  form-group">
-                            <label for="long" class="label-form">Longitude</label>
-                            <input type="text" id="long" name="long" placeholder="Longitude" class="form-control duacol"
-                                value="{{ $wisata->long }}" required>
-                        </div>
-
-                        <div class="col-md-12 col-sm-12  form-group">
-                            <div id='map' style='width: 90%; height: 300px;'></div>
-                        </div>
-
-
-
                     </div>
+
+                    <div class="col-md-6 col-sm-12  form-group">
+                        <label for="tiketDewasa" class="label-form">Harga Tiket Dewasa</label>
+                        <input type="text" name="tiketDewasa" placeholder="Harga Tiket Dewasa" class="form-control duacol"
+                            value="{{ $wisata->tiketDewasa }}" required>
+                    </div>
+                    <div class="col-md-6 col-sm-12  form-group">
+                        <label for="tiketAnak" class="label-form">Harga Tiket Anak-anak</label>
+                        <input type="text" name="tiketAnak" placeholder="Harga Tiket Dewasa" class="form-control duacol"
+                            value="{{ $wisata->tiketAnak }}" required>
+                    </div>
+
+                    <div class="col-md-12 col-sm-12  form-group">
+                        <label for="alamat" class="label-form">Alamat</label>
+                        <textarea class="resizable_textarea form-control" name="alamat"
+                            placeholder="Masukkan Alamat">{{ $wisata->alamat }}</textarea>
+                    </div>
+
+
+                    <div class="col-md-4 col-sm-12  form-group">
+                        <label for="parkirmotor" class="label-form">Harga Parkir Motor</label>
+                        <input type="text" name="parkirmotor" placeholder="Parkir Motor" class="form-control trikol"
+                            value="{{ $wisata->parkirmotor }}" required>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12  form-group">
+                        <label for="parkirmobil" class="label-form">Harga Parkir Mobil</label>
+                        <input type="text" name="parkirmobil" placeholder="Parkir Mobil" class="form-control trikol"
+                            value="{{ $wisata->parkirmobil }}" required>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12  form-group">
+                        <label for="parkirumum" class="label-form">Harga Parkir Umum</label>
+                        <input type="text" name="parkirumum" placeholder="Parkir Umum" class="form-control trikol"
+                            value="{{ $wisata->parkirumum }}" required>
+                    </div>
+
+                    <div class="col-md-6 col-sm-12  form-group">
+                        <label for="lat" class="label-form">Latitude</label>
+                        <input type="text" id="lat" name="lat" placeholder="Latitude" class="form-control duacol" required
+                            value="{{ $wisata->lat }}">
+                    </div>
+                    <div class="col-md-6 col-sm-12  form-group">
+                        <label for="long" class="label-form">Longitude</label>
+                        <input type="text" id="long" name="long" placeholder="Longitude" class="form-control duacol"
+                            value="{{ $wisata->long }}" required>
+                    </div>
+
+                    <div class="col-md-12 col-sm-12  form-group">
+                        <div id='map' style='width: 90%; height: 300px;'></div>
+                    </div>
+
+
+
                 </div>
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Fasilitas Yang Tersedia</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <h6>Fasilitas Yang Tersedia</h6>
-                                <?php
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Fasilitas Yang Tersedia</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h6>Fasilitas Yang Tersedia</h6>
+                            <?php
                             $check="";
                         foreach ($fasilitas as $key => $value) {
                             foreach ($setel_fasilitas as $key => $value1) {
@@ -204,31 +204,31 @@
                                 
                             }
                     ?>
-                                <label class="container-check">{{ $value->nama_fasilitas }}
-                                    <input type="checkbox" name="fasilitas[]" value="{{ $value->id_fasilitas }}"
-                                        {{ $check }}>
-                                    <span class="checkmark"></span>
-                                </label>
+                            <label class="container-check">{{ $value->nama_fasilitas }}
+                                <input type="checkbox" name="fasilitas[]" value="{{ $value->id_fasilitas }}"
+                                    {{ $check }}>
+                                <span class="checkmark"></span>
+                            </label>
 
-                                <?php  $check=""; } ?>
-                                <div class="space20"></div>
-                            </div>
-                            <div class="modal-footer">
-                            </div>
+                            <?php  $check=""; } ?>
+                            <div class="space20"></div>
+                        </div>
+                        <div class="modal-footer">
                         </div>
                     </div>
                 </div>
-                <div class="button-form">
-                    <button type="submit" class="btn btn-success"><i class="fa fa-save"><span>
-                                Simpan</span></i></button>
-                    <button type="button" class="btn btn-warning reset" onclick="document.location.reload(true)"><i
-                            class="fa fa-repeat"><span>
-                                Reset</span></i></button>
-                    <a href="/kelolaWisata" class="btn btn-danger"><i class="fa fa-close"><span> Kembali</span></i></a>
-                    <a href="javascript:void(0)" class="btn btn-primary newSetupFasilitas" onclick="open_modal()"><i
-                            class="fa fa-plus-circle"><span>
-                                Setup Fasilitas</span></i></a>
-                </div>
+            </div>
+            <div class="button-form">
+                <button type="submit" class="btn btn-success"><i class="fa fa-save"><span>
+                            Simpan</span></i></button>
+                <button type="button" class="btn btn-warning reset" onclick="document.location.reload(true)"><i
+                        class="fa fa-repeat"><span>
+                            Reset</span></i></button>
+                <a href="/kelolaWisata" class="btn btn-danger"><i class="fa fa-close"><span> Kembali</span></i></a>
+                <a href="javascript:void(0)" class="btn btn-primary newSetupFasilitas" onclick="open_modal()"><i
+                        class="fa fa-plus-circle"><span>
+                            Setup Fasilitas</span></i></a>
+            </div>
 
 
         </form>

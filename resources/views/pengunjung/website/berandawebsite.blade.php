@@ -97,23 +97,8 @@
         });
     </script>
     {{-- Informasil Website --}}
-    <h3 class="text-center mt-5">Informasi Website</h3>
+    <h3 class="text-center mt-5">{{$halaman_pengunjung->judul}}</h3>
     <div class="container mt-4">
-        <p class="text-justify">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestias autem
-            assumenda iure tempore omnis, cupiditate excepturi fuga possimus, quibusdam officia soluta accusamus
-            placeat minus exercitationem doloremque, amet a quidem? Eius velit expedita non incidunt ducimus,
-            laudantium odio, possimus, consequuntur recusandae officiis in iusto cumque? Necessitatibus sed dolorum
-            error eligendi praesentium ex deleniti aliquam consectetur ipsa quibusdam inventore, aspernatur, quis
-            nulla minus neque animi eius. Ipsa tenetur inventore corporis maiores facilis odio a qui dolorem eum
-            assumenda veniam possimus praesentium eaque veritatis ducimus eveniet harum reprehenderit sequi iusto
-            maxime suscipit, fugit similique, molestiae deleniti! Ea illo eos laboriosam nihil deleniti vitae minima
-            impedit tempore atque vel blanditiis voluptate sequi repudiandae quis, unde vero culpa minus recusandae
-            eius, voluptatibus praesentium quo? Sapiente nam rerum, reiciendis tempore animi expedita quo amet
-            perferendis iusto eaque quasi numquam, explicabo exercitationem. Voluptates velit, fugiat dolorum facere
-            libero eligendi quo sequi odio quisquam mollitia rem placeat a facilis. Dolorum ex ullam optio fuga
-            facilis maxime at debitis, modi voluptate adipisci placeat alias ea, nihil iure itaque expedita eaque
-            hic illum excepturi quibusdam eum delectus reiciendis rem! Totam sunt laborum non, architecto tempora,
-            officiis exercitationem molestias fugit et optio, veritatis esse facilis mollitia dolor eius perferendis
-            quas ratione.</p>
+        <p class="text-justify">{{$halaman_pengunjung->deskripsi}}</p>
     </div>
 @endsection

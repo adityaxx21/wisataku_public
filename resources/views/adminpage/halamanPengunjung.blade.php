@@ -3,13 +3,15 @@
 @section('container')
     <div class="box tambahAkun">
         <h3>Kelola <span class="title akun">Halaman Pengunjung</span></h3>
-        <form action="" method="post">
+        <form action="/halamanPengunjung" method="POST">
+            @csrf
             <div class="form-upload">
                 <div class="row">
 
                     <div class="col-md-12 col-sm-12  form-group">
                         <label for="judul" class="label-form">Judul</label>
-                        <input type="text" name="judul" placeholder="Judul" class="form-control" required id="judul">
+                        <input type="text" name="judul" placeholder="Judul" class="form-control" required id="judul"
+                            value="{{ $halaman->judul }}">
                     </div>
 
 
@@ -81,23 +83,27 @@
                                             class="fa fa-repeat"></i></a>
                                 </div>
                             </div>
-
-                            <div id="editor-one" class="editor-wrapper"></div>
-
-                            <textarea name="deskrisi" id="descr" style="display:none;"></textarea>
                             <script>
-                                var deskripsi = {{ $wisata->deskripsi }}
+                                var deskripsi = {{ $halaman->deskripsi }}
                                 $(document).ready(function() {
                                     $("#editor-one").html(deskripsi);
                                 });
-
-                                function fill_it() {
-                                    $('#editor-one').bind('keyup change', function(event) {
-                                        var currentValue = $(this).html();
-                                        $('#descr').val(currentValue);
-                                    });
                             </script>
+                            <div id="editor-one" class="editor-wrapper" onkeyup="fill_it()">
+                                {{ $halaman->deskripsi }}
+                            </div>
+
+                            <textarea name="deskrisi" id="descr" style="display: none">{{ $halaman->deskripsi }}</textarea>
+
                         </div>
+                        <script>
+                            function fill_it() {
+                                $('#editor-one').bind('keyup change', function(event) {
+                                    var currentValue = $(this).html();
+                                    $('#descr').val(currentValue);
+                                });
+                            }
+                        </script>
                     </div>
 
 
@@ -114,7 +120,6 @@
 
         </form>
     </div>
-
 
     <script src="js/adminPage/formUpload/script.js"></script>
 @endsection

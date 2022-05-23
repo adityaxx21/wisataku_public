@@ -2,7 +2,7 @@
 
 @section('container')
     <div class="box tambahAkun">
-        <h3>Edir <span class="title akun">360</span></h3>
+        <h3>Edit <span class="title akun">360</span></h3>
         <form action="/edit360" method="post" enctype="multipart/form-data">
             @csrf
             <div class="form-upload">

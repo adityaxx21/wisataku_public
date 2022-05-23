@@ -13,6 +13,7 @@ class DashboardWisata_Controller extends Controller
        $data['title'] =  "Halaman Pengunjung";
        $data['slider'] = DB::table('tb_slider')->get();
        $data['wisata'] = DB::table('tb_tambah_wisata')->get();
+       $data['halaman_pengunjung'] = DB::table('tb_halaman_pengunjung')->first();
        foreach ($data['wisata'] as $key => $value) {
         $rating[$key] = DB::table('tb_pesan_komentar')->where([['id_wisata',$value->id],['no_pesan',1]])->average('rating');
         $jumlah[$key] = DB::table('tb_pesan_komentar')->where([['id_wisata',$value->id],['no_pesan',1]])->count();

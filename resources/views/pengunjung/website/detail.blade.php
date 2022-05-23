@@ -34,7 +34,7 @@
                     </div>
                     <span class="mt-4 mb-2 font-weight-bold"><i class="fa-solid fa-circle-play mr-2"></i>Lihat 360 :</span>
                     @foreach ($gambar360 as $item)
-                    <a href="http://{{$item->url_360}}" target="_blank"><img src="{{URL::asset($item->gambar)}}" height="100" alt=""></a>
+                    <a href="{{$item->url_360}}" target="_blank"><img src="{{URL::asset($item->gambar)}}" height="100" alt=""></a>
                     @endforeach
                     
 
