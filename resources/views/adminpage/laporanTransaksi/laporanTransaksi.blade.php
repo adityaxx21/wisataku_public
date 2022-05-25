@@ -20,6 +20,7 @@
                                 <script type="text/javascript">
                                     var chart_data = [];
                                     var date = [];
+                                    var year = [];
                                     var a = '{{isset($jenisLaporan) ? $jenisLaporan:"minggu"}}';
 
                                     function getRandomArbitrary(min, max) {
@@ -30,6 +31,11 @@
                                     <script>
                                         chart_data[{{ $key }}] = {{ $item }};
                                     </script>
+                                @endforeach
+                                @foreach ($year as $item)
+                                <script>
+                                    year[{{ $key }}] = {{ $item }};
+                                </script>
                                 @endforeach
 
 
