@@ -19,9 +19,10 @@
                         <input id="date-picker" class="date-picker form-control input-sm" placeholder="dd-mm-yyyy"
                             type="date" required="required" onfocus="this.type='date'" onclick="this.type='date'" onkeyup=""
                             onchange="(function() {
-                                        $('#cari').val(moment($('#date-picker').val()).format('DD/MM/YYYY'));
-                                        $('#cari').focus();
-                                        $('#cari').trigger($.Event( 'keydown' , { which: 13 } )); })();" onkeydown="">
+                                                                                                                            $('#cari').val(moment($('#date-picker').val()).format('DD/MM/YYYY'));
+                                                                                                                            $('#cari').focus();
+                                                                                                                            $('#cari').trigger($.Event( 'keydown' , { which: 13 } )); })();"
+                            onkeydown="">
                         <script>
                             function name()
 
@@ -31,6 +32,9 @@
                                 }, 60000);
                             }
                         </script>
+
+                        <a href="#"><span class="fa fa-download mr-4"
+                                style="font-size: 28px;float:right;vertical-align: bottom"></span></a>
                         <table id="tabelku" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>

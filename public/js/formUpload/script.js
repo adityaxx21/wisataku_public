@@ -1,41 +1,19 @@
-const akun = document.getElementById('kelolaAkun');
+const akun = document.getElementById("kelolaAkun");
 akun.classList.add("active");
 
+// choose file
 
-const resetButton = document.getElementsByClassName('reset');
-for(var i=0; i<resetButton.length; i++){
-    resetButton[i].addEventListener('click', resetForm);
-  }
+const actualBtn = document.getElementById("actual-btn");
 
-  function resetForm(event){
+const fileChosen = document.getElementById("file-chosen");
 
-    event.preventDefault();
-  
-    var form = event.currentTarget.form;
-    var inputs = form.querySelectorAll('input');
-    var selectOption = form.querySelector('select');
-    var uploadFile = document.getElementById('file-chosen');
-    
-    inputs.forEach(function(input, index){
-        input.value = null;
-        selectOption.selectedIndex = -1;
-      });
-      uploadFile.textContent = 'Tidak ada file';
-  
-  }
+actualBtn.addEventListener("change", function () {
+    fileChosen.textContent = this.files[0].name;
+});
 
-  const actualBtn = document.getElementById('actual-btn');
-
-  const fileChosen = document.getElementById('file-chosen');
-  
-  actualBtn.addEventListener('change', function(){
-    fileChosen.textContent = this.files[0].name
-  })
-
-  function fill_it() {
-    $('#editor-one').bind('keyup change', function(event) {
+function fill_it() {
+    $("#editor-one").bind("keyup change", function (event) {
         var currentValue = $(this).html();
-        $('#descr').val(currentValue);
+        $("#descr").val(currentValue);
     });
-
 }

@@ -55,6 +55,11 @@
                             </tr>
 
                             <tr>
+                                <td>Catatan</td>
+                                <td>{{ $transaksi->catatan }}</td>
+                            </tr>
+
+                            <tr>
                                 <td>Status</td>
                                 <td>
                                     

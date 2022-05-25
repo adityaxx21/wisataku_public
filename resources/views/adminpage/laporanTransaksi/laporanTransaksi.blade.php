@@ -8,47 +8,52 @@
                     <h3>Laporan <span class="title">Transaksi </span></h3>
                     <div class="card-box table-responsive">
                         <div class="box-chart">
-                            <label><input type="search" class="form-control input-sm" placeholder="Nama Wisata"
-                                    aria-controls="datatable-fixed-header" id="search"></label>
-                            <input id="date-picker" class="date-picker form-control laporanTransaksi"
-                                placeholder="dd-mm-yyyy" type="date" required="required" onfocus="this.type='date'"
-                                onclick="this.type='date'">
-                                
-                            <script type="text/javascript">
-                                var chart_data = [];
-                                var chart_data1 = [];
-                            </script>
-                            @foreach ($total_transaksi as $key => $item)
-                                <script>
-                                    chart_data[{{ $key }}] = {{$item}};
+                            <form action="/laporanTransaksi" method="get">
+                                @csrf
+                                <label><input type="search" class="form-control input-sm" placeholder="Nama Wisata"
+                                        aria-controls="datatable-fixed-header" id="search"></label>
+                                <input id="date-picker" class="date-picker form-control laporanTransaksi"
+                                    placeholder="dd-mm-yyyy" type="date" required="required" onfocus="this.type='date'"
+                                    onclick="this.type='date'">
+
+                                <script type="text/javascript">
+                                    var chart_data = [];
+                                    var chart_data1 = [];
                                 </script>
-                            @endforeach
+                                @foreach ($total_transaksi as $key => $item)
+                                    <script>
+                                        chart_data[{{ $key }}] = {{ $item }};
+                                    </script>
+                                @endforeach
 
-                            @foreach ($bejibun as $key => $item)
+                                @foreach ($bejibun as $key => $item)
+                                    <script>
+                                        chart_data1[{{ $key }}] = {{ $item }};
+                                    </script>
+                                @endforeach
+
+
                                 <script>
-                                    chart_data1[{{ $key }}] = {{$item}};
-                                   
+                                    function timeFunctionLong(input) {
+                                        setTimeout(function() {
+                                            input.type = 'text';
+                                        }, 60000);
+                                    }
+                                    window.onload(passVar(chart_data1));
                                 </script>
-                            @endforeach
-
-
-                            <script>
-                                function timeFunctionLong(input) {
-                                    setTimeout(function() {
-                                        input.type = 'text';
-                                    }, 60000);
-                                }
-                                window.onload(passVar(chart_data1));
-                            </script>
-                            <a href="javascript:void(0)" onclick="alert(chart_data)"><i class="fa fa-download download" ></i></a>
-                            <select id="jenisLaporan" name="jenisLaporan" class="form-control jenisLaporan" required="">
-                                <option value=""></option>
-                                <option value="minggu">Mingguan</option>
-                                <option value="bulan">Bulanan</option>
-                                <option value="Tahun">Tahunan</option>
-                            </select>
-                            <canvas id="myChart" class="myChart"></canvas>
+                                <a href="javascript:void(0)" onclick="alert(chart_data)"><i
+                                        class="fa fa-download download"></i></a>
+                                <a href="javascript:void(0)" onclick="alert(chart_data)"><i
+                                        class="fa fa-search download"></i></a>
+                                <select id="jenisLaporan" name="jenisLaporan" class="form-control jenisLaporan" required="">
+                                    <option value=""></option>
+                                    <option value="minggu">Mingguan</option>
+                                    <option value="bulan">Bulanan</option>
+                                    <option value="Tahun">Tahunan</option>
+                                </select>
+                                <canvas id="myChart" class="myChart"></canvas>
                         </div>
+                        </form>
                         <table id="tabelku" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>

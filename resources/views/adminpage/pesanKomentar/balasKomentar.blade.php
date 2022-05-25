@@ -30,17 +30,17 @@
                     <?php
                     foreach ($pesan as $key => $value) {
                     ?>
-                        <div class="col-md-12 col-sm-12  form-group">
-                            <label for="komentar" class="label-form">Komentar {{ $value->username }}</label>
-                            <input type="text" name="komentar" value="{{ $value->pesan }}" class="form-control" required
-                                readonly>
-                        </div>
-                        <div class="col-md-12 col-sm-12  form-group float-right">
-                            <label for="komentar" class="label-form float-right" style="margin-right:10%">Balas Komentar
-                                Admin</label>
-                            <input type="text" name="komentar" value="{{ $value->pesan_balas }}" class="form-control" required
-                                readonly>
-                        </div>
+                    <div class="col-md-12 col-sm-12  form-group">
+                        <label for="komentar" class="label-form">Komentar {{ $value->username }}</label>
+                        <input type="text" name="komentar" value="{{ $value->pesan }}" class="form-control" required
+                            readonly>
+                    </div>
+                    <div class="col-md-12 col-sm-12  form-group float-right">
+                        <label for="komentar" class="label-form float-right" style="margin-right:10%">Balas Komentar
+                            Admin</label>
+                        <input type="text" name="komentar" value="{{ $value->pesan_balas }}" class="form-control"
+                            required readonly>
+                    </div>
                     <?php
                     }
                     ?>
@@ -56,7 +56,7 @@
             </div>
             <div class="button-form">
                 <button type="submit" class="btn btn-success"><i class="fa fa-paper-plane"><span> Balas</span></i></button>
-                <button type="button" class="btn btn-warning reset" onclick="$('#balasKomentar').val('')"><i
+                <button type="button" class="btn btn-warning reset" onclick="document.location.reload(true)"><i
                         class="fa fa-repeat"><span>
                             Reset</span></i></button>
                 <a href="/pesanKomentar" class="btn btn-danger"><i class="fa fa-close"><span> Kembali</span></i></a>

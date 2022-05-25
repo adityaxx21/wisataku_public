@@ -6,63 +6,39 @@
         </div>
         <div class="x_content">
             <br>
-            <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" action="/pesantiket/{{$wisata->id}}" method="POST" enctype="multipart/form-data">
+            <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left"
+                action="/pesantiket/{{ $wisata->id }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group row">
                     <label for="inputPassword" class="col-sm-3 col-form-label">Jumlah Tiket Dewasa</label>
                     <div class="col-sm-2">
-                        <select id="tiketdewasa" name="tiketdewasa" class="myform myform ml-1 mr-5" required="">
-                            <option value="0"></option>
-                            @for ($i = 1; $i < 20; $i++)
-                            <option value={{$i}}>{{$i}}</option>
-                        @endfor
-                        </select>
+                        <input class="form-control" type="text">
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="inputPassword" class="col-sm-3 col-form-label">Jumlah Tiket Anak-anak</label>
                     <div class="col-sm-2">
-                        <select id="tiketanak" name="tiketanak" class="myform myform ml-1 mr-5" required="">
-                            <option value="0"></option>
-                            @for ($i = 1; $i < 20; $i++)
-                            <option value={{$i}}>{{$i}}</option>
-                            @endfor
-                        </select>
+                        <input class="form-control" type="text">
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="inputPassword" class="col-sm-3 col-form-label">Kendaraan Motor</label>
                     <div class="col-sm-2">
-                        <select id="motor" name="motor" class="myform myform ml-1 mr-5" required="">
-                            <option value="0"></option>
-                            @for ($i = 1; $i < 20; $i++)
-                            <option value={{$i}}>{{$i}}</option>
-                            @endfor
-                        </select>
+                        <input class="form-control" type="text">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputPassword" class="col-sm-3 col-form-label">Kendaraan Mobil</label>
                     <div class="col-sm-2">
-                        <select id="mobil" name="mobil" class="myform myform ml-1 mr-5" required="">
-                            <option value="0"></option>
-                            @for ($i = 1; $i < 20; $i++)
-                            <option value={{$i}}>{{$i}}</option>
-                            @endfor
-                        </select>
+                        <input class="form-control" type="text">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputPassword" class="col-sm-3 col-form-label">Kendaraan Umum</label>
                     <div class="col-sm-2">
-                        <select id="umum" name="umum" class="myform myform ml-1 mr-5" required="">
-                            <option value="0"></option>
-                            @for ($i = 1; $i < 20; $i++)
-                            <option value={{$i}}>{{$i}}</option>
-                            @endfor
-                        </select>
+                        <input class="form-control" type="text">
                     </div>
                 </div>
 
@@ -86,14 +62,16 @@
                 <div class="form-group row">
                     <label for="inputPassword" class="col-sm-3 col-form-label">Catatan</label>
                     <div class="col-sm-5">
-                        <textarea id="catatan" required="required" class="form-control" name="catatan" data-parsley-trigger="keyup"></textarea>
+                        <textarea id="catatan" required="required" class="form-control" name="catatan"
+                            data-parsley-trigger="keyup"></textarea>
                     </div>
                 </div>
 
                 <div class="ln_solid"></div>
                 <div class="item form-group">
                     <div class="col-md-6 col-sm-2 offset-md-4">
-                        <button class="btn btn-danger" type="submit"><i class="fa fa-cart-shopping mr-2"></i>Beli Sekarang</button>
+                        <button class="btn btn-danger" type="submit"><i class="fa fa-cart-shopping mr-2"></i>Beli
+                            Sekarang</button>
                     </div>
                 </div>
 

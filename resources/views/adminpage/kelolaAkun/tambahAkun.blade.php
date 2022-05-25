@@ -38,7 +38,8 @@
             </div>
             <div class="button-form">
                 <button type="submit" class="btn btn-success"><i class="fa fa-save"><span> Simpan</span></i></button>
-                <button type="button" class="btn btn-warning reset"><i class="fa fa-repeat"><span>
+                <button type="button" class="btn btn-warning reset" onclick="document.location.reload(true)"><i
+                        class="fa fa-repeat"><span>
                             Reset</span></i></button>
                 <a href="/kelolaAkun" class="btn btn-danger"><i class="fa fa-close"><span> Kembali</span></i></a>
             </div>
