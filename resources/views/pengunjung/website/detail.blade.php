@@ -28,9 +28,7 @@
                             @endforeach
                         @endforeach
                         {{-- item fasilitas --}}
-
-
-
+            
                     </div>
                     <span class="mt-4 mb-2 font-weight-bold"><i class="fa-solid fa-circle-play mr-2"></i>Lihat 360 :</span>
                     @foreach ($gambar360 as $item)
