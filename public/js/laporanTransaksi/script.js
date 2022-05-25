@@ -104,7 +104,16 @@ if (a == 'bulan') {
   ];
 
 } else if (a== 'tahun'){
-
+  var labels = [];
+  var background = [];
+  var border = [];
+  $.each(year, function( index, value ) {
+    labels.push(value); 
+    var color = [getRandomArbitrary(0, 255),getRandomArbitrary(0, 255),getRandomArbitrary(0, 255)];
+    background.push('rgba('+color[0]+', '+color[1]+', '+color[2]+',0.2)'); 
+    border.push('rgb('+color[0]+', '+color[1]+', '+color[2]+')'); 
+  });
+  
 }
 
 

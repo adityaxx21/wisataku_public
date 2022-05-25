@@ -12,18 +12,20 @@
                             <form action="/laporanTransaksi" method="get" id="find">
                                 @csrf
                                 <label><input type="search" class="form-control input-sm" placeholder="Nama Wisata"
-                                        aria-controls="datatable-fixed-header" id="search" name="search" value="{{isset($search) ? $search:""}}"></label>
+                                        aria-controls="datatable-fixed-header" id="search" name="search"
+                                        value="{{ isset($search) ? $search : '' }}"></label>
                                 <input id="date-picker" class="date-picker form-control laporanTransaksi"
                                     placeholder="dd-mm-yyyy" type="date" required="required" onfocus="this.type='date'"
-                                    onclick="this.type='date'" name="date" value="{{$date}}">
+                                    onclick="this.type='date'" name="date" value="{{ $date }}">
 
                                 <script type="text/javascript">
                                     var chart_data = [];
                                     var date = [];
-                                    var a = '{{isset($jenisLaporan) ? $jenisLaporan:"minggu"}}';
+                                    var year = [];
+                                    var a = '{{ isset($jenisLaporan) ? $jenisLaporan : 'minggu' }}';
 
                                     function getRandomArbitrary(min, max) {
-                                        return  Math.trunc( Math.random() * (max - min) + min ) ;
+                                        return Math.trunc(Math.random() * (max - min) + min);
                                     }
                                 </script>
                                 @foreach ($total_transaksi as $key => $item)
@@ -31,10 +33,17 @@
                                         chart_data[{{ $key }}] = {{ $item }};
                                     </script>
                                 @endforeach
+                                @if (isset($year))
+                                    @foreach ($year as $key=>$item)
+                                        <script>
+                                            year[{{ $key }}] = {{ $item }};
+                                        </script>
+                                    @endforeach
+                                @endif
+
 
 
                                 <script>
-
                                     function timeFunctionLong(input) {
                                         setTimeout(function() {
                                             input.type = 'text';
@@ -49,9 +58,10 @@
                                 <a href="javascript:void(0)" onclick=" location.replace('/laporanTransaksi')"><i
                                         class="fa fa-refresh download"></i></a>
                                 <select id="jenisLaporan" name="jenisLaporan" class="form-control jenisLaporan" required="">
-                                    <option value="minggu" {{$jenisLaporan  == 'minggu' ?'selected':null}}>Mingguan</option>
-                                    <option value="bulan" {{$jenisLaporan == 'bulan' ? 'selected':null}}>Bulanan</option>
-                                    <option value="tahun" {{$jenisLaporan  == 'tahun' ? 'selected':null}}>Tahunan</option>
+                                    <option value="minggu" {{ $jenisLaporan == 'minggu' ? 'selected' : null }}>Mingguan
+                                    </option>
+                                    <option value="bulan" {{ $jenisLaporan == 'bulan' ? 'selected' : null }}>Bulanan</option>
+                                    <option value="tahun" {{ $jenisLaporan == 'tahun' ? 'selected' : null }}>Tahunan</option>
                                 </select>
                                 <canvas id="myChart" class="myChart"></canvas>
                         </div>
@@ -74,9 +84,9 @@
                             <tbody>
                                 @foreach ($transaksi as $key => $item)
                                     <tr>
-                                        <td>{{ $key+1 }}</td>
+                                        <td>{{ $key + 1 }}</td>
                                         <td>{{ $item->nama_wisata }}</td>
-                                        <td>{{$item->alamat}}</td>
+                                        <td>{{ $item->alamat }}</td>
                                         <td>{{ $item->jumlah_tiket_dewasa + $item->jumlah_tiket_anak }}</td>
                                         <td>{{ date('D, d/M/Y', strtotime($item->tanggal_kedatangan)) }}</td>
                                         <td>{{ $item->uname }}</td>
