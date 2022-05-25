@@ -26,6 +26,7 @@ class KelolaQr_Controller extends Controller
         // ->groupBy('tb_tambah_wisata.id')
         ->first();
         $data['date'] = date("d-m-Y", strtotime($data["data"]->tanggal_kedatangan));
+        // print_r($data['data']);
         return response()->json($data);
         // return view("operatorpage.operator_page.homeOperator", $data);
     }

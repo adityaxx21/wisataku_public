@@ -8,17 +8,52 @@ use Illuminate\Support\Facades\Storage;
 
 class LaporanTransaksi_Controller extends Controller
 {
-    public function laporan_transaksi()
+    public function laporan_transaksi(Request $request)
     {
         $data['title'] = "Laporan Transaksi";
-        $data['kategori'] = DB::table('tb_kategori_wisata')->get();
-        // $data['transaksi'] = DB::table('tb_transaksi')->get();
-        $data['bulan'] = array('attem' => ['Januari','Februari','Maret']);
-        $data['bejibun'] = [100,200,300,400,500,600,700];
-        $data['total_transaksi'] = [1100,1200,1300,1400,1500,1600,1700];
+        $data['date'] = $request->input('date');
+        $data['search'] = $request->input('search');
+        $date = $data['date'] !== "" ? ['tanggal_kedatangan','LIKE',$data['date'].'%'] : "";
+        $wisata = $data['search'] !== "" ? ['nama_wisata','LIKE','%'.$data['search'].'%'] : "";
+
+        $data['transaksi'] = DB::table('tb_transaksi')
+            ->selectRaw('tb_transaksi.*,user_reg.*,tb_tambah_wisata.*')
+            ->leftJoin('user_reg', 'user_reg.uname', '=', 'tb_transaksi.uname')
+            ->leftJoin('tb_tambah_wisata', 'tb_tambah_wisata.id', '=', 'tb_transaksi.id_wisata')
+            ->orderBy('tb_transaksi.tanggal_kedatangan', 'ASC')
+            ->where([$date,$wisata])
+            ->get();
+        $data['day'] = ['Sun','Mon','Tue','Wed','Thu',"Fri",'Sat'];
+
+        $data['jenisLaporan'] = $request->input('jenisLaporan') !== null ? $request->input('jenisLaporan') : 'bulan';
+
+        if ($data['jenisLaporan'] == 'bulan') {
+            $data['total_transaksi'] = array_fill(0, 12, 0);
+            foreach ($data['transaksi'] as $key => $value) {
+                $date =  ltrim(date('m', strtotime($value->tanggal_kedatangan)),'0');
+                $data['total_transaksi'][(int)$date] +=  1;
+            }
+        } 
+        elseif ($data['jenisLaporan'] == 'minggu') {
+            $data['total_transaksi'] = array_fill(0, 7, 0);
+            foreach ($data['transaksi'] as $key => $value) {
+                $date =  date('D', strtotime($value->tanggal_kedatangan));
+                $data['total_transaksi'][array_search($date,$data['day'],true)] +=  1;
+            }
+        } 
+        elseif ($data['jenisLaporan'] == 'tahun') {
+            $data['total_transaksi'] = array_fill(0, 12, 0);
+            foreach ($data['transaksi'] as $key => $value) {
+                $date = date('Y', strtotime($value->tanggal_kedatangan));
+                $data['total_transaksi'][(int)$date] +=  1;
+            }
+        }
+
+        // print_r($data['total_transaksi']);
+
+
 
         // print_r($data['data_wisata']);
         return view("adminpage.laporanTransaksi.laporanTransaksi", $data);
     }
-
 }

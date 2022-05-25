@@ -69,6 +69,10 @@
                                 <td>Total Pesanan</td>
                                 <td>Rp. {{$transaksi->gross_amount}}</td>
                             </tr>
+                            <tr>
+                                <td>Catatan</td>
+                                <td>{{$transaksi->catatan}}</td>
+                            </tr>
                             
                             <meta name="viewport" content="width=device-width, initial-scale=1">
                         <!-- @TODO: replace SET_YOUR_CLIENT_KEY_HERE with your client key -->
