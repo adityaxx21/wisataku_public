@@ -46,26 +46,25 @@ class LaporanTransaksi_Controller extends Controller
             foreach ($data['transaksi'] as $key => $value) {
                 $date = date('Y', strtotime($value->tanggal_kedatangan));
                 if ($date > $date1) {
-                   
+                    // echo($date." ".$date1."    ");
                     $data['total_transaksi'][] = 0;
                     $data['year'][] = $date;
                     $num += 1;
-                    try {
-                        $date1 = date('Y', strtotime($data['transaksi'][$key-1]->tanggal_kedatangan));
-                    } catch (\Throwable $th) {
-                        $date1 = date('Y', strtotime($data['transaksi'][0]->tanggal_kedatangan));
-                    }
+                    $date1 = $date;
                     $data['total_transaksi'][$num] +=  1;
                 } else{             
                     $data['total_transaksi'][$num] +=  1;
                     $date1 = $date;
-                }  
-                echo($date); 
+                } 
+               
+               
             }
         }
+        // print_r($data['year']);
+        // print_r($data['total_transaksi']);
 
-        print_r($data['year']);
+        // print_r($data['year']);
         // print_r($data['data_wisata']);
-        // return view("adminpage.laporanTransaksi.laporanTransaksi", $data);
+        return view("adminpage.laporanTransaksi.laporanTransaksi", $data);
     }
 }

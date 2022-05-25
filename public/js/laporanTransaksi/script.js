@@ -107,11 +107,11 @@ if (a == 'bulan') {
   var labels = [];
   var background = [];
   var border = [];
-  alert(year);
   $.each(year, function( index, value ) {
     labels.push(value); 
-    background.push('rgba('+getRandomArbitrary(0, 255)+', '+getRandomArbitrary(0, 255)+', '+getRandomArbitrary(0, 255)+',0.2)'); 
-    border.push('rgb('+getRandomArbitrary(0, 255)+', '+getRandomArbitrary(0, 255)+', '+getRandomArbitrary(0, 255)+')'); 
+    var color = [getRandomArbitrary(0, 255),getRandomArbitrary(0, 255),getRandomArbitrary(0, 255)];
+    background.push('rgba('+color[0]+', '+color[1]+', '+color[2]+',0.2)'); 
+    border.push('rgb('+color[0]+', '+color[1]+', '+color[2]+')'); 
   });
   
 }

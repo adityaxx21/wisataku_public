@@ -11,15 +11,19 @@ class KeolaPesanKomentar_Controller extends Controller
 
     var $location = 'PesanKomentar';
     var $glob_id;
-    public function kelola_pesan_komentar()
+    public function kelola_pesan_komentar(Request $request)
     {
         // $get_hak = DB::table('user_reg')->where('uname',session()->get('username'))->value('hak_akses');
         // echo ($get_hak);
+        $data['date'] = $request->input('date');
+        $data['search'] = $request->input('search');
+        $date = $data['date'] !== "" ? ['tb_pesan_komentar.created_at', 'LIKE', $data['date'] . '%'] : "";
+        $wisata = $data['search'] !== "" ? ['tb_tambah_wisata.nama_wisata', 'LIKE', '%' . $data['search'] . '%'] : "";
         $data['title'] = "Pesan Komentar";
         $data['pesan'] = DB::table('tb_pesan_komentar')
             ->selectRaw('tb_pesan_komentar.*,tb_tambah_wisata.nama_wisata as nama_wisata')
             ->leftJoin('tb_tambah_wisata', 'tb_tambah_wisata.id', '=', 'tb_pesan_komentar.id_wisata')
-            ->where('no_pesan', '1')
+            ->where([['no_pesan', '1'],$date,$wisata])
             ->get();
 
         // $data['pesan'] = DB::table('tb_pesan_komentar')->where()->get();
