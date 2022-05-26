@@ -106,6 +106,10 @@
                                                         <td>Status Verifikasi</td>
                                                         <td id="stsVerifikasi"></td>
                                                     </tr>
+                                                    <tr>
+                                                        <td>Catatan</td>
+                                                        <td id="catatan"></td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
 
@@ -158,6 +162,7 @@
                             $('#jmlPengunjung').html(data.data.jumlah_tiket_dewasa+" Dewasa "+data.data.jumlah_tiket_anak+" Anak ");
                             $('#jmlKendaraan').html("Jumlah Motor : "+data.data.jumlah_motor+" Jumlah Mobil : "+data.data.jumlah_mobil+" Jumlah Kendaraan Umum : "+data.data.jumlah_kendaraan_umum);
                             $('#tglDatang').html(data.date);
+                            $('#catatan').html(data.data.catatan);
                             if (data.data.id_status_pemb == 0) {
                                 $('#status_pem').val(0);
                                 $('#stsPembayaran').html("Terbayarkan");

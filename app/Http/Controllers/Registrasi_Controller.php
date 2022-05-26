@@ -68,6 +68,16 @@ class Registrasi_Controller extends Controller
             'created_at' => $sav_date,
         );
         $uname =DB::table('user_reg')->where([['uname',$request->input('uname')],['Email',$request->input('Email')]])->first();
+        if ($request->input('Jenis_Kel') == 'male') {
+            $get_data = array_merge($get_data, array('gambar' => 'storage/uploads/editakun/168723.png'));
+            
+        //    $get_data[] = ['gambar' => 'storage/uploads/editakun/168723.png'];
+        } else{
+            $get_data = array_merge($get_data, array('gambar' => 'storage/uploads/editakun/girl.png'));
+
+        //    $get_data[] = ['gambar' => 'storage/uploads/editakun/girl.png'];
+
+        }
         // print_r($uname);
         $pass = $request->input('pass');
         $passV = $request->input('passV');

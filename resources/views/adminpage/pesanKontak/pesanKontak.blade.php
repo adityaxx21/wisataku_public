@@ -4,7 +4,7 @@
     <div class="col-md-12 col-sm-12 box-akun">
         <div class="x_content">
             <div class="row">
-                <div class="col-sm-12 content-akun">
+                <div class="col-sm-12 content-akun" style="padding: 20px !important">
                     <h3>Pesan <span class="title">Kontak</span></h3>
                     <div class="card-box table-responsive">
                         <label>Search: <input type="search" class="form-control input-sm" placeholder=""
@@ -12,7 +12,6 @@
                         <input id="date-picker" class="date-picker form-control" placeholder="dd-mm-yyyy" type="date"
                             required="required" onfocus="this.type='date'" onclick="this.type='date'">
                         <script>
-
                             function timeFunctionLong(input) {
                                 setTimeout(function() {
                                     input.type = 'text';
@@ -37,20 +36,21 @@
                                 <?php 
                                 foreach ($pesan as $key => $value) {
                                 ?>
-                            <tr>
-                                <td>{{$key+1}}</td>
-                                <td>{{date("d/m/Y", strtotime($value->created_at))}}</td>
-                                <td>{{$value->username}}</td>
-                                <td>{{$value->email}}</td>
-                                <td>{{$value->no_hp}}</td>
-                                <td>{{$value->pesan}}</td>
-                                <td>
-                                    <a href="/balasPesan/{{$value->id_pesan_kontak}}" type="button" class="btn btn-success"><i class="fa fa-paper-plane"><span>
-                                                Balas Komentar</span></i></a>
-                                </td>
+                                <tr>
+                                    <td>{{ $key + 1 }}</td>
+                                    <td>{{ date('d/m/Y', strtotime($value->created_at)) }}</td>
+                                    <td>{{ $value->username }}</td>
+                                    <td>{{ $value->email }}</td>
+                                    <td>{{ $value->no_hp }}</td>
+                                    <td>{{ $value->pesan }}</td>
+                                    <td>
+                                        <a href="/balasPesan/{{ $value->id_pesan_kontak }}" type="button"
+                                            class="btn btn-success"><i class="fa fa-paper-plane"><span>
+                                                    Balas Komentar</span></i></a>
+                                    </td>
 
-                            </tr>
-                            <?php } ?>
+                                </tr>
+                                <?php } ?>
 
 
                             </tbody>

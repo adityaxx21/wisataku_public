@@ -28,8 +28,8 @@
         type='text/css' />
 
     {{-- ajax --}}
-    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
     {{-- map --}}
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css' rel='stylesheet' />
 
@@ -53,7 +53,7 @@
             <div class="top_nav">
                 <div class="nav_menu">
                     <div class="nav toggle">
-                        <a id="menu_toggle" ><i class="fa fa-bars"></i></a>
+                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
                     </div>
                     <button type="button" class="btn btn-info btn-header" onclick="location.replace('/')"
                         style="display: {{ $title == 'Dashboard' ? 'none' : 'inline-block' }}"><i
@@ -63,12 +63,12 @@
                             <li class="nav-item dropdown open" style="padding-left: 15px;">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true"
                                     id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                                    {{session()->get('username')}}
+                                    {{ session()->get('username') }}
                                 </a>
-                                <div class="dropdown-menu dropdown-usermenu pull-right"
+                                <div class="dropdown-menu dropdown-usermenu pull-right" style="left: -4rem !important;"
                                     aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="/logout"><i
-                                            class="fa fa-sign-out pull-right"></i> Log Out</a>
+                                    <a class="dropdown-item" href="/logout"><i class="fa fa-sign-out pull-right"></i>
+                                        Log Out</a>
                                 </div>
                             </li>
                         </ul>
@@ -99,9 +99,6 @@
         <script src="js/tabelku/dataTables.bootstrap.min.js"></script>
         <script src="js/formUpload/icheck.min.js"></script>
         <script src="js/formUpload/bootstrap-wysiwyg.min.js"></script>
-        <script src="js/formUpload/jquery.hotkeys.js"></script>
-        <script src="js/formUpload/prettify.js"></script>
-        <script src="js/formUpload/switchery.js"></script>
         <script src="js/layout/custom.js"></script>
         <script src='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js'></script>
         <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js'></script>

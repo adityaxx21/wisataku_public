@@ -11,6 +11,7 @@ class WisataTransaksi_Controller extends Controller
 {
     public function detail($id)
     {
+
         $data["title"] =  "Halaman Wisata";
         $data['wisata'] = DB::table('tb_tambah_wisata')->where('id', $id)->first();
         $data['rating'] = DB::table('tb_pesan_komentar')->where([['id_wisata', $id], ['no_pesan', 1]])->average('rating');
@@ -21,6 +22,7 @@ class WisataTransaksi_Controller extends Controller
         $data['setel_fasilitas'] = DB::table('tb_setel_fasisilitas')->select('id_fasilitas')->where('id_fasilitas_tersedia', $data['wisata']->id_fasilitas_tersedia)->get();
         $data['komentar'] =  DB::table('tb_pesan_komentar')->where([['id_wisata', $id], ['no_pesan', 1]])->get();
         $data['gambar360'] = DB::table('tb_gambar360')->where('id_gambar360',$id)->get();
+
         return view('pengunjung.website.detail', $data);
     }
 
@@ -77,6 +79,9 @@ class WisataTransaksi_Controller extends Controller
 
     public function pesantiket($id)
     {
+        if (session()->get('username') == "") {
+            return redirect('/login')->with('alert-notif','Anda Harus Login Terlebih Dahulu');
+        } 
         $data['title'] = 'Pesan Tiket';
         $data['wisata'] = DB::table('tb_tambah_wisata')->where('id', $id)->first();
         return view('pengunjung.website.pesantiket', $data);
@@ -84,9 +89,7 @@ class WisataTransaksi_Controller extends Controller
 
     public function pesantiket_post(Request $request, $id)
     {
-        if (session()->get('username') == "") {
-            return redirect('/login')->with('alert-notif','Anda Harus Login Terlebih Dahulu');
-        }
+
         $data['wisata'] = DB::table('tb_tambah_wisata')->where('id', $id)->first();
         $get_email = DB::table('user_reg')->where('uname', session()->get('username'))->value('Email');
         $hargaTiket =  $data['wisata']->tiketDewasa * $request->input('tiketdewasa') + $data['wisata']->tiketAnak * $request->input('tiketanak');
@@ -104,6 +107,7 @@ class WisataTransaksi_Controller extends Controller
             'jumlah_kendaraan_umum' => $request->input('umum'),
             'gross_amount' => $gross_amount,
             'tanggal_kedatangan' =>  date("Y/m/d", strtotime($request->input('tgldatang'))),
+            'catatan' => $request->input('catatan'),
             'created_at' => $sav_date,
         );
         // print_r($get_data);
