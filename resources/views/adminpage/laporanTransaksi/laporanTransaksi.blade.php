@@ -10,23 +10,17 @@
                     <div class="card-box table-responsive">
                         <div class="box-chart">
 
-
-                            <form action="/laporanTransaksi" method="get" id="find">
+                            <form action="/laporanTransaksi" method="get">
                                 @csrf
                                 <label><input type="search" class="form-control input-sm" placeholder="Nama Wisata"
-                                        aria-controls="datatable-fixed-header" id="search" name="search" value="{{isset($search) ? $search:""}}"></label>
+                                        aria-controls="datatable-fixed-header" id="search"></label>
                                 <input id="date-picker" class="date-picker form-control laporanTransaksi"
                                     placeholder="dd-mm-yyyy" type="date" required="required" onfocus="this.type='date'"
-                                    onclick="this.type='date'" name="date" value="{{$date}}">
+                                    onclick="this.type='date'">
 
                                 <script type="text/javascript">
                                     var chart_data = [];
-                                    var date = [];
-                                    var a = '{{isset($jenisLaporan) ? $jenisLaporan:"minggu"}}';
-
-                                    function getRandomArbitrary(min, max) {
-                                        return  Math.trunc( Math.random() * (max - min) + min ) ;
-                                    }
+                                    var chart_data1 = [];
                                 </script>
                                 @foreach ($total_transaksi as $key => $item)
                                     <script>
@@ -34,9 +28,14 @@
                                     </script>
                                 @endforeach
 
+                                @foreach ($bejibun as $key => $item)
+                                    <script>
+                                        chart_data1[{{ $key }}] = {{ $item }};
+                                    </script>
+                                @endforeach
+
 
                                 <script>
-
                                     function timeFunctionLong(input) {
                                         setTimeout(function() {
                                             input.type = 'text';
@@ -44,17 +43,16 @@
                                     }
                                     window.onload(passVar(chart_data1));
                                 </script>
-                                <a href="javascript:void(0)" onclick="alert(getRandomArbitrary(0,255))"><i
-                                        class="fa fa-download download"></i></a>
-                                <a href="javascript:void(0)" onclick="$('#find').submit()"><i
-                                        class="fa fa-search download"></i></a>
-                                <a href="javascript:void(0)" onclick=" location.replace('/laporanTransaksi')"><i
-                                        class="fa fa-refresh download"></i></a>
-                                <select id="jenisLaporan" name="jenisLaporan" class="form-control jenisLaporan" required="">
-                                    <option value="minggu" {{$jenisLaporan  == 'minggu' ?'selected':null}}>Mingguan</option>
-                                    <option value="bulan" {{$jenisLaporan == 'bulan' ? 'selected':null}}>Bulanan</option>
-                                    <option value="tahun" {{$jenisLaporan  == 'tahun' ? 'selected':null}}>Tahunan</option>
 
+                                <a href="javascript:void(0)" onclick="alert(chart_data)"><i
+                                        class="fa fa-download download"></i></a>
+                                <a href="javascript:void(0)" onclick="alert(chart_data)"><i
+                                        class="fa fa-search download"></i></a>
+                                <select id="jenisLaporan" name="jenisLaporan" class="form-control jenisLaporan" required="">
+                                    <option value=""></option>
+                                    <option value="minggu">Mingguan</option>
+                                    <option value="bulan">Bulanan</option>
+                                    <option value="Tahun">Tahunan</option>
                                 </select>
                                 <canvas id="myChart" class="myChart"></canvas>
                         </div>
@@ -77,9 +75,9 @@
                             <tbody>
                                 @foreach ($transaksi as $key => $item)
                                     <tr>
-                                        <td>{{ $key+1 }}</td>
+                                        <td>{{ $key + 1 }}</td>
                                         <td>{{ $item->nama_wisata }}</td>
-                                        <td>{{$item->alamat}}</td>
+                                        <td>{{ $item->alamat }}</td>
                                         <td>{{ $item->jumlah_tiket_dewasa + $item->jumlah_tiket_anak }}</td>
                                         <td>{{ date('D, d/M/Y', strtotime($item->tanggal_kedatangan)) }}</td>
                                         <td>{{ $item->uname }}</td>
