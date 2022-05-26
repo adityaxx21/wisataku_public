@@ -8,7 +8,7 @@
                     <span><i class="fa fa-star" style="color: orange;"></i>
                         {{ isset($rating) ? $rating : 5 }}
                         | {{ isset($jumlah) ? $jumlah : 0 }} Terjual</span>
-                    <img src="image/website/jembatan.jpg" alt="" srcset="" class="mt-4">
+                    <img src="{{URL::asset($wisata->gambar)}}" alt="" srcset="" class="mt-4">
 
                     <span class="mt-4 font-weight-bold">Deskripsi :</span>
                     <p style="font-size: .8rem" class="mt-1">{{ $wisata->deskripsi }}</p>

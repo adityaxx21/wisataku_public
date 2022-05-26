@@ -23,6 +23,7 @@ class WisataTransaksi_Controller extends Controller
         $data['komentar'] =  DB::table('tb_pesan_komentar')->where([['id_wisata', $id], ['no_pesan', 1]])->get();
         $data['gambar360'] = DB::table('tb_gambar360')->where('id_gambar360',$id)->get();
 
+        // print_r($data['wisata']);
         return view('pengunjung.website.detail', $data);
     }
 

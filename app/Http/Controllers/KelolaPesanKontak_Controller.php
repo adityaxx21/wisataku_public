@@ -11,10 +11,14 @@ class KelolaPesanKontak_Controller extends Controller
 
     var $location = 'PesanKontak';
     var $glob_id;
-    public function kelola_pesan_kontak()
+    public function kelola_pesan_kontak(Request $request)
     {
         $data['title'] = "Pesan Komentar";
-        $data['pesan'] = DB::table('tb_pesan_kontak')->where('no_pesan','1')->get();
+        $data['date'] = $request->input('date');
+        $data['search'] = $request->input('search');
+        $date = $data['date'] !== "" ? ['created_at', 'LIKE', $data['date'] . '%'] : "";
+        $username = $data['search'] !== "" ? ['username', 'LIKE', '%' . $data['search'] . '%'] : "";
+        $data['pesan'] = DB::table('tb_pesan_kontak')->where([['no_pesan','1'],$date,$username])->get();
 
         // $data['pesan'] = DB::table('tb_pesan_komentar')->where()->get();
         // print_r($data['pesan']);

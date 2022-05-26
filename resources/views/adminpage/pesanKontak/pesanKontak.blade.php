@@ -7,10 +7,14 @@
                 <div class="col-sm-12 content-akun" style="padding: 20px !important">
                     <h3>Pesan <span class="title">Kontak</span></h3>
                     <div class="card-box table-responsive">
+                        <form action="/pesanKontak" method="get" id="find">
+                            @csrf
                         <label>Search: <input type="search" class="form-control input-sm" placeholder=""
-                                aria-controls="datatable-fixed-header"></label>
+                                aria-controls="datatable-fixed-header" id="search" name="search"
+                                value="{{ isset($search) ? $search : '' }}"></label>
                         <input id="date-picker" class="date-picker form-control" placeholder="dd-mm-yyyy" type="date"
-                            required="required" onfocus="this.type='date'" onclick="this.type='date'">
+                            required="required" onfocus="this.type='date'" onclick="this.type='date'" onkeyup="" name="date"
+                            value="{{ isset($date) ? $date : '' }}">
                         <script>
                             function timeFunctionLong(input) {
                                 setTimeout(function() {
@@ -18,6 +22,10 @@
                                 }, 60000);
                             }
                         </script>
+                        <a href="javascript:void(0)" onclick="$('#find').submit()"><i class="fa fa-search download"></i></a>
+                        <a href="javascript:void(0)" onclick=" location.replace('/pesanKontak')"><i
+                                class="fa fa-refresh download"></i></a>
+                            </form>
                         <table id="tabelku" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
