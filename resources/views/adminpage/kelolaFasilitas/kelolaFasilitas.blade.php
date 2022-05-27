@@ -23,41 +23,39 @@
                                     <th>Gambar</th>
                                     <th class="col-namaKategori">Fasilitas</th>
                                     <th>Aksi</th>
-
-
                                 </tr>
                             </thead>
 
 
                             <tbody>
-                                <tr>
-                                    <?php  $no = 0;
+
+                                <?php  $no = 0;
                                 foreach ($fasilitas_wisata  as $value) {
                                     $no++;
                                     ?>
 
                                 <tr>
                                     <td>{{ $no }}</td>
-                                    <td><img src="{{asset("$value->gambar")}}" alt="" width="200px" height="200px"></td>
+                                    <td><img src="{{ asset("$value->gambar") }}" alt="" width="200px" height="200px"></td>
                                     <td>{{ $value->nama_fasilitas }}</td>
                                     <td>
                                         <a href="/editFasilitas/{{ $value->id }}" class="btn btn-primary"><i
-                                            class="fa fa-pencil"><span>
-                                                Edit</span></i></a>
-                                    <form action='/kelolaFasilitas/delete/{{ $value->id }}' method='post'>
-                                        @method('delete');
-                                        @csrf
-                                        <button type="submit" class="btn btn-danger"
-                                            onclick="return confirm('Are You Sure About This ? ')">
-                                            <i class="fa fa-trash">
-                                                <span>Hapus</span>
-                                            </i>
-                                        </button>
-                                    </form>
-                                </td>
+                                                class="fa fa-pencil"><span>
+                                                    Edit</span></i></a>
+                                        <form action='/kelolaFasilitas/delete/{{ $value->id }}' method='post'>
+                                            @method('delete');
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger"
+                                                onclick="return confirm('Are You Sure About This ? ')">
+                                                <i class="fa fa-trash">
+                                                    <span>Hapus</span>
+                                                </i>
+                                            </button>
+                                        </form>
+                                    </td>
                                 </tr>
                                 <?php } ?>
-                                
+
 
 
                             </tbody>

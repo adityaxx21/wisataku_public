@@ -1,8 +1,6 @@
 function open_modal() {
-    $('#exampleModal').modal('show');
+    $("#exampleModal").modal("show");
 }
-
-
 
 function modal_image(tag) {
     var src = document.getElementById(tag).src;
@@ -11,10 +9,10 @@ function modal_image(tag) {
     modal.style.display = "block";
     modalImg.src = src;
     document.body.style.overflow = "hidden";
-  }
-  
-  function modal_image_close() {
+}
+
+function modal_image_close() {
     var modal = document.getElementById("myModal");
     modal.style.display = "none";
     document.body.style.overflow = "auto";
-  }
+}

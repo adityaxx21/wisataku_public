@@ -4,7 +4,7 @@
     <div class="col-md-12 col-sm-12 box-akun">
         <div class="x_content">
             <div class="row">
-                <div class="col-sm-12 content-akun">
+                <div class="col-sm-12 content-akun" style="padding: 20px !important">
                     <h3>Pesan <span class="title">Kontak</span></h3>
                     <div class="card-box table-responsive">
                         <form action="/pesanKontak" method="get" id="find">

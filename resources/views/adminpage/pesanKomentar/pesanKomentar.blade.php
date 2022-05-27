@@ -11,6 +11,7 @@
                 <div class="col-sm-12 content-akun">
                     <h3>Pesan <span class="title">Komentar</span></h3>
                     <script></script>
+
                     <form action="/pesanKomentar" method="GET" id="find">
                         @csrf 
                         <div class="card-box table-responsive">
@@ -43,6 +44,7 @@
                                 <th>Rating</th>
                                 <th>Komentar</th>
                                 <th>Aksi</th>
+
 
 
                             </tr>

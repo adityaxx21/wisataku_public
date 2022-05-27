@@ -17,22 +17,23 @@
                     </div>
                     <div class="col-md-12 col-sm-12  form-group">
                         <label for="namaKategori" class="label-form">Nama Kategori</label>
-                        <input type="text" name="namaKategori" placeholder="Nama Kategori" class="form-control" requiredid="namaKategori" value="{{$kategori->nama_wisata}}">
+                        <input type="text" name="namaKategori" placeholder="Nama Kategori" class="form-control"
+                            requiredid="namaKategori" value="{{ $kategori->nama_wisata }}">
                     </div>
                 </div>
             </div>
             <div class="button-form">
                 <button type="submit" class="btn btn-success"><i class="fa fa-save"><span> Simpan</span></i></button>
-                <button type="button" class="btn btn-warning reset"><i class="fa fa-repeat"><span>
+                <button type="button" class="btn btn-warning reset" onclick="document.location.reload(true)"><i
+                        class="fa fa-repeat"><span>
                             Reset</span></i></button>
                 <a href="/kelolaKategori" class="btn btn-danger"><i class="fa fa-close"><span> Kembali</span></i></a>
             </div>
-            
+
         </form>
     </div>
 
 
-    <script src="js/adminPage/formUpload/script.js"></script>
+    <script src="js/formUpload/script.js"></script>
     {{-- <script src="js/layout/custom.js"></script> --}}
-    
 @endsection

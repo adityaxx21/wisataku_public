@@ -9,9 +9,11 @@
                     </table>
                     <div class="card-box table-responsive">
                         <div class="box-chart">
-                            <form action="/laporanTransaksi" method="get" id="find">
+
+                            <form action="/laporanTransaksi" method="get">
                                 @csrf
                                 <label><input type="search" class="form-control input-sm" placeholder="Nama Wisata"
+
                                         aria-controls="datatable-fixed-header" id="search" name="search"
                                         value="{{ isset($search) ? $search : '' }}"></label>
                                 <input id="date-picker" class="date-picker form-control laporanTransaksi"
@@ -27,6 +29,7 @@
                                     function getRandomArbitrary(min, max) {
                                         return Math.trunc(Math.random() * (max - min) + min);
                                     }
+
                                 </script>
                                 @foreach ($total_transaksi as $key => $item)
                                     <script>
@@ -41,6 +44,11 @@
                                     @endforeach
                                 @endif
 
+                                @foreach ($bejibun as $key => $item)
+                                    <script>
+                                        chart_data1[{{ $key }}] = {{ $item }};
+                                    </script>
+                                @endforeach
 
 
                                 <script>
@@ -51,17 +59,18 @@
                                     }
                                     window.onload(passVar(chart_data1));
                                 </script>
-                                <a href="javascript:void(0)" onclick="alert(getRandomArbitrary(0,255))"><i
+
+                                <a href="javascript:void(0)" onclick="alert(chart_data)"><i
                                         class="fa fa-download download"></i></a>
-                                <a href="javascript:void(0)" onclick="$('#find').submit()"><i
+                                <a href="javascript:void(0)" onclick="alert(chart_data)"><i
                                         class="fa fa-search download"></i></a>
-                                <a href="javascript:void(0)" onclick=" location.replace('/laporanTransaksi')"><i
-                                        class="fa fa-refresh download"></i></a>
                                 <select id="jenisLaporan" name="jenisLaporan" class="form-control jenisLaporan" required="">
+
                                     <option value="minggu" {{ $jenisLaporan == 'minggu' ? 'selected' : null }}>Mingguan
                                     </option>
                                     <option value="bulan" {{ $jenisLaporan == 'bulan' ? 'selected' : null }}>Bulanan</option>
                                     <option value="tahun" {{ $jenisLaporan == 'tahun' ? 'selected' : null }}>Tahunan</option>
+
                                 </select>
                                 <canvas id="myChart" class="myChart"></canvas>
                         </div>
