@@ -7,11 +7,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-sm-12 form-group">
-                <form action="/hubungikami" method="POST">
+                <form action="{{session()->get('username') !== null ? '/hubungikami' : '/login'}}" method="POST">
                     @csrf
-                    <input type="text" placeholder="Nama" class="form-control contact mb-3" name="nama" value="{{$akun->Nama}}">
-                    <input type="text" placeholder="Email" class="form-control contact mb-3" name="email" value="{{$akun->Email}}">
-                    <input type="text" placeholder="No. Telepon" class="form-control contact mb-3" name="telp" value="{{$akun->Telepon}}">
+                    <input type="text" placeholder="Nama" class="form-control contact mb-3" name="nama" value="{{isset($akun->Nama) ? $akun->Nama : null}}">
+                    <input type="text" placeholder="Email" class="form-control contact mb-3" name="email" value="{{isset($akun->Email) ? $akun->Email : null}}">
+                    <input type="text" placeholder="No. Telepon" class="form-control contact mb-3" name="telp" value="{{isset($akun->Telepon) ?  $akun->Telepon : null}}">
     
                     <textarea id="message" placeholder="Komentar anda" required="required" class="form-control mt-2"name="comment"></textarea>
     
