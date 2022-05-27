@@ -52,11 +52,10 @@
                                     <td>
                                         <a href="/pengunjungDashboard/detail/{{$item->id}}"  class="btn btn-primary "><span>
                                                 Detail</span></a>
-                                                @if ($item->)
-                                                    
+                                                @if ($item->id_status_pemb == 0)
+                                                <a href="/pengunjungDashboard/ulas/{{$item->id}}" type="button" class="btn btn-warning "><span>
+                                                    Ulas</span></a>
                                                 @endif
-                                        <a href="/pengunjungDashboard/ulas/{{$item->id}}" type="button" class="btn btn-warning "><span>
-                                                Ulas</span></a>
                                         <a href="/pengunjungDashboard/hapus/{{$item->id}}" type="button" class="btn btn-danger"><i class="fa fa-trash"><span>
                                                     Hapus</span></i></a>
                                     </td>

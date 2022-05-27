@@ -12,33 +12,33 @@
                 <div class="form-group row">
                     <label for="inputPassword" class="col-sm-3 col-form-label">Jumlah Tiket Dewasa</label>
                     <div class="col-sm-2">
-                        <input class="form-control" type="text">
+                        <input class="form-control" type="text" name="tiketdewasa">
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="inputPassword" class="col-sm-3 col-form-label">Jumlah Tiket Anak-anak</label>
                     <div class="col-sm-2">
-                        <input class="form-control" type="text">
+                        <input class="form-control" type="text" name="tiketanak">
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="inputPassword" class="col-sm-3 col-form-label">Kendaraan Motor</label>
                     <div class="col-sm-2">
-                        <input class="form-control" type="text">
+                        <input class="form-control" type="text" name="motor">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputPassword" class="col-sm-3 col-form-label">Kendaraan Mobil</label>
                     <div class="col-sm-2">
-                        <input class="form-control" type="text">
+                        <input class="form-control" type="text" name="mobil">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputPassword" class="col-sm-3 col-form-label">Kendaraan Umum</label>
                     <div class="col-sm-2">
-                        <input class="form-control" type="text">
+                        <input class="form-control" type="text" name="umum">
                     </div>
                 </div>
 
@@ -62,7 +62,7 @@
                 <div class="form-group row">
                     <label for="inputPassword" class="col-sm-3 col-form-label">Catatan</label>
                     <div class="col-sm-5">
-                        <textarea id="catatan" required="required" class="form-control" name="catatan"
+                        <textarea id="catatan" class="form-control" name="catatan"
                             data-parsley-trigger="keyup"></textarea>
                     </div>
                 </div>

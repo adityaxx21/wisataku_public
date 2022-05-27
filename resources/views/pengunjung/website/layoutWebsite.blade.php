@@ -88,7 +88,14 @@
                                 class="rounded-circle">
                             {{ session()->get('username') }} </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="/pengunjungDashboard/transaksi">Dashboard</a>
+                            @if (session()->get('hak_akses') == 0)
+                                <a class="dropdown-item" href="/DasboardAdmin">Dashboard</a>
+                            @elseif (session()->get('hak_akses') == 1)
+                                <a class="dropdown-item" href="/QrTransaksi">Dashboard</a>
+                            @else
+                                <a class="dropdown-item" href="/pengunjungDashboard/transaksi">Dashboard</a>
+                            @endif
+
                             <a class="dropdown-item" href="/logout">Log Out</a>
                         </div>
                     </li>
@@ -198,8 +205,7 @@
                 data: {
                     input: $('#search-box').val(),
                 },
-                success: function(data) {
-                }
+                success: function(data) {}
             });
         }
     </script>

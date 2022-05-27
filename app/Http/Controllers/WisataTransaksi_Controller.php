@@ -112,7 +112,9 @@ class WisataTransaksi_Controller extends Controller
             'created_at' => $sav_date,
         );
         // print_r($get_data);
-
+        if ($gross_amount == 0) {
+            $get_data = array_merge($get_data, array('id_status_pemb' =>  0));
+        }
         DB::table('tb_transaksi')->insert($get_data);
         $get_id = DB::table('tb_transaksi')->max('id');
         $get_data1 = array(
@@ -206,10 +208,16 @@ class WisataTransaksi_Controller extends Controller
             ),
         );
 
-        $data['snapToken'] = \Midtrans\Snap::getSnapToken($params);
+       
         // $data['transaksi'] = DB::table('tb_transaksi')->where('order_id',$id)->first();
         // print_r( $params);
-        return view('pengunjung.website.detailpesanan', $data);
+        if ($data['transaksi']->id_status_pemb == 0) {
+            return view('pengunjung.website.detailtiket', $data);
+        } else{
+            $data['snapToken'] = \Midtrans\Snap::getSnapToken($params);
+            return view('pengunjung.website.detailpesanan', $data);
+        }
+        
     }
 
     public function detailpesanan_post(Request $request, $id)

@@ -27,7 +27,7 @@
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ date('d-m-Y', strtotime($value->created_at)) }}</td>
-                                    <td>{{ $value->nama_wisata }}</td>d
+                                    <td>{{ $value->nama_wisata }}</td>
                                     <td>{{ $value->rating }}</td>
                                     <td>{{ $value->pesan }}</td>
                                     <td>
