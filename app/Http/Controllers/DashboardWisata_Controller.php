@@ -15,7 +15,7 @@ class DashboardWisata_Controller extends Controller
        $data['wisata'] = DB::table('tb_tambah_wisata')->get();
        $data['halaman_pengunjung'] = DB::table('tb_halaman_pengunjung')->first();
        foreach ($data['wisata'] as $key => $value) {
-        $rating[$key] = DB::table('tb_pesan_komentar')->where([['id_wisata',$value->id],['no_pesan',1]])->average('rating');
+        $rating[$key] = round(DB::table('tb_pesan_komentar')->where([['id_wisata',$value->id],['no_pesan',1]])->average('rating'),2);
         $jumlah[$key] = DB::table('tb_pesan_komentar')->where([['id_wisata',$value->id],['no_pesan',1]])->count();
        }
        $data['jumlah'] = $jumlah;
@@ -55,7 +55,7 @@ class DashboardWisata_Controller extends Controller
       $data['name'] = $name;
       $data['wisata'] = DB::table('tb_tambah_wisata')->where('nama_wisata', 'LIKE', '%'.$name . '%')->get();
       foreach ($data['wisata'] as $key => $value) {
-       $rating[$key] = DB::table('tb_pesan_komentar')->where([['id_wisata',$value->id],['no_pesan',1]])->average('rating');
+       $rating[$key] = round(DB::table('tb_pesan_komentar')->where([['id_wisata',$value->id],['no_pesan',1]])->average('rating'),2);
        $jumlah[$key] = DB::table('tb_pesan_komentar')->where([['id_wisata',$value->id],['no_pesan',1]])->count();
       }
       try {

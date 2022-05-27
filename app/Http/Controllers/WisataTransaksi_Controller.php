@@ -14,8 +14,8 @@ class WisataTransaksi_Controller extends Controller
 
         $data["title"] =  "Halaman Wisata";
         $data['wisata'] = DB::table('tb_tambah_wisata')->where('id', $id)->first();
-        $data['rating'] = DB::table('tb_pesan_komentar')->where([['id_wisata', $id], ['no_pesan', 1]])->average('rating');
-        $data['jumlah'] = DB::table('tb_pesan_komentar')->where([['id_wisata', $id], ['no_pesan', 1]])->count();
+        $data['rating'] = round(DB::table('tb_pesan_komentar')->where([['id_wisata', $id], ['no_pesan', 1]])->average('rating'),2);
+        $data['jumlah'] = DB::table('tb_pesan_komentar')->where([['id_wisata', $id], ['no_pesan', 1],['rating','<>',""]])->count();
         $data['fasilitas'] = DB::table('tb_fasilitas_wisata')->get();
         $data['penginapan'] = DB::table('tb_penginapan')->get();
         $data['kategori_wisata'] = DB::table('tb_kategori_wisata')->get();

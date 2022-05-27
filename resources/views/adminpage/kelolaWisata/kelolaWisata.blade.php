@@ -43,7 +43,7 @@
                                                 class="fa fa-pencil"><span>
                                                     Edit</span></i></a>
                                         <form action='/kelolaWisata/delete/{{ $value->id }}' method='post'>
-                                            @method('delete');
+                                            @method('delete')
                                             @csrf
                                             <button type="submit" class="btn btn-danger"
                                                 onclick="return confirm('Are You Sure About This ? ')">

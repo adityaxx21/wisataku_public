@@ -44,12 +44,11 @@
                         <span><i class="fa fa-map-marker" style="color: red"></i> Penginapan </span>
                     </div>
                     <div id='map_penginapan' style='width: 100%; height: 300px;'></div>
-
+                    
                     <span class="mt-4 mb-2 font-weight-bold"><i class="fa fa-comment"></i> Ulasan Pengunjung ({{$jumlah}})</span>
                     {{-- item comment --}}
                     @foreach ($komentar as $key=>$item)
-                    
-                        @if ($item->pesan != "")
+                        @if ($item->rating != "" || $item->pesan != "")
                         <div class="card comment mb-3">
                         <span class="font-weight-bold">{{$item->username}}</span>
                         <div class="rating-css">

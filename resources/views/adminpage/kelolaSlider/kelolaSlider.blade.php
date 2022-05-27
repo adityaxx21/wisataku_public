@@ -35,7 +35,7 @@
                                     <td><img src="{{ asset("$value->gambar") }}" alt="" width="400px" height="200px"></td>
                                     <td>
                                         <form action='/kelolaSlider/delete/{{ $value->id }}' method='post'>
-                                            @method('delete');
+                                            @method('delete')
                                             @csrf
                                             <button type="submit" class="btn btn-danger"
                                                 onclick="return confirm('Are You Sure About This ? ')">

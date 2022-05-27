@@ -17,7 +17,7 @@ class WisataKategori_Controller extends Controller
         $data['wisata'] = DB::table('tb_tambah_wisata')->where('id_wisata', $id)->get();
         foreach ($data['wisata'] as $key => $value) {
             if (isset($value)) {
-                $rating[$key] = DB::table('tb_pesan_komentar')->where([['id_wisata', $value->id], ['no_pesan', 1]])->average('rating');
+                $rating[$key] = round(DB::table('tb_pesan_komentar')->where([['id_wisata', $value->id], ['no_pesan', 1]])->average('rating'),2);
                 $jumlah[$key] = DB::table('tb_pesan_komentar')->where([['id_wisata', $value->id], ['no_pesan', 1]])->count();
                 $take = 0;
                 $data['margin'] = '';
@@ -32,6 +32,7 @@ class WisataKategori_Controller extends Controller
         } else{
             $data['nama'] = $nama;
         }
+        // print_r($data['rating']);
         return view('pengunjung.website.kategoriberanda', $data);
     }
 }
