@@ -151,7 +151,6 @@
         <script src="js/layout/custom.js"></script>
 
         <script type="text/javascript">
-        
             function get_it(id) {
                 $.ajax({
                     type: 'GET',
@@ -160,8 +159,11 @@
                         if ($.isEmptyObject(data.error)) {
                             $('#namaPemesan').html(data.data.nama_pemesan);
                             $('#jmlPengunjung').html(data.data.jumlah_tiket_dewasa+" Dewasa "+data.data.jumlah_tiket_anak+" Anak ");
+                            if (data.date > ) {
+                                
+                            }
+                            // $('#tglDatang').html(data.date + " / " + '{{date('d-m-Y')}}');
                             $('#jmlKendaraan').html("Jumlah Motor : "+data.data.jumlah_motor+" Jumlah Mobil : "+data.data.jumlah_mobil+" Jumlah Kendaraan Umum : "+data.data.jumlah_kendaraan_umum);
-                            $('#tglDatang').html(data.date);
                             $('#catatan').html(data.data.catatan);
                             if (data.data.id_status_pemb == 0) {
                                 $('#status_pem').val(0);

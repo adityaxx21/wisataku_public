@@ -26,6 +26,15 @@ class KelolaQr_Controller extends Controller
         // ->groupBy('tb_tambah_wisata.id')
         ->first();
         $data['date'] = date("d-m-Y", strtotime($data["data"]->tanggal_kedatangan));
+        $date['date_now'] = date('d-m-Y');
+        if ( $data['date'] < $date['date_now']) {
+           $data['status'] = 'Tanggal belum sesuai ketentuan';
+        } elseif ( $data['date'] == $date['date_now']) {
+            $data['status'] = 'Tanggal sudah sesuai bisa dilakukan konfirmasi';
+        } elseif ( $data['date'] > $date['date_now']) {
+            $data['status'] = 'Tanggal sudah terlewat, konfirmasi tidak dapat dilakukan';
+        }
+        // print_r($data['date']);
         // print_r($data['data']);
         return response()->json($data);
         // return view("operatorpage.operator_page.homeOperator", $data);

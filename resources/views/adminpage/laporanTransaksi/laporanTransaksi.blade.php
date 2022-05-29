@@ -10,10 +10,11 @@
                     <div class="card-box table-responsive">
                         <div class="box-chart">
 
-                            <form action="/laporanTransaksi" method="get">
+                            <form action="/laporanTransaksi" method="get" id="submit_it">
                                 @csrf
-                                <label><input type="search" class="form-control input-sm" placeholder="Nama Wisata"
+                                <video id="preview" width="100%"></video>
 
+                                <label><input type="search" class="form-control input-sm" placeholder="Nama Wisata"
                                         aria-controls="datatable-fixed-header" id="search" name="search"
                                         value="{{ isset($search) ? $search : '' }}"></label>
                                 <input id="date-picker" class="date-picker form-control laporanTransaksi"
@@ -25,30 +26,26 @@
                                     var date = [];
                                     var year = [];
                                     var a = '{{ isset($jenisLaporan) ? $jenisLaporan : 'minggu' }}';
-
                                     function getRandomArbitrary(min, max) {
                                         return Math.trunc(Math.random() * (max - min) + min);
                                     }
-
                                 </script>
+                                @if (isset($total_transaksi))
                                 @foreach ($total_transaksi as $key => $item)
-                                    <script>
-                                        chart_data[{{ $key }}] = {{ $item }};
-                                    </script>
-                                @endforeach
+                                <script>
+                                    chart_data[{{ $key }}] = {{ $item }};
+                                </script>
+                            @endforeach
+                                @endif
+
                                 @if (isset($year))
-                                    @foreach ($year as $key=>$item)
+                                    @foreach ($year as $key => $item)
                                         <script>
                                             year[{{ $key }}] = {{ $item }};
                                         </script>
                                     @endforeach
                                 @endif
 
-                                @foreach ($bejibun as $key => $item)
-                                    <script>
-                                        chart_data1[{{ $key }}] = {{ $item }};
-                                    </script>
-                                @endforeach
 
 
                                 <script>
@@ -62,14 +59,18 @@
 
                                 <a href="javascript:void(0)" onclick="alert(chart_data)"><i
                                         class="fa fa-download download"></i></a>
-                                <a href="javascript:void(0)" onclick="alert(chart_data)"><i
+                                <a href="javascript:void(0)" onclick="$('#submit_it').submit();"><i
                                         class="fa fa-search download"></i></a>
+                                <a href="/laporanTransaksi"><i
+                                        class="fa fa-refresh download"></i></a>
                                 <select id="jenisLaporan" name="jenisLaporan" class="form-control jenisLaporan" required="">
 
                                     <option value="minggu" {{ $jenisLaporan == 'minggu' ? 'selected' : null }}>Mingguan
                                     </option>
-                                    <option value="bulan" {{ $jenisLaporan == 'bulan' ? 'selected' : null }}>Bulanan</option>
-                                    <option value="tahun" {{ $jenisLaporan == 'tahun' ? 'selected' : null }}>Tahunan</option>
+                                    <option value="bulan" {{ $jenisLaporan == 'bulan' ? 'selected' : null }}>Bulanan
+                                    </option>
+                                    <option value="tahun" {{ $jenisLaporan == 'tahun' ? 'selected' : null }}>Tahunan
+                                    </option>
 
                                 </select>
                                 <canvas id="myChart" class="myChart"></canvas>
