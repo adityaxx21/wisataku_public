@@ -20,7 +20,7 @@
                     <div class="col-md-12 col-sm-12  form-group">
                         <label for="namaWisata" class="label-form">Wisata</label>
                         <input type="text" name="namaWisata" placeholder="Nama Wisata" class="form-control"
-                            value="{{ $header_pesan->nama_wisata }}" required readonly>
+                            value="{{ $header_pesan->wisata }}" readonly>
                     </div>
                     <div class="col-md-12 col-sm-12  form-group">
                         <label for="rating" class="label-form">Rating</label>

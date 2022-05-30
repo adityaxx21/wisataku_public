@@ -35,6 +35,7 @@
                             <a href="javascript:void(0)" onclick=" location.replace('/pesanKomentar')"><i
                                     class="fa fa-refresh download"></i></a>
                     </form>
+
                     <table id="tabelku" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
@@ -64,9 +65,16 @@
                                 <td>{{ $value->rating }}</td>
                                 <td>{{ $value->pesan }}</td>
                                 <td>
+                                    <form action="/hapuskomentar" method="post" id="delet_it{{$key}}">
+                                        @csrf
+                                        <input type="text" name="id_pesan" value="{{ $value->id_pesan_komentar }}" hidden>
+                                    </form>
                                     <a href="/balasKomentar/{{ $value->id_pesan_komentar }}" type="button"
                                         class="btn btn-success"><i class="fa fa-paper-plane"><span>
                                                 Balas Komentar</span></i></a>
+                                    <a href="javascript:void(0)" type="button" class="btn btn-danger"><i
+                                            class="fa fa-trash" onclick="$('#delet_it{{$key}}').submit()"><span>
+                                                Hapus Komentar</span></i></a>
                                 </td>
 
                             </tr>

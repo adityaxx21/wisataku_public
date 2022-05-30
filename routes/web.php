@@ -130,6 +130,7 @@ Route::get('/pesanKomentar', [KeolaPesanKomentar_Controller::class, 'kelola_pesa
 Route::get('/balasKomentar/{id}', [KeolaPesanKomentar_Controller::class, 'update']);
 Route::get('/balasKomentar', [KeolaPesanKomentar_Controller::class, 'keola']);
 Route::post('/balasKomentar', [KeolaPesanKomentar_Controller::class, 'balas_komentar']);
+Route::post('/hapuskomentar', [KeolaPesanKomentar_Controller::class, 'hapuskomentar']);
 Route::get('/downloadKomentar', [KeolaPesanKomentar_Controller::class, 'downloadKomentar']);
 
 //end kelola komentar

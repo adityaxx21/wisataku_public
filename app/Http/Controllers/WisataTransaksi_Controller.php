@@ -267,6 +267,7 @@ class WisataTransaksi_Controller extends Controller
         $data['user'] = DB::table('user_reg')->where('uname', session()->get('username'))->first();
         $data['transaksi'] =  DB::table('tb_transaksi')->where('id', $id)->first();
         $data['wisata'] = DB::table('tb_tambah_wisata')->where('id', $data['transaksi']->id_wisata)->first();
+
         return view('pengunjung.website.invoice', $data);
     }
 

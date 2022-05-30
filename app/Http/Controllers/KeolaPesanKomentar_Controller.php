@@ -72,8 +72,8 @@ class KeolaPesanKomentar_Controller extends Controller
         $id = session()->get('glob_id');
         $data['title'] = "Balas Komentar";
         $data['header_pesan'] = DB::table('tb_pesan_komentar')
-            ->selectRaw('tb_pesan_komentar.*,tb_tambah_wisata.nama_wisata as nama_wisata')
-            ->leftJoin('tb_tambah_wisata', 'tb_tambah_wisata.id_wisata', '=', 'tb_pesan_komentar.id_wisata')
+            ->selectRaw('tb_pesan_komentar.*,tb_tambah_wisata.nama_wisata as wisata')
+            ->leftJoin('tb_tambah_wisata', 'tb_tambah_wisata.id', '=', 'tb_pesan_komentar.id_wisata')
             ->first();
 
         // $data['header_pesan'] = DB::table('tb_pesan_komentar')->where('id_pesan_komentar',  $id)->first();
@@ -96,5 +96,18 @@ class KeolaPesanKomentar_Controller extends Controller
         );
         DB::table('tb_pesan_komentar')->where('id_pesan_komentar', $id)->update($data_insert);
         return redirect('/balasKomentar');
+    }
+
+    public function hapuskomentar(Request $request)
+    {
+        $sav_date            = date("Y-m-d H:i:s");
+        $id_pesan = $request->input('id_pesan');
+       $get_data = array(
+           'pesan'=>'[pesan telah dihapus oleh admin karena mengandung kata yang tidak pantas]',
+           'is_deleted' => 0,
+           'updated_at' => $sav_date,
+       );
+       DB::table('tb_pesan_komentar')->where([['id_pesan_komentar',$id_pesan],['no_pesan',1]])->update($get_data);
+       return redirect('/balasKomentar');
     }
 }
