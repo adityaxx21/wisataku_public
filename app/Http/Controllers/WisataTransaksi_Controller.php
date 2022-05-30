@@ -14,14 +14,14 @@ class WisataTransaksi_Controller extends Controller
 
         $data["title"] =  "Halaman Wisata";
         $data['wisata'] = DB::table('tb_tambah_wisata')->where('id', $id)->first();
-        $data['rating'] = round(DB::table('tb_pesan_komentar')->where([['id_wisata', $id], ['no_pesan', 1]])->average('rating'),2);
-        $data['jumlah'] = DB::table('tb_pesan_komentar')->where([['id_wisata', $id], ['no_pesan', 1],['rating','<>',""]])->count();
+        $data['rating'] = round(DB::table('tb_pesan_komentar')->where([['id_wisata', $id], ['no_pesan', 1]])->average('rating'), 2);
+        $data['jumlah'] = DB::table('tb_pesan_komentar')->where([['id_wisata', $id], ['no_pesan', 1], ['rating', '<>', ""]])->count();
         $data['fasilitas'] = DB::table('tb_fasilitas_wisata')->get();
         $data['penginapan'] = DB::table('tb_penginapan')->get();
         $data['kategori_wisata'] = DB::table('tb_kategori_wisata')->get();
         $data['setel_fasilitas'] = DB::table('tb_setel_fasisilitas')->select('id_fasilitas')->where('id_fasilitas_tersedia', $data['wisata']->id_fasilitas_tersedia)->get();
         $data['komentar'] =  DB::table('tb_pesan_komentar')->where([['id_wisata', $id], ['no_pesan', 1]])->get();
-        $data['gambar360'] = DB::table('tb_gambar360')->where('id_gambar360',$id)->get();
+        $data['gambar360'] = DB::table('tb_gambar360')->where('id_gambar360', $id)->get();
 
         // print_r($data['wisata']);
         return view('pengunjung.website.detail', $data);
@@ -37,22 +37,24 @@ class WisataTransaksi_Controller extends Controller
         $data['nama_wisata'] = $request->get('search');
 
         $fil_wisata = array();
-        if ( $data['id_wis'] != "") {
+        if ($data['id_wis'] != "") {
             $fil_wisata[] = ['id_wisata', $data['id_wis']];
-        } if ($data['range_harga'] != "") {
+        }
+        if ($data['range_harga'] != "") {
             foreach ($data['range'] as $key => $value) {
                 if ($value->label == $data['range_harga']) {
-                    $fil_wisata[] = ['tiketDewasa','<', $value->harga_max];
-                    $fil_wisata[] = ['tiketDewasa','>=', $value->harga_min];
-                    $fil_wisata[] = ['tiketAnak','<', $value->harga_max];
-                    $fil_wisata[] = ['tiketAnak','>=', $value->harga_min];
+                    $fil_wisata[] = ['tiketDewasa', '<', $value->harga_max];
+                    $fil_wisata[] = ['tiketDewasa', '>=', $value->harga_min];
+                    $fil_wisata[] = ['tiketAnak', '<', $value->harga_max];
+                    $fil_wisata[] = ['tiketAnak', '>=', $value->harga_min];
                 }
             }
-        } if ($data['nama_wisata'] != ""){
-            $fil_wisata[] = ['nama_wisata','LIKE', '%'.$data['nama_wisata'].'%'];
-        } 
+        }
+        if ($data['nama_wisata'] != "") {
+            $fil_wisata[] = ['nama_wisata', 'LIKE', '%' . $data['nama_wisata'] . '%'];
+        }
         try {
-            $data['wisata'] = DB::table('tb_tambah_wisata')->where($fil_wisata)->get(); 
+            $data['wisata'] = DB::table('tb_tambah_wisata')->where($fil_wisata)->get();
         } catch (\Throwable $th) {
             $data['wisata'] = DB::table('tb_tambah_wisata')->where([])->get();
         }
@@ -66,7 +68,7 @@ class WisataTransaksi_Controller extends Controller
         } catch (\Throwable $th) {
             //throw $th;
         }
-        $data['wisata'] = DB::table('tb_tambah_wisata')->where($fil_wisata)->get(); 
+        $data['wisata'] = DB::table('tb_tambah_wisata')->where($fil_wisata)->get();
         return view('pengunjung.website.kategorinavbar', $data);
     }
 
@@ -81,8 +83,8 @@ class WisataTransaksi_Controller extends Controller
     public function pesantiket($id)
     {
         if (session()->get('username') == "") {
-            return redirect('/login')->with('alert-notif','Anda Harus Login Terlebih Dahulu');
-        } 
+            return redirect('/login')->with('alert-notif', 'Anda Harus Login Terlebih Dahulu');
+        }
         $data['title'] = 'Pesan Tiket';
         $data['wisata'] = DB::table('tb_tambah_wisata')->where('id', $id)->first();
         return view('pengunjung.website.pesantiket', $data);
@@ -208,27 +210,26 @@ class WisataTransaksi_Controller extends Controller
             ),
         );
 
-       
+
         // $data['transaksi'] = DB::table('tb_transaksi')->where('order_id',$id)->first();
         // print_r( $params);
         if ($data['transaksi']->id_status_pemb == 0) {
             return view('pengunjung.website.detailtiket', $data);
-        } else{
+        } else {
             $data['snapToken'] = \Midtrans\Snap::getSnapToken($params);
             return view('pengunjung.website.detailpesanan', $data);
         }
-        
     }
 
     public function detailpesanan_post(Request $request, $id)
     {
         if (session()->get('username') == "") {
-            return redirect('/login')->with('alert-notif','Anda Harus Login Terlebih Dahulu');
+            return redirect('/login')->with('alert-notif', 'Anda Harus Login Terlebih Dahulu');
         }
         // $id = session()->get('glob_id');
         $json = json_decode($request->get('json'));
         $sav_date            = date("Y-m-d H:i:s");
-        $status = $json->transaction_status; 
+        $status = $json->transaction_status;
 
         // $url =
         $get_data = array(
@@ -249,7 +250,7 @@ class WisataTransaksi_Controller extends Controller
 
     }
 
-    
+
 
     public function detailtiket($id)
     {
@@ -265,7 +266,7 @@ class WisataTransaksi_Controller extends Controller
     {
         $data['user'] = DB::table('user_reg')->where('uname', session()->get('username'))->first();
         $data['transaksi'] =  DB::table('tb_transaksi')->where('id', $id)->first();
-        // print_r($data['user']);
+        $data['wisata'] = DB::table('tb_tambah_wisata')->where('id', $data['transaksi']->id_wisata)->first();
         return view('pengunjung.website.invoice', $data);
     }
 

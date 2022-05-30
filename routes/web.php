@@ -130,6 +130,7 @@ Route::get('/pesanKomentar', [KeolaPesanKomentar_Controller::class, 'kelola_pesa
 Route::get('/balasKomentar/{id}', [KeolaPesanKomentar_Controller::class, 'update']);
 Route::get('/balasKomentar', [KeolaPesanKomentar_Controller::class, 'keola']);
 Route::post('/balasKomentar', [KeolaPesanKomentar_Controller::class, 'balas_komentar']);
+Route::get('/downloadKomentar', [KeolaPesanKomentar_Controller::class, 'downloadKomentar']);
 
 //end kelola komentar
 
@@ -147,6 +148,7 @@ Route::post('/balasPesan', [KelolaPesanKontak_Controller::class, 'balas_kontak']
 //Laporan Transaksi
 
 Route::get('/laporanTransaksi', [LaporanTransaksi_Controller::class, 'laporan_transaksi']);
+Route::get('/downloadLaporan', [LaporanTransaksi_Controller::class, 'downloadLaporan']);
 
 
 // end laporan transaksi
@@ -175,10 +177,10 @@ Route::POST('/QrTransaksi', [KelolaQr_Controller::class, 'post_QR']);
 // Wisatawan Side
 
 //Halaman Wisata Start
-Route::get('/', [DashboardWisata_Controller::class,'index']);
-Route::get('/website', [DashboardWisata_Controller::class,'website']);
-Route::post('/search', [DashboardWisata_Controller::class,'search_me_post']);
-Route::get('/search/{name}', [DashboardWisata_Controller::class,'search_me']);
+Route::get('/', [DashboardWisata_Controller::class, 'index']);
+Route::get('/website', [DashboardWisata_Controller::class, 'website']);
+Route::post('/search', [DashboardWisata_Controller::class, 'search_me_post']);
+Route::get('/search/{name}', [DashboardWisata_Controller::class, 'search_me']);
 Route::get('/search', function () {
     return view('pengunjung/website/search', [
         "title" => "Halaman Pengunjung"
@@ -186,34 +188,34 @@ Route::get('/search', function () {
 });
 
 //Transaksi Wisata 
-Route::get('/wisata', [WisataTransaksi_Controller::class,'wisata']);
-Route::get('/wisata/search/{harga}{nama}', [WisataTransaksi_Controller::class,'wisata']);
-Route::get('/detail/{id}', [WisataTransaksi_Controller::class,'detail']);
-Route::get('/carirute/{id}', [WisataTransaksi_Controller::class,'carirute']);
-Route::get('/pesantiket/{id}', [WisataTransaksi_Controller::class,'pesantiket']);
-Route::post('/pesantiket/{id}', [WisataTransaksi_Controller::class,'pesantiket_post']);
-Route::get('/detailpesanan/{id}', [WisataTransaksi_Controller::class,'detailpesanan']);
-Route::post('/detailpesanan/{id}', [WisataTransaksi_Controller::class,'detailpesanan_post']);
-Route::get('/detailtiket/{id}', [WisataTransaksi_Controller::class,'detailtiket']);
-Route::get('/invoice/{id}', [WisataTransaksi_Controller::class,'invoice']);
+Route::get('/wisata', [WisataTransaksi_Controller::class, 'wisata']);
+Route::get('/wisata/search/{harga}{nama}', [WisataTransaksi_Controller::class, 'wisata']);
+Route::get('/detail/{id}', [WisataTransaksi_Controller::class, 'detail']);
+Route::get('/carirute/{id}', [WisataTransaksi_Controller::class, 'carirute']);
+Route::get('/pesantiket/{id}', [WisataTransaksi_Controller::class, 'pesantiket']);
+Route::post('/pesantiket/{id}', [WisataTransaksi_Controller::class, 'pesantiket_post']);
+Route::get('/detailpesanan/{id}', [WisataTransaksi_Controller::class, 'detailpesanan']);
+Route::post('/detailpesanan/{id}', [WisataTransaksi_Controller::class, 'detailpesanan_post']);
+Route::get('/detailtiket/{id}', [WisataTransaksi_Controller::class, 'detailtiket']);
+Route::get('/invoice/{id}', [WisataTransaksi_Controller::class, 'invoice']);
 
 // Route::get('/detailtiket/{id}', [WisataTransaksi_Controller::class,'detailtiket_post']);
 
 //Penginapan Wisata
-Route::get('/penginapan', [WisataPenginapan_Controller::class,'penginapan']);
-Route::post('/penginapan', [WisataPenginapan_Controller::class,'penginapan_post']);
-Route::get('/penginapan/search/{filter}', [WisataPenginapan_Controller::class,'penginapan_filter']);
-Route::get('/detailpenginapan/{nama}', [WisataPenginapan_Controller::class,'detail_penginapan']);
+Route::get('/penginapan', [WisataPenginapan_Controller::class, 'penginapan']);
+Route::post('/penginapan', [WisataPenginapan_Controller::class, 'penginapan_post']);
+Route::get('/penginapan/search/{filter}', [WisataPenginapan_Controller::class, 'penginapan_filter']);
+Route::get('/detailpenginapan/{nama}', [WisataPenginapan_Controller::class, 'detail_penginapan']);
 
 //Kategori Wisata
-Route::get('/kategori/{nama}', [WisataKategori_Controller::class,'kategori']);
+Route::get('/kategori/{nama}', [WisataKategori_Controller::class, 'kategori']);
 
 
-Route::get('/map', [DashboardWisata_Controller::class,'map']);
+Route::get('/map', [DashboardWisata_Controller::class, 'map']);
 
 
-Route::get('/hubungikami', [WisataHubungiKami_Controller::class,'hubungikami']);
-Route::post('/hubungikami', [WisataHubungiKami_Controller::class,'hubungikami_post']);
+Route::get('/hubungikami', [WisataHubungiKami_Controller::class, 'hubungikami']);
+Route::post('/hubungikami', [WisataHubungiKami_Controller::class, 'hubungikami_post']);
 
 // Route::get('/carirute', [DashboardWisata_Controller::class,'detail']);
 
@@ -242,29 +244,29 @@ Route::post('/hubungikami', [WisataHubungiKami_Controller::class,'hubungikami_po
 //Halaman Dashboard Start
 
 //Halaman Transaksi
-Route::get('/pengunjungDashboard/transaksi', [DashboardPengunjung_Controller::class,'kelola_dashboard_pengunjung']);
-Route::get('/pengunjungDashboard/detail/{id}', [DashboardPengunjung_Controller::class,'update']);
-Route::get('/pengunjungDashboard/detail', [DashboardPengunjung_Controller::class,'detail']);
-Route::post('/pengunjungDashboard/detail', [DashboardPengunjung_Controller::class,'detail_post']);
-Route::get('/pengunjungDashboard/ulas/{id}', [DashboardPengunjung_Controller::class,'update_i']);
-Route::get('/pengunjungDashboard/ulas', [DashboardPengunjung_Controller::class,'ulas']);
-Route::post('/pengunjungDashboard/ulas', [DashboardPengunjung_Controller::class,'ulas_post']);
-Route::get('/pengunjungDashboard/hapus/{id}', [DashboardPengunjung_Controller::class,'delete']);
+Route::get('/pengunjungDashboard/transaksi', [DashboardPengunjung_Controller::class, 'kelola_dashboard_pengunjung']);
+Route::get('/pengunjungDashboard/detail/{id}', [DashboardPengunjung_Controller::class, 'update']);
+Route::get('/pengunjungDashboard/detail', [DashboardPengunjung_Controller::class, 'detail']);
+Route::post('/pengunjungDashboard/detail', [DashboardPengunjung_Controller::class, 'detail_post']);
+Route::get('/pengunjungDashboard/ulas/{id}', [DashboardPengunjung_Controller::class, 'update_i']);
+Route::get('/pengunjungDashboard/ulas', [DashboardPengunjung_Controller::class, 'ulas']);
+Route::post('/pengunjungDashboard/ulas', [DashboardPengunjung_Controller::class, 'ulas_post']);
+Route::get('/pengunjungDashboard/hapus/{id}', [DashboardPengunjung_Controller::class, 'delete']);
 
 //Halaman Komentar
-Route::get('/pengunjungDashboard/komentar', [PengunjungKomentar_Controller::class,'riwayat_komentar']);
-Route::get('/hapusPesanKomentar/{id}', [PengunjungKomentar_Controller::class,'hapus_pesan_komentar']);
+Route::get('/pengunjungDashboard/komentar', [PengunjungKomentar_Controller::class, 'riwayat_komentar']);
+Route::get('/hapusPesanKomentar/{id}', [PengunjungKomentar_Controller::class, 'hapus_pesan_komentar']);
 
 
 //Halaman Pesan Kontak
-Route::get('/pengunjungDashboard/pesan', [PengunjungPesan_Controller::class,'riwayat_kontak']);
-Route::get('/balasKontak/{id}', [PengunjungPesan_Controller::class,'keola']);
-Route::post('/balasKontak/{id}', [PengunjungPesan_Controller::class,'balasKontak_post']);
-Route::get('/hapusPesanKontak/{id}', [PengunjungPesan_Controller::class,'hapus_pesan_kontak']);
+Route::get('/pengunjungDashboard/pesan', [PengunjungPesan_Controller::class, 'riwayat_kontak']);
+Route::get('/balasKontak/{id}', [PengunjungPesan_Controller::class, 'keola']);
+Route::post('/balasKontak/{id}', [PengunjungPesan_Controller::class, 'balasKontak_post']);
+Route::get('/hapusPesanKontak/{id}', [PengunjungPesan_Controller::class, 'hapus_pesan_kontak']);
 
 //Halaman Profil
-Route::get('/pengunjungDashboard/profile', [PengunjungEditAkun_Controller::class,'edit_profile']);
-Route::post('/pengunjungDashboard/profile', [PengunjungEditAkun_Controller::class,'edit_akun']);
+Route::get('/pengunjungDashboard/profile', [PengunjungEditAkun_Controller::class, 'edit_profile']);
+Route::post('/pengunjungDashboard/profile', [PengunjungEditAkun_Controller::class, 'edit_akun']);
 
 
 

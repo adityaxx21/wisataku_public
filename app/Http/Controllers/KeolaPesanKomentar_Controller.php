@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
+use Dompdf\Dompdf;
 
 class KeolaPesanKomentar_Controller extends Controller
 {
@@ -23,12 +25,40 @@ class KeolaPesanKomentar_Controller extends Controller
         $data['pesan'] = DB::table('tb_pesan_komentar')
             ->selectRaw('tb_pesan_komentar.*,tb_tambah_wisata.nama_wisata as nama_wisata')
             ->leftJoin('tb_tambah_wisata', 'tb_tambah_wisata.id', '=', 'tb_pesan_komentar.id_wisata')
-            ->where([['no_pesan', '1'],$date,$wisata])
+            ->where([['no_pesan', '1'], $date, $wisata])
             ->get();
+        // $data['totalPengunjung'] = DB::table('tb_transaksi')->where('id_status_pemb', 0)->count();
 
+
+
+        Session::put('pesanKomentar', $data);
         // $data['pesan'] = DB::table('tb_pesan_komentar')->where()->get();
         // print_r($data['data_wisata']);
         return view("adminpage.pesanKomentar.pesanKomentar", $data);
+    }
+
+
+    public function downloadKomentar()
+    {
+        $data = Session::get('pesanKomentar');
+
+
+        // print_r($data['jenislaporan']);
+        $view = view("adminpage.pesanKomentar.downloadKomentar", $data);
+
+        // instantiate and use the dompdf class
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($view);
+
+        // (Optional) Setup the paper size and orientation
+        $dompdf->setPaper('A4', 'landscape');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser
+        $dompdf->stream("Rekap Data Pesan Komentar");
+        return view("adminpage.pesanKomentar.downloadKomentar", $data);
     }
 
     public function update($id)
@@ -48,7 +78,7 @@ class KeolaPesanKomentar_Controller extends Controller
 
         // $data['header_pesan'] = DB::table('tb_pesan_komentar')->where('id_pesan_komentar',  $id)->first();
         // $data['wisata'] = DB::table('tb_tambah_wisata')->where('id_pesan_komentar',  $id)->first();
-        $data['pesan'] = DB::table('tb_pesan_komentar')->where('id_pesan_komentar',  $id)->select('pesan', 'hak_akses', 'username','pesan_balas')->get();
+        $data['pesan'] = DB::table('tb_pesan_komentar')->where('id_pesan_komentar',  $id)->select('pesan', 'hak_akses', 'username', 'pesan_balas')->get();
         // print_r( $data['penginapan']);
         // print_r($data['pesan'] );
         return view("adminpage.pesanKomentar.balasKomentar", $data);
@@ -64,7 +94,7 @@ class KeolaPesanKomentar_Controller extends Controller
             'pesan_balas' => $request->post('balasanKomentar'),
             'updated_at' => $sav_date,
         );
-        DB::table('tb_pesan_komentar')->where('id_pesan_komentar',$id)->update($data_insert);
+        DB::table('tb_pesan_komentar')->where('id_pesan_komentar', $id)->update($data_insert);
         return redirect('/balasKomentar');
     }
 }
