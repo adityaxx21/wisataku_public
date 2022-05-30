@@ -30,8 +30,13 @@
 
                     <div class="col-sm-12 mt-5 ulasan">
                         <h2>Beri Komentar Anda</h2>
+                        @if ($pesan->is_deleted == 0)
+                            {{$readonly = 'readonly'}}
+                        @else
+                        {{$readonly = ''}}
+                        @endif
                         <textarea rows="5" cols="100" class="resizable_textarea form-control" name="komentarUlasan"
-                            placeholder="Beri Komentar Kamu">{{$pesan->pesan}}</textarea>
+                            placeholder="Beri Komentar Kamu" {{$readonly}}>{{$pesan->pesan}}</textarea>
 
                     </div>
 

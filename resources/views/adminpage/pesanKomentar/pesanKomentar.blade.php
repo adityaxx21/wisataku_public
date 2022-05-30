@@ -13,13 +13,14 @@
                     <script></script>
 
                     <form action="/pesanKomentar" method="GET" id="find">
-                        @csrf 
+                        @csrf
                         <div class="card-box table-responsive">
                             <label>Search: <input type="search" class="form-control input-sm" placeholder=""
-                                    aria-controls="datatable-fixed-header" id="search" name="search" value="{{isset($search) ? $search : '' }}"></label>
-                            <input id="date-picker" class="date-picker form-control" placeholder="dd-mm-yyyy"
-                                type="date" required="required" onfocus="this.type='date'" onclick="this.type='date'"
-                                onkeyup="" name="date"  value="{{ isset($date) ? $date : '' }}">
+                                    aria-controls="datatable-fixed-header" id="search" name="search"
+                                    value="{{ isset($search) ? $search : '' }}"></label>
+                            <input id="date-picker" class="date-picker form-control" placeholder="dd-mm-yyyy" type="date"
+                                required="required" onfocus="this.type='date'" onclick="this.type='date'" onkeyup=""
+                                name="date" value="{{ isset($date) ? $date : '' }}">
                             <script>
                                 function timeFunctionLong(input) {
                                     setTimeout(function() {
@@ -34,6 +35,7 @@
                             <a href="javascript:void(0)" onclick=" location.replace('/pesanKomentar')"><i
                                     class="fa fa-refresh download"></i></a>
                     </form>
+
                     <table id="tabelku" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
@@ -63,9 +65,16 @@
                                 <td>{{ $value->rating }}</td>
                                 <td>{{ $value->pesan }}</td>
                                 <td>
+                                    <form action="/hapuskomentar" method="post" id="delet_it{{$key}}">
+                                        @csrf
+                                        <input type="text" name="id_pesan" value="{{ $value->id_pesan_komentar }}" hidden>
+                                    </form>
                                     <a href="/balasKomentar/{{ $value->id_pesan_komentar }}" type="button"
                                         class="btn btn-success"><i class="fa fa-paper-plane"><span>
                                                 Balas Komentar</span></i></a>
+                                    <a href="javascript:void(0)" type="button" class="btn btn-danger"><i
+                                            class="fa fa-trash" onclick="$('#delet_it{{$key}}').submit()"><span>
+                                                Hapus Komentar</span></i></a>
                                 </td>
 
                             </tr>
