@@ -119,7 +119,7 @@
                         </div>
                     </div>
                     <div class="button-form reset-btn">
-                        <button type="submit" class="btn btn-success submit"><i class="fa fa-check-circle"><span>
+                        <button type="submit" class="btn btn-success submit" id="sub" ><i class="fa fa-check-circle"><span>
                                     Submit</span></i></button>
                         <button onclick="Location.reload()" class="btn btn-warning reset"><i class="fa fa-repeat"><span>
                                     Reset</span></i></button>
@@ -159,10 +159,8 @@
                         if ($.isEmptyObject(data.error)) {
                             $('#namaPemesan').html(data.data.nama_pemesan);
                             $('#jmlPengunjung').html(data.data.jumlah_tiket_dewasa+" Dewasa "+data.data.jumlah_tiket_anak+" Anak ");
-                            if (data.date > ) {
-                                
-                            }
-                            // $('#tglDatang').html(data.date + " / " + '{{date('d-m-Y')}}');
+                            $('#sub').prop('hidden', data.hidden);
+                            $('#tglDatang').html(data.date + " / " + '{{date('d-m-Y')}}' + data.status);
                             $('#jmlKendaraan').html("Jumlah Motor : "+data.data.jumlah_motor+" Jumlah Mobil : "+data.data.jumlah_mobil+" Jumlah Kendaraan Umum : "+data.data.jumlah_kendaraan_umum);
                             $('#catatan').html(data.data.catatan);
                             if (data.data.id_status_pemb == 0) {

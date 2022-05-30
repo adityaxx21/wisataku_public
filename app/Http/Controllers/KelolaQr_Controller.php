@@ -28,14 +28,18 @@ class KelolaQr_Controller extends Controller
         $data['date'] = date("d-m-Y", strtotime($data["data"]->tanggal_kedatangan));
         $date['date_now'] = date('d-m-Y');
         if ( $data['date'] < $date['date_now']) {
-           $data['status'] = 'Tanggal belum sesuai ketentuan';
+           $data['status'] = '<br> <span class="info-tagihan"><i class="fa fa-info-circle"></i>Tanggal belum sesuai ketentuan</span>';
+           $data['hidden'] = true;
         } elseif ( $data['date'] == $date['date_now']) {
-            $data['status'] = 'Tanggal sudah sesuai bisa dilakukan konfirmasi';
+            $data['status'] = '<br> <span class="bayar-sukses"><i class="fa fa-info-circle"></i>Tanggal sudah sesuai bisa dilakukan konfirmasi</span>';
+            $data['hidden'] = false;
         } elseif ( $data['date'] > $date['date_now']) {
-            $data['status'] = 'Tanggal sudah terlewat, konfirmasi tidak dapat dilakukan';
+            $data['status'] = '<br> <span class="bayar-gagal"><i class="fa fa-info-circle"></i>Tanggal sudah terlewat, konfirmasi tidak dapat dilakukan</span>';
+            $data['hidden'] = true;
         }
         // print_r($data['date']);
         // print_r($data['data']);
+        // $data['hidden'] = 'visibility: hidden';
         return response()->json($data);
         // return view("operatorpage.operator_page.homeOperator", $data);
     }

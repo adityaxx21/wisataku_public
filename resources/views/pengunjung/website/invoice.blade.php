@@ -2,236 +2,334 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <!--  This file has been downloaded from bootdey.com @bootdey on twitter -->
-    <!--  All snippets are MIT license http://bootdey.com/license -->
-    <title>Invoice - Wisata Kediriku </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <link href="{{URL::asset('css/website/bootstrap.min.css')}}" rel="stylesheet">
-    <script src="{{URL::asset('js/website/bootstrap.min.js')}}"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    {{-- <link rel="stylesheet" href="{{ URL::asset('css/website/invoice.css') }}"> --}}
 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js">
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.esm.js">
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.js"></script>
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css"
-        integrity="sha384-/frq1SRXYH/bSyou/HUp/hib7RVN1TawQYja658FEOodR/FQBKVqT9Ol+Oz3Olq5" crossorigin="anonymous">
-</head>
+    <title>Invoice</title>
 
-<body>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Staatliches&display=swap");
+        @import url("https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap");
 
-    <div class="receipt-main col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3">
-        <div class="row">
-            <div class="receipt-header">
-                <div class="col-xs-6 col-sm-6 col-md-6">
-                    <div class="receipt-left">
-                        <img class="img-responsive" alt="iamgurdeeposahan"
-                            src="{{URL::asset(session()->get('gambar'))}}"
-                            style="width: 71px; border-radius: 43px;">
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 text-right">
-                    <div class="receipt-right">
-                        <h5>Wisata Kediriku</h5>
-                        <p>085x xxxx xxxx <i class="fa fa-phone"></i></p>
-                        <p>wisatakediriku@gmail.com <i class="fa fa-envelope"></i></p>
-                        <p>Kab. Kediri <i class="fa fa-location-arrow"></i></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="receipt-header receipt-header-mid">
-                <div class="col-xs-8 col-sm-8 col-md-8 text-left">
-                    <div class="receipt-right">
-                        <h5>{{$user->Nama}} </h5>
-                        <p><b>No. Hp :</b> {{$user->Telepon}}</p>
-                        <p><b>Email :</b> {{$user->Email}}</p>
-                    </div>
-                </div>
-                <div class="col-xs-4 col-sm-4 col-md-4">
-                    <div class="receipt-left">
-                        <h3>INVOICE # {{$transaksi->id}}</h3>
-                        <script>
-                            var qrcode = "{{$transaksi->id}}"
-                        </script>
-                        <div id="qrcode"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th class="text-center">Deskripsi</th>
-                        <th class="text-center">Jumlah</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="col-md-9">Jumlah Tiket</td>
-                        <td class="col-md-3 text-center">{{$transaksi->jumlah_tiket_dewasa+$transaksi->jumlah_tiket_anak}}</td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-9">Jumlah Kendaran</td>
-                        <td class="col-md-3 text-center">{{$transaksi->jumlah_mobil+$transaksi->jumlah_motor+$transaksi->jumlah_kendaraan_umum}}</td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-9">Tanggal Masuk</td>
-                        <td class="col-md-3">{{date("d/m/Y", strtotime($transaksi->tanggal_kedatangan))}}</td>
-                    </tr>
-
-                    <tr>
-
-                        <td class="text-right">
-                            <h4><strong>Total: </strong></h4>
-                        </td>
-                        <td class="text-left text-danger">
-                            <h4><strong>Rp. {{$transaksi->gross_amount}},-</strong></h4>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="row">
-            <div class="receipt-header receipt-header-mid receipt-footer">
-                <div class="col-xs-8 col-sm-8 col-md-8 text-left">
-                    <div class="receipt-right">
-                        <p><b>Tanggal :</b> {{date("d-m-Y")}}</p>
-                        <h5 style="color: rgb(140, 140, 140);">Terima Kasih Atas Kunjungannya.!</h5>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-
-
-    <style type="text/css">
-        /* @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;1,100;1,300&display=swap"); */
         * {
-            font-family: sans-serif;
-        }
-
-
-        .text-danger strong {
-            color: #9f181c;
-        }
-
-        .receipt-main {
-            background: #ffffff none repeat scroll 0 0;
-            border-bottom: 12px solid #333333;
-            border-top: 12px solid #9f181c;
-            margin-top: 50px;
-            margin-bottom: 50px;
-            padding: 40px 30px !important;
-            position: relative;
-            box-shadow: 0 1px 21px #acacac;
-            color: #333333;
-            font-family: open sans;
-        }
-
-        .receipt-main p {
-            color: #333333;
-            font-family: open sans;
-            line-height: 1.42857;
-        }
-
-        .receipt-footer h1 {
-            font-size: 15px;
-            font-weight: 400 !important;
-            margin: 0 !important;
-        }
-
-        .receipt-main::after {
-            background: #414143 none repeat scroll 0 0;
-            content: "";
-            height: 5px;
-            left: 0;
-            position: absolute;
-            right: 0;
-            top: -13px;
-        }
-
-        .receipt-main thead {
-            background: #414143 none repeat scroll 0 0;
-        }
-
-        .receipt-main thead th {
-            color: #fff;
-        }
-
-        .receipt-right h5 {
-            font-size: 16px;
-            font-weight: bold;
-            margin: 0 0 7px 0;
-        }
-
-        .receipt-right p {
-            font-size: 12px;
-            margin: 0px;
-        }
-
-        .receipt-right p i {
-            text-align: center;
-            width: 18px;
-        }
-
-        .receipt-main td {
-            padding: 9px 20px !important;
-        }
-
-        .receipt-main th {
-            padding: 13px 20px !important;
-        }
-
-        .receipt-main td {
-            font-size: 13px;
-            font-weight: initial !important;
-        }
-
-        .receipt-main td p:last-child {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
-        .receipt-main td h2 {
-            font-size: 20px;
-            font-weight: 900;
-            margin: 0;
-            text-transform: uppercase;
+        body,
+        html {
+            height: 100vh;
+            display: grid;
+            font-family: "Staatliches", cursive;
+            /* background: #d83565; */
+            color: black;
+            font-size: 14px;
+            letter-spacing: 0.1em;
         }
 
-        .receipt-header-mid .receipt-left h1 {
-            font-weight: 100;
-            margin: 34px 0 0;
+        .ticket {
+            border: 1px solid rgb(92, 107, 192);
+            margin: auto;
+            display: flex;
+            background: rgb(197, 202, 233);
+
+            /* box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+                rgba(0, 0, 0, 0.22) 0px 15px 12px; */
+        }
+
+        .left {
+            display: flex;
+        }
+
+        .image {
+            background: white;
+            width: 250px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.85;
+        }
+
+        .admit-one {
+            position: absolute;
+            color: darkgray;
+            height: 250px;
+            padding: 0 10px;
+            letter-spacing: 0.15em;
+            display: flex;
+            text-align: center;
+            justify-content: space-around;
+            writing-mode: vertical-rl;
+            transform: rotate(-180deg);
+        }
+
+        .admit-one span:nth-child(2) {
+            color: white;
+            font-weight: 700;
+        }
+
+        .left .ticket-number {
+            /* height: 280px; */
+            width: 250px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-end;
+            padding: 5px;
+            color: white;
+        }
+
+        .ticket-info {
+            padding: 10px;
+            padding-bottom: 0px !important;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .date {
+            border-top: 1px solid gray;
+            border-bottom: 1px solid gray;
+            padding: 5px 0;
+            font-weight: 200;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .date span {
+            width: 100px;
+        }
+
+        .date span:first-child {
+            text-align: left;
+        }
+
+        .date span:last-child {
             text-align: right;
-            text-transform: uppercase;
         }
 
-        .receipt-header-mid {
-            margin: 24px 0;
-            overflow: hidden;
+        .date .june-29 {
+            color: #d83565;
+            font-size: 20px;
         }
 
-        #container {
-            background-color: #dcdcdc;
+        .show-name {
+            width: 500px;
+            font-size: 20px;
+            font-family: "Nanum Pen Script", cursive;
+            color: #d83565;
         }
 
+        .show-name h1 {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: #4a437e;
+        }
+
+        .time {
+            padding: 10px 0;
+            color: #4a437e;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            /* gap: 10px; */
+            font-weight: 700;
+        }
+
+        .time span {
+            font-weight: 400;
+            color: gray;
+        }
+
+        .left .time {
+            font-size: 16px;
+        }
+
+        .location {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            padding-top: 8px;
+            border-top: 1px solid gray;
+        }
+
+        .location .separator {
+            font-size: 20px;
+        }
+
+        .right {
+            height: 100%;
+            width: 180px;
+            border-left: 1px dashed #404040;
+        }
+
+        .right .admit-one {
+            color: darkgray;
+        }
+
+        .right .admit-one span:nth-child(2) {
+            color: gray;
+        }
+
+        .right .right-info-container {
+            height: 100%;
+            padding: 10px 10px 10px 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .right .show-name h1 {
+            font-size: 18px;
+        }
+
+        .barcode {
+            height: 100px;
+        }
+
+        .barcode img {
+            height: 100%;
+        }
+
+        .right .ticket-number {
+            color: gray;
+        }
 
         canvas {
-            height: 70px;
+            height: 100px;
             display: inline-block;
             vertical-align: baseline;
         }
 
     </style>
-    <script type="text/javascript" src="{{URL::asset('js/website/jquery.qrcode.min.js')}}"></script>
-    <script src="{{URL::asset('js/website/generate-qrcode.js')}}"></script>
-   
+
+</head>
+
+<body onload='screenshot()'>
+
+    {{-- <body> --}}
+    <?php use Carbon\Carbon;
+    $createdAt = Carbon::parse($transaksi->tanggal_kedatangan); ?>
+
+    <div class="ticket" id="photo">
+        <div class="left">
+            <div class="image" style="background-image: url('{{ URL::asset($wisata->gambar) }}')">
+                {{-- <p class="admit-one">
+                    <span>Wisataku</span>
+                    <span>Wisataku</span>
+                    <span>Wisataku</span>
+                </p> --}}
+                <div class="ticket-number">
+                    <p>
+                        #{{ $transaksi->id_wisata }}
+                    </p>
+                </div>
+            </div>
+            <div class="ticket-info">
+                <p class="date">
+                    <span> {{ $createdAt->format('l') }}</span>
+                    <span class="june-29">{{ $createdAt->format('j F') }}</span>
+                    <span>{{ $createdAt->format('Y') }}</span>
+                </p>
+                <div class="show-name">
+                    <h1>{{ $wisata->nama_wisata }}</h1>
+                    <h4>{{ $wisata->alamat }}</h4>
+                </div>
+                <div class="time">
+                    <h3>Buka Mulai Jam {{ $wisata->jamOperasi }} WIB</h3>
+                    <h4 style="color: #d83565;font-weight: 800; margin-top:10px;margin-bottom:5px"> cara menggunakan
+                        tiket : </h4>
+                    <h5 style="font-weight: 100;gap:0px">Tunjukkan tiket ke petugas operator di lapangan untuk scan
+                        QR-Code</h5>
+                    <p style="font-weight: 800;font-size:.9rem;color: #d83565">*)Pastikan tiket anda belum pernah
+                        diverifikasi
+                        sebelumnya</p>
+                </div>
+                <p class="location"><span>wisataku.com</span>
+                    <span class="separator"><i class="far fa-smile"></i></span><span>Wisata Kabupaten
+                        Kediri</span>
+                </p>
+            </div>
+        </div>
+        <center>
+            <div class="right">
+                {{-- <p class="admit-one">
+                <span>ADMIT ONE</span>
+                <span>ADMIT ONE</span>
+                <span>ADMIT ONE</span>
+            </p> --}}
+
+                <div class="right-info-container">
+                    <div class="show-name">
+                        <h1>Pemesan</h1>
+                        <h2>{{ $transaksi->uname }}</h2>
+                    </div>
+                    <div class="time">
+                        <p>Tanggal Kedatangan</p>
+                        <h4 style="color: #d83565">{{ $createdAt->format('l, j F Y') }}</h4>
+                    </div>
+                    <div class="barcode">
+                        <script>
+                            var qrcode = "{{ $transaksi->id }}"
+                        </script>
+                        <div id="qrcode" class="qrcode"></div>
+                    </div>
+                    <p class="ticket-number">
+                        #20030220
+                    </p>
+                </div>
+            </div>
+        </center>
+    </div>
 </body>
+
+<script type="text/javascript">
+    function screenshot() {
+        html2canvas(document.getElementById("photo")).then(function(canvas) {
+            downloadImage(canvas.toDataURL(), "Tiket Wisata {{ $transaksi->uname }}.png");
+        });
+    }
+
+    function downloadImage(uri, filename) {
+        var link = document.createElement('a');
+        if (typeof link.download !== 'string') {
+            window.open(uri);
+        } else {
+            link.href = uri;
+            link.download = filename;
+            accountForFirefox(clickLink, link);
+        }
+    }
+
+    function clickLink(link) {
+        link.click();
+    }
+
+    function accountForFirefox(click) {
+        var link = arguments[1];
+        document.body.appendChild(link);
+        click(link);
+        document.body.removeChild(link);
+    }
+</script>
+
+<script type="text/javascript" src="{{ URL::asset('js/website/jquery.qrcode.min.js') }}"></script>
+<script src="{{ URL::asset('js/website/generate-qrcode.js') }}"></script>
 
 </html>

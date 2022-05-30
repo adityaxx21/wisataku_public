@@ -12,8 +12,6 @@
 
                             <form action="/laporanTransaksi" method="get" id="submit_it">
                                 @csrf
-                                <video id="preview" width="100%"></video>
-
                                 <label><input type="search" class="form-control input-sm" placeholder="Nama Wisata"
                                         aria-controls="datatable-fixed-header" id="search" name="search"
                                         value="{{ isset($search) ? $search : '' }}"></label>

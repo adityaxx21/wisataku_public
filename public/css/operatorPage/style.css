@@ -9,3 +9,17 @@
     margin-right: 1rem;
     margin-bottom: 1rem;
 }
+.bayar-gagal{
+    background-color: #db2d2d;
+    color: #f00d0d;
+}
+
+.info-tagihan{
+    background-color: #FFB74D;
+    color: #BF360C;
+}
+
+.bayar-sukses{
+    color: #1B5E20;
+    background-color: #A5D6A7;
+}
