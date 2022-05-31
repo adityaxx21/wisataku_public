@@ -29,10 +29,24 @@
                         </div>
                     </div>
 
-                    <div class="col-md-12 col-sm-12  form-group">
+                    <div class="col-md-6 col-sm-12  form-group">
                         <label for="hargaPenginapan" class="label-form">Harga Penginapan</label>
                         <input type="text" value="{{ $penginapan->harga }}" name="hargaPenginapan"
                             placeholder="Harga Tiket Dewasa" class="form-control duacol" required>
+                    </div>
+                    <div class="col-md-6 col-sm-12  form-group">
+                        <div class="col-md-5">
+                            <label for="jamOperasi" class="label-form">Jam Operasi </label>
+                            <input type="time" name="jamOperasi" placeholder="Jam Operasi" class="form-control duacol"
+                            value="{{ $penginapan->jamOperasi }}"  required>
+                        </div>
+                        <div class="col-md-5">
+                            <label for="jamOperasi" class="label-form">Jam Tutup Operasi </label>
+                            <input type="time" name="jamTutupOperasi" placeholder="Jam Operasi" class="form-control duacol"
+                            value="{{ $penginapan->jamTutupOperasi }}"  required>
+                        </div>
+
+
                     </div>
 
                     <div class="col-md-12 col-sm-12  form-group">

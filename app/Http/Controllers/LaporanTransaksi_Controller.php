@@ -28,6 +28,7 @@ class LaporanTransaksi_Controller extends Controller
             ->leftJoin('tb_tambah_wisata', 'tb_tambah_wisata.id', '=', 'tb_transaksi.id_wisata')
             ->orderBy('tb_transaksi.tanggal_kedatangan', 'ASC')
             ->where([$date, $wisata])
+            ->groupByRaw('tb_transaksi.id')
             ->get();
         $data['day'] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', "Fri", 'Sat'];
 
@@ -71,6 +72,7 @@ class LaporanTransaksi_Controller extends Controller
         // session()->get('laporan', $data['transaksi']);
         Session::put('datalaporan', $data['transaksi']);
         Session::put('jenislaporan', $data['jenisLaporan']);
+        Session::put('gambar', $request->input('cavas_here'));
 
         // print_r($data['total_transaksi']);
 
@@ -84,6 +86,11 @@ class LaporanTransaksi_Controller extends Controller
     {
         $data['transaksi'] = Session::get('datalaporan');
         $data['jenislaporan'] = Session::get('jenislaporan');
+        $data['gambar'] = Session::get('gambar');
+        $data['jumlah_pengunjung'] = 0;
+        foreach ($data['transaksi'] as $value) {
+            $data['jumlah_pengunjung'] += $value->jumlah_tiket_dewasa + $value->jumlah_tiket_anak;
+        }
 
         // print_r($data['jenislaporan']);
         $view = view("adminpage.laporanTransaksi.downloadLaporan", $data);

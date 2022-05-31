@@ -3,7 +3,14 @@ var total_transaksi;
 $(document).ready(function () {
     passVar(chart_data);
 });
+
 function passVar(params) {
+    function done() {
+        console.log("haha");
+        var url = myLine.toBase64Image('image/png');
+        $('#cavas_here').val(url);
+
+    }
     var config = {
         type: "bar",
         data: data(params),
@@ -22,10 +29,16 @@ function passVar(params) {
                     },
                 },
             },
+            animation: {
+                onComplete: done
+            },
         },
     };
+    
 
-    new Chart(document.getElementById("myChart"), config);
+
+    var myLine = new Chart(document.getElementById("myChart"), config);
+    
 }
 
 if (a == "Bulanan") {
@@ -36,6 +49,7 @@ if (a == "Bulanan") {
         "April",
         "May",
         "June",
+        "July",
         "August",
         "September",
         "October",
@@ -136,3 +150,4 @@ function data(params) {
     };
     return data;
 }
+

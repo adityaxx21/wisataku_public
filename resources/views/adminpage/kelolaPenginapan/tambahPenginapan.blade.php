@@ -10,7 +10,7 @@
                     <div class="col-md-12 col-sm-12  form-group">
                         <label for="nama" class="label-form">Gambar</label>
                         <div class="form-group upfile">
-                            <input type="file" id="actual-btn" name="gambar" hidden />
+                            <input type="file" id="actual-btn" name="gambar" accept="image/*" hidden />
                             <label for="actual-btn" name="gambar">Pilih File</label>
                             <span id="file-chosen">Tidak ada file</span>
                         </div>
@@ -29,10 +29,24 @@
                         </div>
                     </div>
 
-                    <div class="col-md-12 col-sm-12  form-group">
+                    <div class="col-md-6 col-sm-12  form-group">
                         <label for="hargaPenginapan" class="label-form">Harga Penginapan</label>
                         <input type="text" name="hargaPenginapan" placeholder="Harga Tiket Dewasa"
                             class="form-control duacol" required>
+                    </div>
+                    <div class="col-md-6 col-sm-12  form-group">
+                        <div class="col-md-5">
+                            <label for="jamOperasi" class="label-form">Jam Operasi </label>
+                            <input type="time" name="jamOperasi" placeholder="Jam Operasi" class="form-control duacol"
+                                required>
+                        </div>
+                        <div class="col-md-5">
+                            <label for="jamOperasi" class="label-form">Jam Tutup Operasi </label>
+                            <input type="time" name="jamTutupOperasi" placeholder="Jam Operasi" class="form-control duacol"
+                                required>
+                        </div>
+
+
                     </div>
 
                     <div class="col-md-12 col-sm-12  form-group">

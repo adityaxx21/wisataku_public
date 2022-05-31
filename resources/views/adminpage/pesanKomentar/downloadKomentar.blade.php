@@ -16,7 +16,7 @@
         <h1>Data Pesan Komentar</h1>
         <h1>Wisata Kabupaten Kediri</h1>
         <div class="mt-5 text-left mb-2" style="font-size: 12px">
-            <strong>Total Pesan Masuk = $totalpesan e sesuai filter</strong>
+            <strong>Total Pesan Masuk = {{$pesan->count()}}</strong>
         </div>
 
         <table class="table table-bordered text-center" style="font-size: 12px">

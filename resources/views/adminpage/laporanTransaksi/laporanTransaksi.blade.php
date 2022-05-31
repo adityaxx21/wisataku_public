@@ -48,12 +48,17 @@
 
 
                                 <script>
+                                    // alert(chart_data);
                                     function timeFunctionLong(input) {
                                         setTimeout(function() {
                                             input.type = 'text';
                                         }, 60000);
                                     }
-                                    window.onload(passVar(chart_data1));
+                                    window.onload(onloading());
+                                    function onloading() {
+                                        passVar(chart_data1);
+                                        $('#submit_it').submit();
+                                    }
                                 </script>
 
                                 <a href="/downloadLaporan"><i class="fa fa-download download"></i></a>
@@ -71,7 +76,11 @@
                                     </option>
 
                                 </select>
-                                <canvas id="myChart" class="myChart"></canvas>
+                                <input type="hidden" id="cavas_here" name="cavas_here">
+                                <img  id="img_here" alt="" srcset="">
+                                
+                                <canvas id="myChart" class="myChart"></canvas>  
+                                
                         </div>
                         </form>
                         <table id="tabelku" class="table table-striped table-bordered" style="width:100%">

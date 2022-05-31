@@ -107,7 +107,7 @@
                             </a>
                             <div class="media-body">
                                 <strong>Jam Operasional</strong>
-                                <p style="font-size: .9em;margin-bottom:0px">10.00 Am - 17.00 pm</p>
+                                <p style="font-size: .9em;margin-bottom:0px">{{$wisata->jamOperasi}} - {{$wisata->jamTutupOperasi}}</p>
 
                             </div>
                         </article>

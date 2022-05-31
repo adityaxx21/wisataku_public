@@ -94,6 +94,7 @@
                     </table>
                     {{-- <button  class="btn btn-primary lihat-tiket mt-3"><span>Lihat
                         Tiket</span></button> --}}
+                        
                     <center><button id="pay-button" class="btn btn-danger lihat-tiket mt-3"><i class="fa-solid fa-money-bill mr-2"></i><span>Bayar Sekarang</span></button></center>
                     <script type="text/javascript">
                         // For example trigger on button clicked, or any time you need
@@ -110,12 +111,10 @@
                                 onPending: function(result) {
                                     /* You may add your own implementation here */
                                     console.log(result);
-                                    send_response_to_form(result);
                                 },
                                 onError: function(result) {
                                     /* You may add your own implementation here */
                                     console.log(result);
-                                    send_response_to_form(result);
                                 },
                                 onClose: function() {
                                     /* You may add your own implementation here */
@@ -130,22 +129,6 @@
                             // alert($('#qr_code').val());
 
                             $('#submit_form').submit();
-                            $.ajax({
-                                type: 'POST',
-                                url: "{{ url('/detailpesanan/asdasd') }}",
-                                data: {
-                                    json: JSON.stringify(result),
-                                },
-                                success: function(data) {
-                                    if ($.isEmptyObject(data.error)) {
-                                        // alert(data.alert-success);
-                                        // location.reload();
-                                    } else {
-                                        printErrorMsg(data.error);
-                                    }
-                                    $('#isChange').html('Hello World');
-                                }
-                            });
                         }
                         //
                     </script>

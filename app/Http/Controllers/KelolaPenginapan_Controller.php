@@ -35,6 +35,8 @@ class KelolaPenginapan_Controller extends Controller
         $get_data = array(
             'nama_penginapan' =>  $request->post('namaPenginapan'),
             'deskripsi' => $request->post('deskrisi'),
+            'jamOperasi' => $request->post('jamOperasi'),
+            'jamTutupOperasi' => $request->post('jamTutupOperasi'),
             'alamat' => $request->post('alamat'),
             'harga' => $request->post('hargaPenginapan'),
             'lat' => $request->post('lat'),
@@ -81,6 +83,8 @@ class KelolaPenginapan_Controller extends Controller
         $get_data = array(
             'nama_penginapan' =>  $request->post('namaPenginapan'),
             'deskripsi' => $request->post('deskrisi'),
+            'jamOperasi' => $request->post('jamOperasi'),
+            'jamTutupOperasi' => $request->post('jamTutupOperasi'),
             'alamat' => $request->post('alamat'),
             'harga' => $request->post('hargaPenginapan'),
             'lat' => $request->post('lat'),

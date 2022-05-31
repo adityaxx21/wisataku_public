@@ -37,9 +37,16 @@
                     </div>
 
                     <div class="col-md-6 col-sm-12  form-group">
-                        <label for="jamOperasi" class="label-form">Jam Operasi </label>
-                        <input type="time" name="jamOperasi" placeholder="Jam Operasi" class="form-control duacol" required
-                            value="{{ $wisata->jamOperasi }}">
+                        <div class="col-md-5">
+                            <label for="jamOperasi" class="label-form">Jam Operasi </label>
+                            <input type="time" name="jamOperasi" placeholder="Jam Operasi" class="form-control duacol"
+                                required value="{{ $wisata->jamOperasi }}">
+                        </div>
+                        <div class="col-md-5">
+                            <label for="jamOperasi" class="label-form">Jam Tutup Operasi </label>
+                            <input type="time" name="jamTutupOperasi" placeholder="Jam Operasi" class="form-control duacol"
+                                required value="{{ $wisata->jamTutupOperasi }}">
+                        </div>
                     </div>
 
                     <div class="col-md-12 col-sm-12  form-group">
