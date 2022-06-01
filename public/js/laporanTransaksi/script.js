@@ -2,6 +2,7 @@ var total_transaksi;
 
 $(document).ready(function () {
     passVar(chart_data);
+    // $('#submit_it').submit();
 });
 
 function passVar(params) {

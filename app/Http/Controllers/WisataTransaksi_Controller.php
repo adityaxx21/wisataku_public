@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Crypt;
@@ -14,8 +15,6 @@ class WisataTransaksi_Controller extends Controller
 
         $data["title"] =  "Halaman Wisata";
         $data['wisata'] = DB::table('tb_tambah_wisata')->where('id', $id)->first();
-        $data['rating'] = round(DB::table('tb_pesan_komentar')->where([['id_wisata', $id], ['no_pesan', 1]])->average('rating'), 2);
-        $data['jumlah'] = DB::table('tb_pesan_komentar')->where([['id_wisata', $id], ['no_pesan', 1], ['rating', '<>', ""]])->count();
         $data['fasilitas'] = DB::table('tb_fasilitas_wisata')->get();
         $data['penginapan'] = DB::table('tb_penginapan')->get();
         $data['kategori_wisata'] = DB::table('tb_kategori_wisata')->get();
@@ -57,16 +56,6 @@ class WisataTransaksi_Controller extends Controller
             $data['wisata'] = DB::table('tb_tambah_wisata')->where($fil_wisata)->get();
         } catch (\Throwable $th) {
             $data['wisata'] = DB::table('tb_tambah_wisata')->where([])->get();
-        }
-        foreach ($data['wisata'] as $key => $value) {
-            $rating[$key] = DB::table('tb_pesan_komentar')->where([['id_wisata', $value->id], ['no_pesan', 1]])->average('rating');
-            $jumlah[$key] = DB::table('tb_pesan_komentar')->where([['id_wisata', $value->id], ['no_pesan', 1]])->count();
-        }
-        try {
-            $data['jumlah'] = $jumlah;
-            $data['rating'] = $rating;
-        } catch (\Throwable $th) {
-            //throw $th;
         }
         $data['wisata'] = DB::table('tb_tambah_wisata')->where($fil_wisata)->get();
         return view('pengunjung.website.kategorinavbar', $data);
@@ -214,6 +203,13 @@ class WisataTransaksi_Controller extends Controller
         // $data['transaksi'] = DB::table('tb_transaksi')->where('order_id',$id)->first();
         // print_r( $params);
         if ($data['transaksi']->id_status_pemb == 0) {
+            DB::table('tb_tambah_wisata')->whereId(DB::table('tb_transaksi')->where('id', $id)->value('id_wisata'))->increment('terjual');
+
+        // DB::table('tb_transaksi')
+        //         ->where('id', $id)
+        //         ->update([
+        //             'terjual' => DB::raw('terjual + 1'),
+        //         ]);
             return view('pengunjung.website.detailtiket', $data);
         } else {
             $data['snapToken'] = \Midtrans\Snap::getSnapToken($params);
@@ -241,10 +237,12 @@ class WisataTransaksi_Controller extends Controller
             'pdf_url' => isset($json->pdf_url) ? $json->pdf_url : null,
             'updated_at' => $sav_date,
         );
+
+        $order = DB::table('tb_transaksi')->where('id', $id)->update($get_data);
         if ($get_data['id_status_pemb'] == 0) {
+            DB::table('tb_tambah_wisata')->whereId(DB::table('tb_transaksi')->where('id', $id)->value('id_wisata'))->increment('terjual');
             DB::table('tb_pesan_komentar')->where('id_transaksi', $id)->update(['no_pesan' => 1]);
         }
-        $order = DB::table('tb_transaksi')->where('id', $id)->update($get_data);
         return $order ? redirect(url('/detailtiket/' . $id))->with('alert-success', 'Order berhasil dibuat') : redirect(url('/detailtiket/' . $id))->with('alert-failed', 'Terjadi kesalahan');
         // print_r ( $json);
 

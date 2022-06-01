@@ -40,8 +40,8 @@
                     <a href="/detail/{{$item->id}}">
                         <h5 class="card-title">{{ $item->nama_wisata }}</h5>
                     </a>
-                    <span><i class="fa fa-star" style="color: orange;"></i> {{ isset($rating[$key]) ? $rating[$key] : 5 }}
-                        | {{ isset($jumlah[$key]) ? $jumlah[$key] : 0 }} Terjual</span>
+                    <span><i class="fa fa-star" style="color: orange;"></i> {{ isset($item->rating) ? $item->rating : 5 }}
+                        | {{ isset($item->terjual) ? $item->terjual : 0 }} Terjual</span>
                     <p><i class="fa fa-map-marker"></i> Kediri</p>
                 </div>
             </div>

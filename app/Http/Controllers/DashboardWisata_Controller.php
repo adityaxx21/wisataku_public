@@ -9,17 +9,15 @@ class DashboardWisata_Controller extends Controller
 {
     public function index()
     {
-        
        $data['title'] =  "Halaman Pengunjung";
        $data['slider'] = DB::table('tb_slider')->get();
-       $data['wisata'] = DB::table('tb_tambah_wisata')->get();
+       $data['wisata'] = DB::table('tb_tambah_wisata')->orderBy('rating','desc')->paginate(5);
        $data['halaman_pengunjung'] = DB::table('tb_halaman_pengunjung')->first();
-       foreach ($data['wisata'] as $key => $value) {
-        $rating[$key] = round(DB::table('tb_pesan_komentar')->where([['id_wisata',$value->id],['no_pesan',1]])->average('rating'),2);
-        $jumlah[$key] = DB::table('tb_pesan_komentar')->where([['id_wisata',$value->id],['no_pesan',1]])->count();
-       }
-       $data['jumlah'] = $jumlah;
-       $data['rating'] = $rating;
+      //  foreach ($data['wisata'] as $key => $value) {
+      //   $jumlah[$key] = DB::table('tb_transaksi')->where([['id_wisata',$value->id],['id_status_pemb',0]])->count();
+      //  }
+      //  $data['jumlah'] = $jumlah;
+      //  $data['rating'] = $rating;
        $data['kategori'] = DB::table('tb_kategori_wisata')->get();
     //    print_r($data['rating']);
        return view('pengunjung.website.berandawebsite',$data);

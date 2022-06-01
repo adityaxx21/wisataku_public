@@ -20,6 +20,7 @@
                                     onclick="this.type='date'" name="date" value="{{ $date }}">
 
                                 <script type="text/javascript">
+                                    
                                     var chart_data = [];
                                     var date = [];
                                     var year = [];
@@ -54,11 +55,9 @@
                                             input.type = 'text';
                                         }, 60000);
                                     }
-                                    window.onload(onloading());
-                                    function onloading() {
-                                        passVar(chart_data1);
-                                        $('#submit_it').submit();
-                                    }
+                                    // function onloading() {
+                                    //     passVar(chart_data1);
+                                    // }
                                 </script>
 
                                 <a href="/downloadLaporan"><i class="fa fa-download download"></i></a>
@@ -76,11 +75,11 @@
                                     </option>
 
                                 </select>
-                                <input type="hidden" id="cavas_here" name="cavas_here">
-                                <img  id="img_here" alt="" srcset="">
-                                
-                                <canvas id="myChart" class="myChart"></canvas>  
-                                
+                                <input type="text" id="cavas_here" name="cavas_here" hidden>
+                                <img id="img_here" alt="" srcset="">
+
+                                <canvas id="myChart" class="myChart"></canvas>
+
                         </div>
                         </form>
                         <table id="tabelku" class="table table-striped table-bordered" style="width:100%">

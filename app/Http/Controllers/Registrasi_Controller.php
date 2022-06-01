@@ -18,7 +18,7 @@ class Registrasi_Controller extends Controller
     }
     public function login_process(Request $request)
     {
-        Session::flush();
+        // Session::flush();
         
         $uname = $request->input('username');
         $user = User_Reg::where('uname', $uname)->first();
@@ -34,7 +34,12 @@ class Registrasi_Controller extends Controller
                 } elseif ($user['hak_akses'] == 1) {
                     return redirect('/QrTransaksi');
                 } elseif ($user['hak_akses'] == 2) {
-                    return redirect('/');
+                    if (session()->get('redirect') != null) {
+                       return redirect(session()->get('redirect'));
+                    } else {
+                        return redirect('/');
+                    }
+                    
                 }
                
             } else {

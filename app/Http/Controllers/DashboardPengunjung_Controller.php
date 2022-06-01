@@ -22,7 +22,7 @@ class DashboardPengunjung_Controller extends Controller
             ->leftJoin('tb_status_transaksi', 'tb_status_transaksi.id_status', '=', 'tb_transaksi.id_status_pemb')
             ->leftJoin('tb_tambah_wisata', 'tb_tambah_wisata.id', '=', 'tb_transaksi.id_wisata')
             ->where([['tb_transaksi.uname', session()->get('username')], ['tb_transaksi.is_deleted', 1]])
-            // ->groupBy('tb_tambah_wisata.id')
+            ->groupBy('tb_transaksi.id')
             ->get();
         // print_r( $data['data_wisata']);
         return view('pengunjung.transaksi.transaksi', $data);
@@ -50,7 +50,7 @@ class DashboardPengunjung_Controller extends Controller
             ->leftJoin('tb_status_transaksi', 'tb_status_transaksi.id_status', '=', 'tb_transaksi.id_status_pemb')
             ->leftJoin('tb_tambah_wisata', 'tb_tambah_wisata.id', '=', 'tb_transaksi.id_wisata')
             ->where('tb_transaksi.id', $id)
-            // ->groupBy('tb_tambah_wisata.id')
+            // ->groupBy('tb_transaksi.id')
             ->first();
         $data['no_invoice'] = $id;
         // $hargaTiket =  ($data['transaksi']->tiketDewasa*$data['transaksi']->jumlah_tiket_dewasa)+($data['transaksi']->tiketAnak*$data['transaksi']->jumlah_tiket_anak);
@@ -149,6 +149,10 @@ class DashboardPengunjung_Controller extends Controller
             'pdf_url' => isset($json->pdf_url) ? $json->pdf_url : null,
             'updated_at' => $sav_date,
         );
+        if ($get_data['id_status_pemb'] == 0) {
+            DB::table('tb_tambah_wisata')->whereId(DB::table('tb_transaksi')->where('id', $id)->value('id_wisata'))->increment('terjual');
+            DB::table('tb_pesan_komentar')->where('id_transaksi', $id)->update(['no_pesan' => 1]);
+        }
         $order = DB::table('tb_transaksi')->where('tb_transaksi.id', $id)->update($get_data);
         return $order ? redirect(url('/pengunjungDashboard/detail'))->with('alert-success', 'Order berhasil dibuat') : redirect(url('/pengunjungDashboard/detail'))->with('alert-failed', 'Terjadi kesalahan');
         // print_r ( $json);
@@ -160,9 +164,6 @@ class DashboardPengunjung_Controller extends Controller
     {
         $id = session()->get('glob_id');
         $data['title'] = "Halaman Dashboard Ulas";
-        if ($this->panggil_ulas($id) == null) {
-            # code...
-        }
         $data['pesan'] = $this->panggil_ulas($id);
 
         // print_r( $data['pesan']);
@@ -190,8 +191,13 @@ class DashboardPengunjung_Controller extends Controller
             "updated_at" => $sav_date,
 
         );
-        print_r($get_data);
+
         DB::table('tb_pesan_komentar')->where('id_transaksi', $id)->update($get_data);
+        $data = DB::table('tb_pesan_komentar')->where('id_transaksi', $id)->first();
+        DB::table('tb_tambah_wisata')->whereId($data->id_wisata)->update(array(
+            'jumlah_ulasan' => DB::raw('jumlah_ulasan + 1'),
+            'rating' => DB::raw('(rating + '.strval($get_data['rating']).')/2'),
+        ));
         return redirect('/pengunjungDashboard/ulas');
     }
 

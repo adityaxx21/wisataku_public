@@ -6,8 +6,8 @@
                 <div class="card-detail">
                     <h3>{{ $wisata->nama_wisata }}</h3>
                     <span><i class="fa fa-star" style="color: orange;"></i>
-                        {{ isset($rating) ? $rating : 5 }}
-                        | {{ isset($jumlah) ? $jumlah : 0 }} Terjual</span>
+                        {{ isset($wisata->rating) ? $wisata->rating : 5 }}
+                        | {{ isset($wisata->terjual) ? $wisata->terjual : 0 }} Terjual</span>
                     <img src="{{URL::asset($wisata->gambar)}}" alt="" srcset="" class="mt-4">
 
                     <span class="mt-4 font-weight-bold">Deskripsi :</span>
@@ -45,7 +45,7 @@
                     </div>
                     <div id='map_penginapan' style='width: 100%; height: 300px;'></div>
                     
-                    <span class="mt-4 mb-2 font-weight-bold"><i class="fa fa-comment"></i> Ulasan Pengunjung ({{$jumlah}})</span>
+                    <span class="mt-4 mb-2 font-weight-bold"><i class="fa fa-comment"></i> Ulasan Pengunjung ({{$wisata->jumlah_ulasan}})</span>
                     {{-- item comment --}}
                     @foreach ($komentar as $key=>$item)
                         @if ($item->rating != "" || $item->pesan != "")
@@ -57,7 +57,12 @@
                             @endfor
                            
                         </div>
+                        @if ($item->is_deleted == 0)
+                        <p style="font-size: .8rem" class="text-danger">{{$item->pesan}}</p> 
+                        @else
                         <p style="font-size: .8rem">{{$item->pesan}}</p>
+                        @endif
+                        
                         @if ($item->pesan_balas != "")
                         <div class="balasan">
                             <span class="font-weight-bold" style="font-size: .8rem"> Admin</span>

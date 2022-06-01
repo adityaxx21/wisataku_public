@@ -206,11 +206,10 @@ class KelolaWisata_Controller extends Controller
     public function delete($id)
     {
 
-        $id_fas = DB::table('tb_tambah_wisata')->select('id_fasilitas_tersedia')->where('id', $id)->get();
-        foreach ($id_fas as $value)
-           $take = $value->id_fasilitas_tersedia;
-        DB::table('tb_setel_fasisilitas')->where('id_fasilitas_tersedia', $take)->delete();
+        $id_fas = DB::table('tb_tambah_wisata')->select('id_fasilitas_tersedia')->where('id', $id)->value('id_fasilitas_tersedia');
+        DB::table('tb_setel_fasisilitas')->where('id_fasilitas_tersedia', $id_fas)->delete();
         DB::table('tb_tambah_wisata')->where('id', $id)->delete();
+        DB::table('tb_transaksi')->where('id_wisata', $id)->delete();
 
         // echo strval($value);
 

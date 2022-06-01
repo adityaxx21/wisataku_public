@@ -82,7 +82,7 @@ class LaporanTransaksi_Controller extends Controller
     }
 
 
-    public function downloadLaporan()
+    public function downloadLaporan(Request $request)
     {
         $data['transaksi'] = Session::get('datalaporan');
         $data['jenislaporan'] = Session::get('jenislaporan');

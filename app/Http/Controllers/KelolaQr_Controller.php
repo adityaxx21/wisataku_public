@@ -26,14 +26,18 @@ class KelolaQr_Controller extends Controller
         // ->groupBy('tb_tambah_wisata.id')
         ->first();
         $data['date'] = date("d-m-Y", strtotime($data["data"]->tanggal_kedatangan));
-        $date['date_now'] = date('d-m-Y');
-        if ( $data['date'] >$date['date_now']) {
+        $date = date("Y-m-d", strtotime( $data['date']));;
+        $data['date_now'] = date('d-m-Y');
+        $date_now =date('Y-m-d');
+
+
+        if ( $date > $date_now) {
            $data['status'] = '<br> <span class="info-tagihan"><i class="fa fa-info-circle"></i>Tanggal belum sesuai ketentuan</span>';
            $data['hidden'] = true;
-        } elseif ( $data['date'] == $date['date_now']) {
+        } elseif ( $date == $date_now) {
             $data['status'] = '<br> <span class="bayar-sukses"><i class="fa fa-info-circle"></i>Tanggal sudah sesuai bisa dilakukan konfirmasi</span>';
             $data['hidden'] = false;
-        } elseif ( $data['date'] < $date['date_now']) {
+        } elseif ( $date < $date_now) {
             $data['status'] = '<br> <span class="bayar-gagal"><i class="fa fa-info-circle"></i>Tanggal sudah terlewat, konfirmasi tidak dapat dilakukan</span>';
             $data['hidden'] = true;
         }
