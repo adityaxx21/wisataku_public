@@ -9,9 +9,10 @@ use Illuminate\Support\Facades\Storage;
 class KelolaKategori_Controller extends Controller
 {
     var $location = 'Kategori';
-    var $glob_id = "";
+    
     public function kelola_kategori()
     {
+        //menampilkan list kategori
         $data['title'] = "Kelola Kategori";
         $data['kategori_wisata'] = DB::table('tb_kategori_wisata')->get();
 
@@ -21,6 +22,7 @@ class KelolaKategori_Controller extends Controller
     }
     public function tambah_kategori()
     {
+        // menu tambah kategori
         $data['title'] = "Form Tambah Kategori";
 
         return view("adminpage.kelolaKategori.tambahKategori", $data);
@@ -28,6 +30,7 @@ class KelolaKategori_Controller extends Controller
 
     public function create_kategori(Request $request)
     {
+        // fungsi post tambah kategori
         $max_num =  DB::table('tb_kategori_wisata')->max('id_wisata');
 
         $sav_date            =date("Y-m-d H:i:s");
@@ -57,6 +60,7 @@ class KelolaKategori_Controller extends Controller
 
     public function update($id)
     {
+        // 
         session(['glob_id' => $id]);
         return redirect('/editKategori');
     }

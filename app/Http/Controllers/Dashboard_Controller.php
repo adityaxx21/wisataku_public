@@ -13,7 +13,7 @@ class Dashboard_Controller extends Controller
         if (session()->has('username') == false) {
             return redirect("/login");
         }
-
+        //Digunakan untuk memanggil jumlah tiap data dari tiap" table dalam halaman dashboard admin
         $data['title'] = "Dashboard";
         $data['jumlah_wisata'] = DB::table('tb_tambah_wisata')->count();
         $data['jumlah_akun'] = DB::table('user_reg')->count();

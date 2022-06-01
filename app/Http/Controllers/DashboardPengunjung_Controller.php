@@ -13,6 +13,9 @@ class DashboardPengunjung_Controller extends Controller
     // {{--Transaksi--}}
     public function kelola_dashboard_pengunjung()
     {
+        // Digunakan untuk memanggil jumlah tiap data dari tiap" table dalam halaman dashboard pengunjung, yang mana merupakan halaman transaksi
+        // parameter penggunaan dengan session yang menyimpan username untuk kondisi where dalam table
+        // table sendiri dipakai dengna left join dengan mengkombinasikan id yang sama untuk table tertentu
         $data['title'] = "Halaman Dashboard Pengunjung";
         $data['status'] = DB::table('tb_status_transaksi')->get();
         $data['transaksi'] = DB::table('tb_transaksi')->where('uname', session()->get('username'))->get();
@@ -30,11 +33,13 @@ class DashboardPengunjung_Controller extends Controller
 
     public function update($id)
     {
+        //menyimpan id transaksi pada session untuk halaman detail
         session(['glob_id' => $id]);
         return redirect('/pengunjungDashboard/detail');
     }
     public function update_i($id)
     {
+        //menyimpan id transaksi pada session untuk halaman ulasan
         session(['glob_id' => $id]);
         return redirect('/pengunjungDashboard/ulas');
     }
@@ -42,8 +47,10 @@ class DashboardPengunjung_Controller extends Controller
     //Detail Transaksi
     public function detail()
     {
+        //bagian ini dipakai untuk memproses transaksi di mana id yang dipakai merupakan id yang disimpan dalam session  
         $id = session()->get('glob_id');
         $data['title'] = "Halaman Dashboard Detail";
+        //sma seperti sebelumbya data disimpan dalam variabel transaksi dengan leftjoin
         $data['transaksi'] = DB::table('tb_transaksi')
             ->selectRaw('tb_transaksi.*,tb_transaksi.id as id_transaksi,tb_transaksi.created_at as tanggal,user_reg.Email as email,user_reg.Telepon as telepon,tb_status_transaksi.*,tb_status_transaksi.deskripsi as deskripsi_status,tb_tambah_wisata.*')
             ->leftJoin('user_reg', 'user_reg.uname', '=', 'tb_transaksi.uname')
@@ -52,9 +59,8 @@ class DashboardPengunjung_Controller extends Controller
             ->where('tb_transaksi.id', $id)
             // ->groupBy('tb_transaksi.id')
             ->first();
+        //proses dibawah dipakai untuk membuat json dalam mitrands demi mendapatkan detail - detail dari biaya dan nama barang transaksinya
         $data['no_invoice'] = $id;
-        // $hargaTiket =  ($data['transaksi']->tiketDewasa*$data['transaksi']->jumlah_tiket_dewasa)+($data['transaksi']->tiketAnak*$data['transaksi']->jumlah_tiket_anak);
-        // $hargaKendaraan =  ($data['transaksi']->parkirmotor*$data['transaksi']->jumlah_motor)+($data['transaksi']->parkirmobil*$data['transaksi']->jumlah_mobil)+($data['transaksi']->parkirumum*$data['transaksi']->jumlah_kendaraan_umum);
         $aray = array();
         if ($data['transaksi']->jumlah_tiket_dewasa != 0) {
             $aray[] = [
@@ -97,7 +103,14 @@ class DashboardPengunjung_Controller extends Controller
                 'name' => 'Jumlah Tiket Anak'
             ];
         }
+        //untuk penjelasan ini bisa dibaca di website resmi karena dibawah ini juga sudah ada keteranganya
         // Set your Merchant Server Key
+        //serverkey sandbox = 'SB-Mid-server-HHVxnaKotmFizvbMyeHMi5hA'
+        //clientkey sandbox = 'SB-Mid-client-p3ZANgkDvn4BQswk'
+        //js sandbox = https://app.sandbox.midtrans.com/snap/snap.jss
+        //serverkey production = 'Mid-client-uyb5rEus3lvtOYH-'
+        //clientkey production = 'Mid-server-PdcfAopvqbjNANEmps76DNUj'
+        //js production = https://app.midtrans.com/snap/snap.js
         \Midtrans\Config::$serverKey = 'SB-Mid-server-HHVxnaKotmFizvbMyeHMi5hA';
         // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
         \Midtrans\Config::$isProduction = false;
@@ -131,6 +144,7 @@ class DashboardPengunjung_Controller extends Controller
 
     public function detail_post(Request $request)
     {
+        //proses dibawah ini adalah setelah melakukan pembayaran jika transaksi sudah dibayar maka status pembayaran akan menjadi 0 dan akan muncul pesan bahwa sudah terbayar
         if (session()->get('username') == "") {
             return redirect('/login')->with('alert-notif', 'Anda Harus Login Terlebih Dahulu');
         }
@@ -162,6 +176,7 @@ class DashboardPengunjung_Controller extends Controller
     // Ulas Transaksi
     public function ulas()
     {
+        //membuka laman ulas berdasarkan id
         $id = session()->get('glob_id');
         $data['title'] = "Halaman Dashboard Ulas";
         $data['pesan'] = $this->panggil_ulas($id);
@@ -171,6 +186,7 @@ class DashboardPengunjung_Controller extends Controller
     }
     public function panggil_ulas($id)
     {
+        //menampilkan pesan dari table 
         $data = DB::table('tb_pesan_komentar')
             ->selectRaw('tb_pesan_komentar.*,tb_tambah_wisata.nama_wisata as nama_wisata')
             ->leftJoin('tb_tambah_wisata', 'tb_tambah_wisata.id', '=', 'tb_pesan_komentar.id_wisata')
@@ -182,6 +198,7 @@ class DashboardPengunjung_Controller extends Controller
 
     public function ulas_post(Request $request)
     {
+        //saat melakukan submit akan diubah sesuai input
         $id = session()->get('glob_id');
         $sav_date            = date("Y-m-d H:i:s");
         $get_data = array(
@@ -194,6 +211,7 @@ class DashboardPengunjung_Controller extends Controller
 
         DB::table('tb_pesan_komentar')->where('id_transaksi', $id)->update($get_data);
         $data = DB::table('tb_pesan_komentar')->where('id_transaksi', $id)->first();
+        //digunakan untuk mengubah jumlah ulasan dan rating pada tb_tambah_wisata
         DB::table('tb_tambah_wisata')->whereId($data->id_wisata)->update(array(
             'jumlah_ulasan' => DB::raw('jumlah_ulasan + 1'),
             'rating' => DB::raw('(rating + '.strval($get_data['rating']).')/2'),
@@ -203,6 +221,7 @@ class DashboardPengunjung_Controller extends Controller
 
     public function delete($id)
     {
+        //menghapus transaksi dengan softdelete (tanpa menghilangkan data)
         DB::table('tb_transaksi')->where('id', $id)->update(['is_deleted' => 0]);
         return redirect('/pengunjungDashboard/transaksi');
     }
