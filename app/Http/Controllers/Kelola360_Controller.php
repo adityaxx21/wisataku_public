@@ -8,8 +8,9 @@ use Illuminate\Support\Facades\Storage;
 
 class Kelola360_Controller extends Controller
 {
+    // menampilkan halaman kelola360 untuk menghapus ataupun menambah
     var $location = 'Kelola_360';
-    var $glob_id = "";
+    
     public function kelola_360()
     {
         $data['title'] = "Kelola Gambar 360";
@@ -21,6 +22,7 @@ class Kelola360_Controller extends Controller
     }
     public function tambah_360()
     {
+        //fungi membuka halaman tambah
         $data['title'] = "Form Tambah Gambar 360";
         $data['wisata'] = DB::table('tb_tambah_wisata')->get();
         return view("adminpage.kelola360.tambah360", $data);
@@ -28,6 +30,7 @@ class Kelola360_Controller extends Controller
 
     public function create_360(Request $request)
     {
+        //proses menambahkan gambar pada halaman tambah
         $max_num =  $request->input('id_wisata');
         
 
@@ -61,12 +64,14 @@ class Kelola360_Controller extends Controller
     }
     public function update($id)
     {
+        //mengambil session dari id untuk halaman berikutnya
         session(['glob_id' => $id]);
         return redirect('/edit360');
     }
 
     public function keola()
     {
+        //menampilkan data berdasarkan id dari session yang disimpan sebelummnya
         $id = session()->get('glob_id');
         $data['title'] = "Kelola Gambar 360";
         $data['gambar360'] = DB::table('tb_gambar360')->where('id',  $id)->first();
@@ -78,6 +83,7 @@ class Kelola360_Controller extends Controller
 
     public function edit_360(Request $request)
     {
+        //proses update data dari 360
         $id = session()->get('glob_id');
         $max_num =  $request->input('id_wisata');
         $sav_date            =date("Y-m-d H:i:s");

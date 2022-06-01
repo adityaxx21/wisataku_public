@@ -8,10 +8,9 @@ use Illuminate\Support\Facades\DB;
 
 class KelolaAkun_Controller extends Controller
 {
-    var $glob_id="";
     public function keola_akun()
     {
-        session()->get('username');
+        //menampilkan daftar akun dalam halaman kelola akun
         $data['title'] = 'Kelola Akun';
         $data['get_data'] = DB::table('user_reg')
             ->selectRaw('user_reg.*,tb_level_user.jenis_akses as jenis_akses')
@@ -22,7 +21,7 @@ class KelolaAkun_Controller extends Controller
     }
     public function tambah_akun()
     {
-        session()->get('username');
+        //fungsi get dari saat akan menambah akun
         $data['title'] = 'Kelola Akun';
         $data['hak_akses'] = DB::table('tb_level_user')->get();
 
@@ -30,7 +29,8 @@ class KelolaAkun_Controller extends Controller
     }
 
     public function create_data(Request $request)
-    {
+    {  
+        //funsi post dari penambahan akun
         $sav_date            =date("Y-m-d H:i:s");
         $get_data = array(
             'Nama' => $request->input('nama'),
@@ -48,12 +48,14 @@ class KelolaAkun_Controller extends Controller
 
     public function update($id)
     {
+        //menyimpan session id akun
         session(['glob_id' => $id]);
         return redirect('/editAkun');
     }
 
     public function keola()
     {
+        //fungsi get saat akan mengedit akun
         $id = session()->get('glob_id');
         $data['title'] = "Edit Akun";
         $data['akun'] = DB::table('user_reg')->where('id',  $id)->first();
@@ -65,6 +67,7 @@ class KelolaAkun_Controller extends Controller
 
     public function edit_akun(Request $request)
     {
+        // fungsi post edit akun setalah melakukan perbaruan
         $id = session()->get('glob_id');
         $uname = DB::table('user_reg')->where('id',$id)->select('uname','hak_akses')->first();
         $sav_date            =date("Y-m-d H:i:s");
@@ -77,7 +80,7 @@ class KelolaAkun_Controller extends Controller
             'pass' => $request->input('password')
         );
         $saved = DB::table('user_reg')->where('id',$id)->update($get_data);
-       
+    //    saat merubah username dan role pada akun diri yang dipakai saat ini, maka user perlu login
         if (!$saved) {
             App::abort(500, 'Error');
         } else {            
@@ -105,6 +108,7 @@ class KelolaAkun_Controller extends Controller
 
     public function update_uname_roles($uname,$new_uname,$roles)
     {
+        //table yang diubah saat update akun
         DB::table('tb_pesan_komentar')->where('username', $uname)->update(['username' => $new_uname]);
         DB::table('tb_pesan_kontak')->where('username', $uname)->update(['username' => $new_uname]);
         DB::table('tb_transaksi')->where('uname', $uname)->update(['uname' => $new_uname]);

@@ -18,7 +18,7 @@ class Registrasi_Controller extends Controller
     }
     public function login_process(Request $request)
     {
-        // Session::flush();
+        Session::flush();
         
         $uname = $request->input('username');
         $user = User_Reg::where('uname', $uname)->first();

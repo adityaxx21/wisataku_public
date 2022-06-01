@@ -9,13 +9,14 @@ class KelolaHalamanPengunjung_Controller extends Controller
 {
     public function index()
     {
-
+        //ditampilakn di halaman pengunjung
        $data['title'] =  "Halaman Pengunjung";
        $data['halaman'] = DB::table('tb_halaman_pengunjung')->first();
        return view('adminpage.halamanPengunjung',$data);
     }
     public function index_post(Request $request)
     {
+        // mengubah pada halaman pengunjung
         $get_data = [
             'judul' => $request->post('judul'),
             'deskripsi'  => $request->post('deskrisi')

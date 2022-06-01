@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Storage;
 
 class KelolaFasilitas_Controller extends Controller
 {
+    //menampilkan fasilitas
     var $location = 'Fasilitas';
-    var $glob_id = '';
     public function kelola_Fasilitas()
     {
         $data['title'] = "Kelola Fasilitas";
@@ -21,6 +21,7 @@ class KelolaFasilitas_Controller extends Controller
     }
     public function tambah_fasilitas()
     {
+        // masuk ke menu tambah fasilitas
         $data['title'] = "Form Tambah Fasilitas";
 
         return view("adminpage.kelolaFasilitas.tambahFasilitas", $data);
@@ -28,6 +29,7 @@ class KelolaFasilitas_Controller extends Controller
 
     public function create_fasilitas(Request $request)
     {
+        // masuk ke menu tambah fasilitas
         $max_num =  DB::table('tb_fasilitas_wisata')->max('id_fasilitas');
 
         $sav_date            =date("Y-m-d H:i:s");
@@ -59,12 +61,14 @@ class KelolaFasilitas_Controller extends Controller
 
     public function update($id)
     {
+        // menyimpan sesiion untuk edit fasilitas
         session(['glob_id' => $id]);
         return redirect('/editFasilitas');
     }
 
     public function keola()
     {
+        // menampilkan menu edit fasilitas
         $id = session()->get('glob_id');
         $data['title'] = "Edit Fasilitas";
         $data['fasilitas'] = DB::table('tb_fasilitas_wisata')->where('id',  $id)->first();

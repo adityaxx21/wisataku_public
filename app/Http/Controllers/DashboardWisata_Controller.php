@@ -9,30 +9,17 @@ class DashboardWisata_Controller extends Controller
 {
     public function index()
     {
+       //menampilkan data pada halaman webiste
        $data['title'] =  "Halaman Pengunjung";
        $data['slider'] = DB::table('tb_slider')->get();
        $data['wisata'] = DB::table('tb_tambah_wisata')->orderBy('rating','desc')->paginate(5);
        $data['halaman_pengunjung'] = DB::table('tb_halaman_pengunjung')->first();
-      //  foreach ($data['wisata'] as $key => $value) {
-      //   $jumlah[$key] = DB::table('tb_transaksi')->where([['id_wisata',$value->id],['id_status_pemb',0]])->count();
-      //  }
-      //  $data['jumlah'] = $jumlah;
-      //  $data['rating'] = $rating;
        $data['kategori'] = DB::table('tb_kategori_wisata')->get();
-    //    print_r($data['rating']);
        return view('pengunjung.website.berandawebsite',$data);
     }
-    public function wisata()
-    {
-
-       $data['title'] =  "Halaman Wisata";
-       
-       return view('pengunjung.website.berandawebsite',$data);
-    }
-
     public function map()
     {
-
+      //menampilkan halaman map dari menu atas
        $data['title'] =  "Halaman Maps";
        $data['wisata'] =  DB::table('tb_tambah_wisata')->get();
        return view('pengunjung.website.menumap',$data);
@@ -40,7 +27,7 @@ class DashboardWisata_Controller extends Controller
 
     public function search_me_post(Request $request)
     {
-
+      //fungsi post pada kolom pencarian
        $data['title'] =  "Hasil Pencarian";
        $find = $request->input('search-box');
  
@@ -49,6 +36,7 @@ class DashboardWisata_Controller extends Controller
     }
     public function search_me($name)
     {
+       //menampilkan hasil pencarian 
       $data['title'] =  "Hasil Pencarian";
       $data['name'] = $name;
       $data['wisata'] = DB::table('tb_tambah_wisata')->where('nama_wisata', 'LIKE', '%'.$name . '%')->get();
@@ -60,8 +48,6 @@ class DashboardWisata_Controller extends Controller
          $data['jumlah'] = $jumlah;
          $data['rating'] = $rating;
       } catch (\Throwable $th) {
-         // $data['jumlah'] = "";
-         // $data['rating'] = "";
       }
 
       $data['penginapan'] = DB::table('tb_penginapan')->where('nama_penginapan', 'LIKE','%'. $name . '%')->get();
