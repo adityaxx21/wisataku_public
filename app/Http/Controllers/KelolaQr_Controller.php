@@ -10,7 +10,6 @@ class KelolaQr_Controller extends Controller
 {
 
     var $location = 'KelolaQr';
-    var $glob_id;
     public function kelola_QR()
     {
         $data['title'] = "Kelola QR";
@@ -18,13 +17,15 @@ class KelolaQr_Controller extends Controller
     }
     public function detail_data($id)
     {
+        // proses pembacaan data dilakukan dengan mengkonvert qr code yang berisi id transaksi 
         $data['title'] = "Kelola QR";
         $data["data"] = DB::table('tb_transaksi')
         ->selectRaw('tb_transaksi.*,user_reg.Nama as nama_pemesan')
         ->leftJoin('user_reg', 'user_reg.uname', '=', 'tb_transaksi.uname')
         ->where('tb_transaksi.id', $id)
-        // ->groupBy('tb_tambah_wisata.id')
         ->first();
+
+        // pencrian tanggal dilakukan dengan compare 2 tanggal saat ini dan tanggal kedatangan
         $data['date'] = date("d-m-Y", strtotime($data["data"]->tanggal_kedatangan));
         $date = date("Y-m-d", strtotime( $data['date']));;
         $data['date_now'] = date('d-m-Y');
@@ -41,24 +42,20 @@ class KelolaQr_Controller extends Controller
             $data['status'] = '<br> <span class="bayar-gagal"><i class="fa fa-info-circle"></i>Tanggal sudah terlewat, konfirmasi tidak dapat dilakukan</span>';
             $data['hidden'] = true;
         }
-        // print_r($data['date']);
-        // print_r($data['data']);
-        // $data['hidden'] = 'visibility: hidden';
+        // output berupa detail data dlam bentuk json dan ditampilkan dalam  ajax
         return response()->json($data);
-        // return view("operatorpage.operator_page.homeOperator", $data);
+   
     }
 
 
     public function post_QR(Request $request)
     {
+        // proses input merubah apakah user sudah datang atau belum 1 berarti blum dan 0 sebaliknya
+        // proses ini mengubah 1 menjadi 0
        $input_id = $request->input('scanner');
        $is_attend = $request->input('status_pem');
        DB::table('tb_transaksi')->where('id', $input_id)->update(['is_attend'=>0]);
-    //    $get_data = DB::table('tb_transaksi')->where('id',$input_id)->first();
-    //    return redirect('/QrTransaksi',$data);
-        // echo json_encode(array('status'=>TRUE, 'data'=>$data));
-        // return redirect('/QrTransaksi')->with('alert-notif', 'Hak Akses atau Username Anda Telah Diubah, Anda Harus Login Terlebih Dahulu');
-        return $is_attend == 0 ? redirect(url('/QrTransaksi'))->with('alert-success', 'Selamat Transaksi Anda Terverifikasi') : redirect(url('/QrTransaksi'))->with('alert-failed', 'Anda Belum Melakukan Pembayaran, Mohon Lakukan Pembayaran Terlebih Dahulu');
+       return $is_attend == 0 ? redirect(url('/QrTransaksi'))->with('alert-success', 'Selamat Transaksi Anda Terverifikasi') : redirect(url('/QrTransaksi'))->with('alert-failed', 'Anda Belum Melakukan Pembayaran, Mohon Lakukan Pembayaran Terlebih Dahulu');
         // return view('/QrTransaksi',44);
     }
 

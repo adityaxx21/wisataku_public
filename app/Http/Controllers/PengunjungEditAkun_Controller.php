@@ -37,7 +37,9 @@ class PengunjungEditAkun_Controller extends Controller
         $passV = $request->post('confirmpass');
 
         // isi dengan nama folder tempat kemana file diupload
-        try {
+//dilakukan kondisi apakah gambar dinputkan atau belum jika sudah tidak akan dilakukan jika belum maka gambar dianggap kosong dan tidak dilakukan pemrosesan apapun
+//proses dilakukan dengan mengambil nama gambar dan disimpan dalam database sedangkan file disimpan pada folder storage      
+  try {
             $name_img =  $request->file('gambar')->getClientOriginalName();
         } catch (\Throwable $th) {
             $name_img = "";
@@ -78,6 +80,7 @@ class PengunjungEditAkun_Controller extends Controller
 
     public function update_uname($uname, $new_uname)
     {
+        // hal ini dilakukan agar tiap uname dalam beberapa table ikut terganti
         DB::table('tb_pesan_komentar')->where('username', $uname)->update(['username' => $new_uname]);
         DB::table('tb_pesan_kontak')->where('username', $uname)->update(['username' => $new_uname]);
         DB::table('tb_transaksi')->where('uname', $uname)->update(['uname' => $new_uname]);

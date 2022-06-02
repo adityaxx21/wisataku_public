@@ -9,7 +9,7 @@ class WisataHubungiKami_Controller extends Controller
 {
     public function hubungikami()
     {
-
+        // bagian ini dipakai untuk memulai pesan kontak pada admin
        $data['title'] =  "Halaman Hubungi Kami";
        $data['akun'] = DB::table('user_reg')->where('uname',session()->get('username'))->first();
        
@@ -17,6 +17,7 @@ class WisataHubungiKami_Controller extends Controller
     }
     public function hubungikami_post(Request $request)
     {
+        // proses post dari pesan kontak
         $id_pesan_kontak = DB::table('tb_pesan_kontak')->max('id_pesan_kontak');
         $sav_date            = date("Y-m-d H:i:s");
         $get_data = array(

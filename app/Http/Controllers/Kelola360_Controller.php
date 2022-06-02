@@ -43,7 +43,9 @@ class Kelola360_Controller extends Controller
             'created_at' => $sav_date,
         );
         // isi dengan nama folder tempat kemana file diupload
-        try {
+//dilakukan kondisi apakah gambar dinputkan atau belum jika sudah tidak akan dilakukan jika belum maka gambar dianggap kosong dan tidak dilakukan pemrosesan apapun
+//proses dilakukan dengan mengambil nama gambar dan disimpan dalam database sedangkan file disimpan pada folder storage      
+  try {
             $name_img =  $request->file('gambar')->getClientOriginalName();
         } catch (\Throwable $th) {
             $name_img = "";
@@ -94,7 +96,9 @@ class Kelola360_Controller extends Controller
             'updated_at' => $sav_date,
         );
         // isi dengan nama folder tempat kemana file diupload
-        try {
+//dilakukan kondisi apakah gambar dinputkan atau belum jika sudah tidak akan dilakukan jika belum maka gambar dianggap kosong dan tidak dilakukan pemrosesan apapun
+//proses dilakukan dengan mengambil nama gambar dan disimpan dalam database sedangkan file disimpan pada folder storage      
+  try {
             $name_img =  $request->file('gambar')->getClientOriginalName();
         } catch (\Throwable $th) {
             $name_img = "";

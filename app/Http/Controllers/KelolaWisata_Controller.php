@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 class KelolaWisata_Controller extends Controller
 {
     var $location = 'wisata';
-    var $glob_id;
+
     public function kelola_wisata()
     {
         $data['title'] = "Kelola Wisata";
@@ -22,20 +22,20 @@ class KelolaWisata_Controller extends Controller
             ->leftJoin('tb_kategori_wisata', 'tb_kategori_wisata.id_wisata', '=', 'tb_tambah_wisata.id_wisata')
             // ->groupBy('tb_tambah_wisata.id')
             ->get();
-        
+
 
 
         // print_r($data['data_wisata']);
         return view("adminpage.kelolaWisata.kelolaWisata", $data);
         // print_r($data['pilih_fasilitas']);
     }
-    public function update_fas(Request $request,$id)
+    public function update_fas(Request $request, $id)
     {
+        // berfungsi untuk menambahkan fasilitas dalam menu kelola wisata
         $fasilitas = $request->input('fasilitas');
-        
-        $sav_date    =date("Y-m-d H:i:s");
-        // $get_id_fasilitas = DB::table('tb_tambah_wisata')->where('id',session()->get('glob_id'))->value('id_fasilitas_tersedia');
-        DB::table('tb_setel_fasisilitas')->where('id_fasilitas_tersedia',$id)->delete();
+
+        $sav_date    = date("Y-m-d H:i:s");
+        DB::table('tb_setel_fasisilitas')->where('id_fasilitas_tersedia', $id)->delete();
 
         foreach ($fasilitas as $key => $value) {
             $get_data1 = array(
@@ -50,6 +50,7 @@ class KelolaWisata_Controller extends Controller
     }
     public function tambah_wisata()
     {
+        // fungsi untuk menambah wisata
         $data['title'] = "Form Tambah Wisata";
         $data['fasilitas'] = DB::table('tb_fasilitas_wisata')->get();
         $data['wisata'] = DB::table('tb_kategori_wisata')->get();
@@ -57,17 +58,19 @@ class KelolaWisata_Controller extends Controller
     }
     public function setup_fasilitas(Request $request)
     {
+        // fungsi untuk menambah fasilitas  pada button setup fasilitas
         $where = array('id' => $request->id);
-        $company  = DB::table('tb_setel_fasisilitas')->where('id_fasilitas_tersedia',$where)->value('id_fasilitas');
+        $company  = DB::table('tb_setel_fasisilitas')->where('id_fasilitas_tersedia', $where)->value('id_fasilitas');
 
         return Response()->json($company);
     }
 
     public function create_wisata(Request $request)
     {
+        // menambahkan wisata dengan post
 
         $nama_wisata = $request->post('namaWisata');
-        $sav_date            =date("Y-m-d H:i:s");
+        $sav_date            = date("Y-m-d H:i:s");
         $max_num =  DB::table('tb_tambah_wisata')->max('id_fasilitas_tersedia');
         $get_data = array(
             'id_wisata' => $request->post('kategoriWisata'),
@@ -86,7 +89,7 @@ class KelolaWisata_Controller extends Controller
             'id_fasilitas_tersedia' =>  $max_num + 1,
             'created_at' => $sav_date,
         );
-        
+        // mencari apakah setup fasilitas diisi atau tidak
         try {
             $fasilitas = $request->input('fasilitas');
             foreach ($fasilitas as $key => $value) {
@@ -95,7 +98,7 @@ class KelolaWisata_Controller extends Controller
                     'id_fasilitas' => $value,
                     'created_at' => $sav_date,
                 );
-                
+
                 DB::table('tb_setel_fasisilitas')->insert($get_data1);
                 $get_data1 = [];
             }
@@ -127,6 +130,7 @@ class KelolaWisata_Controller extends Controller
 
     public function update($id)
     {
+        // menyimpan id transaksi
         session(['glob_id' => $id]);
         // echo (session()->get('glob_id'));
         return redirect('/editWisata');
@@ -134,22 +138,24 @@ class KelolaWisata_Controller extends Controller
 
     public function keola()
     {
+        // menampulkan halaman edit wisata
         $id = session()->get('glob_id');
         $data['title'] = "Edit Wisata";
         $data['wisata'] = DB::table('tb_tambah_wisata')->where('id',  $id)->first();
         $data['fasilitas'] = DB::table('tb_fasilitas_wisata')->get();
         $data['kategori_wisata'] = DB::table('tb_kategori_wisata')->get();
-        $data['setel_fasilitas'] = DB::table('tb_setel_fasisilitas')->select('id_fasilitas')->where('id_fasilitas_tersedia',$data['wisata']->id_fasilitas_tersedia)->get();
+        $data['setel_fasilitas'] = DB::table('tb_setel_fasisilitas')->select('id_fasilitas')->where('id_fasilitas_tersedia', $data['wisata']->id_fasilitas_tersedia)->get();
         return view("adminpage.kelolaWisata.editWisata", $data);
     }
-  
+
 
     public function edit_wisata(Request $request)
     {
+        // bagian edit wisata untuk merubah tiap" inputnya
         $id = session()->get('glob_id');
         $nama_wisata = $request->post('namaWisata');
-        $sav_date    =date("Y-m-d H:i:s");
-        $get_id_fasilitas = DB::table('tb_tambah_wisata')->where('id',session()->get('glob_id'))->value('id_fasilitas_tersedia');
+        $sav_date    = date("Y-m-d H:i:s");
+        $get_id_fasilitas = DB::table('tb_tambah_wisata')->where('id', session()->get('glob_id'))->value('id_fasilitas_tersedia');
 
         // $get_num = DB::table('tb_tambah_wisata')->where('id',);
         $get_data = array(
@@ -170,7 +176,7 @@ class KelolaWisata_Controller extends Controller
             'updated_at' => $sav_date,
         );
         $fasilitas = $request->input('fasilitas');
-        DB::table('tb_setel_fasisilitas')->where('id_fasilitas_tersedia',$get_id_fasilitas)->delete();
+        DB::table('tb_setel_fasisilitas')->where('id_fasilitas_tersedia', $get_id_fasilitas)->delete();
 
         foreach ($fasilitas as $key => $value) {
             $get_data1 = array(
@@ -183,6 +189,8 @@ class KelolaWisata_Controller extends Controller
         }
 
         // isi dengan nama folder tempat kemana file diupload
+        //dilakukan kondisi apakah gambar dinputkan atau belum jika sudah tidak akan dilakukan jika belum maka gambar dianggap kosong dan tidak dilakukan pemrosesan apapun
+        //proses dilakukan dengan mengambil nama gambar dan disimpan dalam database sedangkan file disimpan pada folder storage      
         try {
             $name_img =  $request->file('gambar')->getClientOriginalName();
         } catch (\Throwable $th) {

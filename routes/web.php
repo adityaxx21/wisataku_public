@@ -182,11 +182,7 @@ Route::get('/', [DashboardWisata_Controller::class, 'index']);
 Route::get('/website', [DashboardWisata_Controller::class, 'website']);
 Route::post('/search', [DashboardWisata_Controller::class, 'search_me_post']);
 Route::get('/search/{name}', [DashboardWisata_Controller::class, 'search_me']);
-Route::get('/search', function () {
-    return view('pengunjung/website/search', [
-        "title" => "Halaman Pengunjung"
-    ]);
-});
+
 
 //Transaksi Wisata 
 Route::get('/wisata', [WisataTransaksi_Controller::class, 'wisata']);
@@ -211,30 +207,12 @@ Route::get('/detailpenginapan/{nama}', [WisataPenginapan_Controller::class, 'det
 //Kategori Wisata
 Route::get('/kategori/{nama}', [WisataKategori_Controller::class, 'kategori']);
 
-
+//Menu Maps
 Route::get('/map', [DashboardWisata_Controller::class, 'map']);
 
-
+//Hubungi kami
 Route::get('/hubungikami', [WisataHubungiKami_Controller::class, 'hubungikami']);
 Route::post('/hubungikami', [WisataHubungiKami_Controller::class, 'hubungikami_post']);
-
-// Route::get('/carirute', [DashboardWisata_Controller::class,'detail']);
-
-
-
-
-
-
-// Route::get('/invoice', function () {
-//     return view('pengunjung/website/invoice', [
-//         "title" => "Pesan Tiket",
-//     ]);
-
-//     // $pdf = Pdf::loadView('pengunjung/website/invoice')->setOptions(['defaultFont' => 'sans-serif']);
-//     // return $pdf->download('invoice.pdf');
-// });
-
-
 
 
 

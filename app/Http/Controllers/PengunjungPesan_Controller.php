@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 class PengunjungPesan_Controller extends Controller
 {
      // {{--Kontak--}}
+    //  menampilkan riwayat pesan
      public function riwayat_kontak()
      {
          $data['title'] = "Halaman Riwayat Kontak";
@@ -22,6 +23,7 @@ class PengunjungPesan_Controller extends Controller
      
     public function keola($id)
     {
+        // proses untuk balas komentar seperti fitur chat
         $data['title'] = "Balas Komentar";
 
         $data['header_pesan'] = DB::table('tb_pesan_kontak')->where('id_pesan_kontak',  $id)->first();
@@ -37,6 +39,7 @@ class PengunjungPesan_Controller extends Controller
 
     public function balasKontak_post(Request $request,$id)
     {
+        // balas pesan berdasarkan no_pesan, nilai 1 merupakan pesan pertama yang dikirim oleh user dan sisanya bergantian tergantung admin atau user
         // $max_num =  DB::table('tb_kategori_wisata')->max('id_wisata');
         $get_max = DB::table('tb_pesan_kontak')->where('id_pesan_kontak',  $id)->max('no_pesan');
         $get_data = DB::table('tb_pesan_kontak')->where('id_pesan_kontak',  $id)->first();

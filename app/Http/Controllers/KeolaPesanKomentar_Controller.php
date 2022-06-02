@@ -12,13 +12,13 @@ class KeolaPesanKomentar_Controller extends Controller
 {
 
     var $location = 'PesanKomentar';
-    var $glob_id;
+
     public function kelola_pesan_komentar(Request $request)
     {
-        // $get_hak = DB::table('user_reg')->where('uname',session()->get('username'))->value('hak_akses');
-        // echo ($get_hak);
+        // menampilkan pesan serta mealkukan filter bila diinputkan
         $data['date'] = $request->input('date');
         $data['search'] = $request->input('search');
+        // filter tanggal dan pencarian
         $date = $data['date'] !== "" ? ['tb_pesan_komentar.created_at', 'LIKE', $data['date'] . '%'] : "";
         $wisata = $data['search'] !== "" ? ['tb_tambah_wisata.nama_wisata', 'LIKE', '%' . $data['search'] . '%'] : "";
         $data['title'] = "Pesan Komentar";
@@ -27,21 +27,16 @@ class KeolaPesanKomentar_Controller extends Controller
             ->leftJoin('tb_tambah_wisata', 'tb_tambah_wisata.id', '=', 'tb_pesan_komentar.id_wisata')
             ->where([['no_pesan', '1'], $date, $wisata])
             ->get();
-        // $data['totalPengunjung'] = DB::table('tb_transaksi')->where('id_status_pemb', 0)->count();
-
-
 
         Session::put('pesanKomentar', $data);
-        // $data['pesan'] = DB::table('tb_pesan_komentar')->where()->get();
-        // print_r($data['data_wisata']);
         return view("adminpage.pesanKomentar.pesanKomentar", $data);
     }
 
 
     public function downloadKomentar()
     {
+        // proses download pdf berdasarkan yang ditampilkan dalam table
         $data = Session::get('pesanKomentar');
-
 
         // print_r($data['jenislaporan']);
         $view = view("adminpage.pesanKomentar.downloadKomentar", $data);
@@ -63,30 +58,28 @@ class KeolaPesanKomentar_Controller extends Controller
 
     public function update($id)
     {
+        // mengambil id komentar
         session(['glob_id' => $id]);
         return redirect('/balasKomentar');
     }
 
     public function keola()
     {
+        // menampilkan pesan serta menu untuk membalas komentar
         $id = session()->get('glob_id');
         $data['title'] = "Balas Komentar";
         $data['header_pesan'] = DB::table('tb_pesan_komentar')
             ->selectRaw('tb_pesan_komentar.*,tb_tambah_wisata.nama_wisata as wisata')
             ->leftJoin('tb_tambah_wisata', 'tb_tambah_wisata.id', '=', 'tb_pesan_komentar.id_wisata')
             ->first();
-
-        // $data['header_pesan'] = DB::table('tb_pesan_komentar')->where('id_pesan_komentar',  $id)->first();
-        // $data['wisata'] = DB::table('tb_tambah_wisata')->where('id_pesan_komentar',  $id)->first();
         $data['pesan'] = DB::table('tb_pesan_komentar')->where('id_pesan_komentar',  $id)->select('pesan', 'hak_akses', 'username', 'pesan_balas')->get();
-        // print_r( $data['penginapan']);
-        // print_r($data['pesan'] );
         return view("adminpage.pesanKomentar.balasKomentar", $data);
     }
 
 
     public function balas_komentar(Request $request)
     {
+        // melakukan update pada table untuk membalas komentar
         $id = session()->get('glob_id');
         // $max_num =  DB::table('tb_kategori_wisata')->max('id_wisata');
         $sav_date            = date("Y-m-d H:i:s");
@@ -100,6 +93,7 @@ class KeolaPesanKomentar_Controller extends Controller
 
     public function hapuskomentar(Request $request)
     {
+        // hapus komentar
         $sav_date            = date("Y-m-d H:i:s");
         $id_pesan = $request->input('id_pesan');
        $get_data = array(

@@ -18,7 +18,7 @@
                     </div>
                     <div class="card-body">
                         <h5 class="card-title"><a href="/detail/{{$item->id}}">{{$item->nama_wisata}}</a></h5>
-                        <span><i class="fa fa-star" style="color: orange;"></i> {{$rating[$key]}} |{{$jumlah[$key]}} Terjual</span>
+                        <span><i class="fa fa-star" style="color: orange;"></i> {{$item->rating}} |{{$item->terjual}} Terjual</span>
                         <p><i class="fa fa-map-marker"></i>Kediri</p>
                     </div>
                 </div>

@@ -19,16 +19,19 @@ class Registrasi_Controller extends Controller
     public function login_process(Request $request)
     {
         Session::flush();
-        
+        // proses login (untuk bagian ini user masih menggunakan model)
         $uname = $request->input('username');
         $user = User_Reg::where('uname', $uname)->first();
         if ($user) {
             $pass = $request->input('password');
             if ($user['pass'] == $pass) {
+                // jika uname dan pass sesuai maka akan disimpan beberapa variabel dalam session guna ditampilkan dalam beberapa halaman
                 session(['username' => $user['uname']]);
                 session(['name' => $user['Nama']]);
                 session(['gambar' => $user['gambar']]);
                 session(['hak_akses' => $user['hak_akses']]);
+                // hak akses akan menentukan redirect kemana halaman tersebut
+                // 0 admin 1 operator 2 user
                 if ($user['hak_akses'] == 0) {
                     return redirect('/DasboardAdmin');
                 } elseif ($user['hak_akses'] == 1) {
@@ -59,7 +62,7 @@ class Registrasi_Controller extends Controller
 
     public function create(Request $request)
     {
-
+        // buat akun hanya dilakukan untuk user sedangkan admin dan operator dilakukan di dasboard admin
         $sav_date            =date("Y-m-d H:i:s");
         $get_data = array(
             'Nama' => $request->input('Nama'),

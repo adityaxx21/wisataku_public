@@ -10,6 +10,7 @@ class PengunjungKomentar_Controller extends Controller
     // {{--Komentar--}}
     public function riwayat_komentar()
     {
+        // menampilkan komentar
         $data['title'] = "Halaman Riwayat Komentar";
         $data['pesan'] = DB::table('tb_pesan_komentar')
             ->selectRaw('tb_pesan_komentar.*,tb_tambah_wisata.nama_wisata as nama_wisata')
@@ -20,12 +21,11 @@ class PengunjungKomentar_Controller extends Controller
             ))
             ->get();
 
-        // $data['pesan'] = DB::table('tb_pesan_komentar')->where()->get();
-        // print_r($data['data_wisata']);
         return view('pengunjung.komentar.riwayatkomentar', $data);
     }
     public function hapus_pesan_komentar($id)
     {
+        // menghapus komentar
         $get_data = array(
             'pesan' => '',
             'rating' => ''

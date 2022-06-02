@@ -60,13 +60,14 @@ class KelolaKategori_Controller extends Controller
 
     public function update($id)
     {
-        // 
+        // menyimpan session
         session(['glob_id' => $id]);
         return redirect('/editKategori');
     }
 
     public function keola()
     {
+        //menampilkan  edit kategori
         $id = session()->get('glob_id');
         $data['title'] = "Edit Kategori";
         $data['kategori'] = DB::table('tb_kategori_wisata')->where('id',  $id)->first();
@@ -77,6 +78,7 @@ class KelolaKategori_Controller extends Controller
 
     public function edit_kategori(Request $request)
     {
+        //update kategori
         $id = session()->get('glob_id');
         // $max_num =  DB::table('tb_kategori_wisata')->max('id_wisata');
 
@@ -87,7 +89,9 @@ class KelolaKategori_Controller extends Controller
         );
         // isi dengan nama folder tempat kemana file diupload
        
-        try {
+//dilakukan kondisi apakah gambar dinputkan atau belum jika sudah tidak akan dilakukan jika belum maka gambar dianggap kosong dan tidak dilakukan pemrosesan apapun
+//proses dilakukan dengan mengambil nama gambar dan disimpan dalam database sedangkan file disimpan pada folder storage      
+  try {
             $name_img =  $request->file('gambar')->getClientOriginalName();
         } catch (\Throwable $th) {
             $name_img = "";

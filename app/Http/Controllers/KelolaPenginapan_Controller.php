@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\DB;
 
 class KelolaPenginapan_Controller extends Controller
 {
-
+    // 
     var $location = 'Penginapan';
-    var $glob_id;
+
     public function kelola_penginapan()
     {
         $data['title'] = "Kelola Penginapan";
@@ -29,9 +29,9 @@ class KelolaPenginapan_Controller extends Controller
 
     public function create_penginapan(Request $request)
     {
-
+         
         $sav_date            =date("Y-m-d H:i:s");
-
+        // parameter input dari halaman 
         $get_data = array(
             'nama_penginapan' =>  $request->post('namaPenginapan'),
             'deskripsi' => $request->post('deskrisi'),
@@ -53,7 +53,7 @@ class KelolaPenginapan_Controller extends Controller
         if (!empty($name_img)) {
             $get_data = array_merge($get_data, array('gambar' =>  $img_loc . $name_img));
         }
-
+        //menambahkan data dengan input get_data
         DB::table('tb_penginapan')->insert($get_data);
 
         return redirect('/kelolaPenginapan');
@@ -61,25 +61,28 @@ class KelolaPenginapan_Controller extends Controller
 
     public function update($id)
     {
+        //menyimpan session
         session(['glob_id' => $id]);
         return redirect('/editPenginapan');
     }
 
     public function keola()
     {
+        // mengambil session id
         $id = session()->get('glob_id');
         $data['title'] = "Edit Penginapan";
         $data['penginapan'] = DB::table('tb_penginapan')->where('id',  $id)->first();
-        // print_r( $data['penginapan']);
+        // menampilkan untuk fungsi update data
         return view("adminpage.kelolaPenginapan.editPenginapan", $data);
     }
 
 
     public function edit_penginapan(Request $request)
     {
+        // fungsi post dengan input id yang didapat dari session
         $id = session()->get('glob_id');
         $sav_date            =date("Y-m-d H:i:s");
-
+        
         $get_data = array(
             'nama_penginapan' =>  $request->post('namaPenginapan'),
             'deskripsi' => $request->post('deskrisi'),
@@ -92,7 +95,9 @@ class KelolaPenginapan_Controller extends Controller
             'updated_at' => $sav_date,
         );
         // isi dengan nama folder tempat kemana file diupload
-        try {
+//dilakukan kondisi apakah gambar dinputkan atau belum jika sudah tidak akan dilakukan jika belum maka gambar dianggap kosong dan tidak dilakukan pemrosesan apapun
+//proses dilakukan dengan mengambil nama gambar dan disimpan dalam database sedangkan file disimpan pada folder storage      
+  try {
             $name_img =  $request->file('gambar')->getClientOriginalName();
         } catch (\Throwable $th) {
             $name_img = "";
@@ -108,7 +113,7 @@ class KelolaPenginapan_Controller extends Controller
 
 
         $saved =  DB::table('tb_penginapan')->where('id', $id)->update($get_data);
-
+        //setelah data disimpan akan dibuat kondisi apakah penyimpanan berhasil atau tiadak
         if ($saved) {
             $request->session()->forget('glob_id');
             echo ('Success');

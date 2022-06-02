@@ -12,7 +12,7 @@ class WisataTransaksi_Controller extends Controller
 {
     public function detail($id)
     {
-
+        // menampilkan detail wisata dengan relasi beberapa table untuk menampilkan menunya
         $data["title"] =  "Halaman Wisata";
         $data['wisata'] = DB::table('tb_tambah_wisata')->where('id', $id)->first();
         $data['fasilitas'] = DB::table('tb_fasilitas_wisata')->get();
@@ -28,6 +28,7 @@ class WisataTransaksi_Controller extends Controller
 
     public function wisata(Request $request)
     {
+        // proses filter pada menu wisata
         $data['title'] = 'Halaman Wisata';
         $data['kategori'] = DB::table('tb_kategori_wisata')->get();
         $data['range'] = DB::table('tb_range_harga')->get();
@@ -35,6 +36,8 @@ class WisataTransaksi_Controller extends Controller
         $data['range_harga'] = $request->get('kategoriHarga');
         $data['nama_wisata'] = $request->get('search');
 
+        // input : range harga dari database
+        // output : pencarian data berdasarkan harga
         $fil_wisata = array();
         if ($data['id_wis'] != "") {
             $fil_wisata[] = ['id_wisata', $data['id_wis']];
@@ -49,6 +52,7 @@ class WisataTransaksi_Controller extends Controller
                 }
             }
         }
+        // pencarian berdasarkan nama wisata
         if ($data['nama_wisata'] != "") {
             $fil_wisata[] = ['nama_wisata', 'LIKE', '%' . $data['nama_wisata'] . '%'];
         }
@@ -63,6 +67,7 @@ class WisataTransaksi_Controller extends Controller
 
     public function carirute($id)
     {
+        // menu untuk mencari rute dari saat ini
         $data['title'] = 'Halaman Wisata';
         $data['wisata'] = DB::table('tb_tambah_wisata')->where('id', $id)->first();
 
@@ -71,6 +76,7 @@ class WisataTransaksi_Controller extends Controller
 
     public function pesantiket($id)
     {
+        // proses pesan tiket
         if (session()->get('username') == "") {
             return redirect('/login')->with('alert-notif', 'Anda Harus Login Terlebih Dahulu');
         }
@@ -81,6 +87,7 @@ class WisataTransaksi_Controller extends Controller
 
     public function pesantiket_post(Request $request, $id)
     {
+        // input data pada tabel pesan tiket berdasarkan username dari session serta data" yang diinputkan di kolom
 
         $data['wisata'] = DB::table('tb_tambah_wisata')->where('id', $id)->first();
         $get_email = DB::table('user_reg')->where('uname', session()->get('username'))->value('Email');
@@ -102,7 +109,7 @@ class WisataTransaksi_Controller extends Controller
             'catatan' => $request->input('catatan'),
             'created_at' => $sav_date,
         );
-        // print_r($get_data);
+        // kondisi jika ada wisata yang gratis seluruhnya (parkir dan tiket masuk) makan akan dianggap sudah membayar dan langsung print tiket
         if ($gross_amount == 0) {
             $get_data = array_merge($get_data, array('id_status_pemb' =>  0));
         }
@@ -122,6 +129,7 @@ class WisataTransaksi_Controller extends Controller
 
     public function detailpesanan($id)
     {
+        // proses ini adalah pembayaran dengan midtrans
         $data['title'] = "Pesan Tiket";
         $data['transaksi'] = DB::table('tb_transaksi')
             ->selectRaw('tb_transaksi.*,tb_status_transaksi.*,user_reg.Alamat as alamat,user_reg.Telepon as telepon,tb_status_transaksi.deskripsi as deskripsi_status,tb_tambah_wisata.*')
@@ -131,8 +139,7 @@ class WisataTransaksi_Controller extends Controller
             ->where('tb_transaksi.id', $id)
             ->first();
         $data['no_invoice'] = $id;
-        // $hargaTiket =  ($data['transaksi']->tiketDewasa*$data['transaksi']->jumlah_tiket_dewasa)+($data['transaksi']->tiketAnak*$data['transaksi']->jumlah_tiket_anak);
-        // $hargaKendaraan =  ($data['transaksi']->parkirmotor*$data['transaksi']->jumlah_motor)+($data['transaksi']->parkirmobil*$data['transaksi']->jumlah_mobil)+($data['transaksi']->parkirumum*$data['transaksi']->jumlah_kendaraan_umum);
+        //proses dibawah dipakai untuk membuat json dalam mitrands demi mendapatkan detail - detail dari biaya dan nama barang transaksinya
         $aray = array();
         if ($data['transaksi']->jumlah_tiket_dewasa != 0) {
             $aray[] = [
@@ -175,6 +182,14 @@ class WisataTransaksi_Controller extends Controller
                 'name' => 'Jumlah Tiket Anak'
             ];
         }
+        //untuk penjelasan ini bisa dibaca di website resmi karena dibawah ini juga sudah ada keteranganya
+        // Set your Merchant Server Key
+        //serverkey sandbox = 'SB-Mid-server-HHVxnaKotmFizvbMyeHMi5hA'
+        //clientkey sandbox = 'SB-Mid-client-p3ZANgkDvn4BQswk'
+        //js sandbox = https://app.sandbox.midtrans.com/snap/snap.jss
+        //serverkey production = 'Mid-client-uyb5rEus3lvtOYH-'
+        //clientkey production = 'Mid-server-PdcfAopvqbjNANEmps76DNUj'
+        //js production = https://app.midtrans.com/snap/snap.js
 
         // Set your Merchant Server Key
         \Midtrans\Config::$serverKey = 'SB-Mid-server-HHVxnaKotmFizvbMyeHMi5hA';
@@ -198,18 +213,9 @@ class WisataTransaksi_Controller extends Controller
 
             ),
         );
-
-
-        // $data['transaksi'] = DB::table('tb_transaksi')->where('order_id',$id)->first();
-        // print_r( $params);
+        // jika sudah membayar maka akan redirect ke halaman detail tiket
         if ($data['transaksi']->id_status_pemb == 0) {
             DB::table('tb_tambah_wisata')->whereId(DB::table('tb_transaksi')->where('id', $id)->value('id_wisata'))->increment('terjual');
-
-        // DB::table('tb_transaksi')
-        //         ->where('id', $id)
-        //         ->update([
-        //             'terjual' => DB::raw('terjual + 1'),
-        //         ]);
             return view('pengunjung.website.detailtiket', $data);
         } else {
             $data['snapToken'] = \Midtrans\Snap::getSnapToken($params);
@@ -219,6 +225,8 @@ class WisataTransaksi_Controller extends Controller
 
     public function detailpesanan_post(Request $request, $id)
     {
+        // menentukan apakah user sudah membayar melalui midtrans atau tidak
+        //  parameter input berupa json dari halaman pembayaran untuk mengirimkan status pembayaran
         if (session()->get('username') == "") {
             return redirect('/login')->with('alert-notif', 'Anda Harus Login Terlebih Dahulu');
         }
@@ -252,6 +260,7 @@ class WisataTransaksi_Controller extends Controller
 
     public function detailtiket($id)
     {
+        // menampilkan tiket berdasarkan id transaksi
         $data['title'] = "Pesan Tiket";
         $data['transaksi'] = DB::table('tb_transaksi')->where('id', $id)->first();
         // $data['wisata'] = DB::table('tb_tambah_wisata')->where('id', $data['transaksi']->id_wisata)->first();
@@ -262,6 +271,7 @@ class WisataTransaksi_Controller extends Controller
 
     public function invoice($id)
     {
+        // menu untuk print invoice
         $data['user'] = DB::table('user_reg')->where('uname', session()->get('username'))->first();
         $data['transaksi'] =  DB::table('tb_transaksi')->where('id', $id)->first();
         $data['wisata'] = DB::table('tb_tambah_wisata')->where('id', $data['transaksi']->id_wisata)->first();
@@ -269,25 +279,4 @@ class WisataTransaksi_Controller extends Controller
         return view('pengunjung.website.invoice', $data);
     }
 
-    // public function search_me(Request $request)
-    // {
-    //     $data['title'] = "Pencarian";
-    //     $data['kategori'] = DB::table('tb_kategori_wisata')->get();
-    //     if ($request->get('city')) {
-    //         $city = $request->get('city');
-    //         $stores->whereHas(
-    //             'city',
-    //             function ($query) use ($city) {
-    //                 $query->where('name', 'LIKE', "%{$city}%");
-    //             }
-    //         );
-    //     } else {
-    //     }
-
-    //     // if ($request->get('keyword')) {
-    //     //     $stores->search($request->keyword);
-    //     // }
-
-    //     return view('pengunjung.website.kategorinavbar',$data);
-    // }
 }

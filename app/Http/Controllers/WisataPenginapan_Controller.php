@@ -9,13 +9,14 @@ class WisataPenginapan_Controller extends Controller
 {
     public function penginapan()
     {
-
+    //menampilkan halaman penginapan 
         $data['title'] =  "Halaman Penginapan";
         $data['penginapan'] = DB::table('tb_penginapan')->get();
         return view('pengunjung.website.penginapan', $data);
     }
     public function penginapan_post(Request $request)
     {
+        // melakukan pencarian penginapan
         $data['title'] =  "Halaman Penginapan";
         $data['penginapan'] = DB::table('tb_penginapan')->where('nama_penginapan', 'LIKE','%'. $request->input('search') . '%')->get();
         if ($request->input('search') == "") {
@@ -28,7 +29,7 @@ class WisataPenginapan_Controller extends Controller
 
     public function detail_penginapan($nama)
     {
-
+        // menampilkan detail hasil pencarian penginapan
         $data['title'] =  "Halaman Penginapan";
         $data['penginapan'] = DB::table('tb_penginapan')->where('nama_penginapan', $nama)->first();
         //    $data['test']

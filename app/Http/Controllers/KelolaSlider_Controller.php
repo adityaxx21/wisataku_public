@@ -26,13 +26,16 @@ class KelolaSlider_Controller extends Controller
 
     public function create_slider(Request $request)
     {
-        $sav_date            =date("Y-m-d H:i:s");
+        // menambah data pada menu slidet
+        $sav_date            = date("Y-m-d H:i:s");
 
         $get_data = array(
             'created_at' => $sav_date,
         );
         // isi dengan nama folder tempat kemana file diupload
 
+        //dilakukan kondisi apakah gambar dinputkan atau belum jika sudah tidak akan dilakukan jika belum maka gambar dianggap kosong dan tidak dilakukan pemrosesan apapun
+        //proses dilakukan dengan mengambil nama gambar dan disimpan dalam database sedangkan file disimpan pada folder storage      
         try {
             $name_img =  $request->file('gambar')->getClientOriginalName();
         } catch (\Throwable $th) {
@@ -54,9 +57,6 @@ class KelolaSlider_Controller extends Controller
     public function delete($id)
     {
         DB::table('tb_slider')->where('id', $id)->delete();
-        // $id_fasilitas = DB::table('tb_slider')->where('id', $id)->value('id_fasilitas');
-        // DB::table('tb_setel_fasisilitas')->where('id_fasilitas', $id_fasilitas)->delete();
-        //    echo($id);
         return redirect('/kelolaSlider');
     }
 }

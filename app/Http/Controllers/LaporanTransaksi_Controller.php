@@ -16,9 +16,11 @@ class LaporanTransaksi_Controller extends Controller
 
     public function laporan_transaksi(Request $request)
     {
+        // menampilkan isi dari laporan transaksi 
         $data['title'] = "Laporan Transaksi";
         $data['date'] = $request->input('date');
         $data['search'] = $request->input('search');
+        // pencarian data jika diinputkan
         $date = $data['date'] !== "" ? ['tanggal_kedatangan', 'LIKE', $data['date'] . '%'] : "";
         $wisata = $data['search'] !== "" ? ['nama_wisata', 'LIKE', '%' . $data['search'] . '%'] : "";
 
@@ -31,21 +33,24 @@ class LaporanTransaksi_Controller extends Controller
             ->groupByRaw('tb_transaksi.id')
             ->get();
         $data['day'] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', "Fri", 'Sat'];
-
+        // menentukan jenis laporan jika tidak diubah default bulanan
         $data['jenisLaporan'] = $request->input('jenisLaporan') !== null ? $request->input('jenisLaporan') : 'Bulanan';
-
+        
+        //akan melakukan filter bulanan sesuai data yang ada di database yang mana nama" bulan terdapat di script.js bagian laporan transaksi
         if ($data['jenisLaporan'] == 'Bulanan') {
             $data['total_transaksi'] = array_fill(0, 12, 0);
             foreach ($data['transaksi'] as $key => $value) {
                 $date =  ltrim(date('m', strtotime($value->tanggal_kedatangan)), '0');
                 $data['total_transaksi'][(int)$date] +=  1;
             }
+        //akan melakukan filter mingguan sesuai data yang ada di database 
         } elseif ($data['jenisLaporan'] == 'Mingguan') {
             $data['total_transaksi'] = array_fill(0, 7, 0);
             foreach ($data['transaksi'] as $key => $value) {
                 $date =  date('D', strtotime($value->tanggal_kedatangan));
                 $data['total_transaksi'][array_search($date, $data['day'], true)] +=  1;
             }
+        //akan melakukan filter tahubab sesuai data yang ada di database 
         } elseif ($data['jenisLaporan'] == 'Tahunan') {
             $num = -1;
             $date1 = 0;
@@ -65,25 +70,18 @@ class LaporanTransaksi_Controller extends Controller
                 }
             }
         }
-
-        // print_r($data['jenisLaporan']);
-        // $this->dataDownload = "22";
-        // $this->x = '12';
-        // session()->get('laporan', $data['transaksi']);
+        // data disimpan dalam session untuk dilakukan print
         Session::put('datalaporan', $data['transaksi']);
         Session::put('jenislaporan', $data['jenisLaporan']);
         Session::put('gambar', $request->input('cavas_here'));
 
-        // print_r($data['total_transaksi']);
-
-        // print_r($data['year']);
-        // print_r($data['transaksi']);
         return view("adminpage.laporanTransaksi.laporanTransaksi", $data);
     }
 
 
     public function downloadLaporan(Request $request)
     {
+        // mengambil data dari session untuk diprint dalam bentuk dokumen
         $data['transaksi'] = Session::get('datalaporan');
         $data['jenislaporan'] = Session::get('jenislaporan');
         $data['gambar'] = Session::get('gambar');
