@@ -149,6 +149,7 @@ Route::post('/balasPesan', [KelolaPesanKontak_Controller::class, 'balas_kontak']
 //Laporan Transaksi
 
 Route::get('/laporanTransaksi', [LaporanTransaksi_Controller::class, 'laporan_transaksi']);
+Route::get('/laporanTransaksi/cari_data', [LaporanTransaksi_Controller::class, 'cari_data']);
 Route::get('/downloadLaporan', [LaporanTransaksi_Controller::class, 'downloadLaporan']);
 
 

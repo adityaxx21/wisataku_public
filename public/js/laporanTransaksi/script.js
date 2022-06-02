@@ -7,7 +7,7 @@ $(document).ready(function () {
 
 function passVar(params) {
     function done() {
-        console.log("haha");
+        // alert(url);
         var url = myLine.toBase64Image('image/png');
         $('#cavas_here').val(url);
 
@@ -37,10 +37,44 @@ function passVar(params) {
     };
     
 
-
-    var myLine = new Chart(document.getElementById("myChart"), config);
     
+    var myLine = new Chart(document.getElementById("myChart"), config);
+    // config.update();
 }
+
+// function update_chart(params) {
+//     function done() {
+//         // alert(url);
+//         var url = myLine.toBase64Image('image/png');
+//         $('#cavas_here').val(url);
+//     }
+    
+//     var config = {
+//         type: "bar",
+//         data: data(params),
+//         options: {
+//             plugins: {
+//                 legend: {
+//                     display: false,
+//                 },
+//             },
+//             scales: {
+//                 y: {
+//                     beginAtZero: true,
+//                     title: {
+//                         display: true,
+//                         text: "Banyak Order",
+//                     },
+//                 },
+//             },
+//             animation: {
+//                 onComplete: done
+//             },
+//         },
+//     };
+    
+//     myLine.update();
+// }
 
 if (a == "Bulanan") {
     var labels = [

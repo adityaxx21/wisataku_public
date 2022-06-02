@@ -73,18 +73,21 @@ class LaporanTransaksi_Controller extends Controller
         // data disimpan dalam session untuk dilakukan print
         Session::put('datalaporan', $data['transaksi']);
         Session::put('jenislaporan', $data['jenisLaporan']);
-        Session::put('gambar', $request->input('cavas_here'));
+        Session::put('canvas', $request->input('cavas_here'));
 
         return view("adminpage.laporanTransaksi.laporanTransaksi", $data);
     }
 
+    
+
 
     public function downloadLaporan(Request $request)
     {
+        // $this->laporan_transaksi($request);
         // mengambil data dari session untuk diprint dalam bentuk dokumen
         $data['transaksi'] = Session::get('datalaporan');
         $data['jenislaporan'] = Session::get('jenislaporan');
-        $data['gambar'] = Session::get('gambar');
+        $data['gambar'] = $request->input('cavas_here');
         $data['jumlah_pengunjung'] = 0;
         foreach ($data['transaksi'] as $value) {
             $data['jumlah_pengunjung'] += $value->jumlah_tiket_dewasa + $value->jumlah_tiket_anak;
@@ -106,5 +109,6 @@ class LaporanTransaksi_Controller extends Controller
         // Output the generated PDF to Browser
         $dompdf->stream("Laporan Transaksi");
         return view("adminpage.laporanTransaksi.downloadLaporan", $data);
+        // return redirect('/');
     }
 }
