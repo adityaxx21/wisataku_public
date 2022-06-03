@@ -20,9 +20,11 @@ class LaporanTransaksi_Controller extends Controller
         // menampilkan isi dari laporan transaksi 
         $data['title'] = "Laporan Transaksi";
         $data['date'] = $request->input('date');
+        $data['date_end'] = $request->input('date_end');
         $data['search'] = $request->input('search');
         // pencarian data jika diinputkan
-        $date = $data['date'] !== "" ? ['tanggal_kedatangan', 'LIKE', $data['date'] . '%'] : "";
+        $date = $data['date'] !== "" ? ['tb_transaksi.created_at', 'LIKE', $data['date'] . '%'] : "";
+        $date_end = $data['date_end'] !== "" ?  [$data['date'],$data['date_end']] : "";
         $wisata = $data['search'] !== "" ? ['nama_wisata', 'LIKE', '%' . $data['search'] . '%'] : "";
         $data['jenisLaporan'] = $request->input('jenisLaporan') !== null ? $request->input('jenisLaporan') : 'Bulanan';
         $last_week = date('Y-m-d', strtotime(date('Y-m-d'). ' - 7 days')); 
@@ -52,7 +54,8 @@ class LaporanTransaksi_Controller extends Controller
             ->leftJoin('user_reg', 'user_reg.uname', '=', 'tb_transaksi.uname')
             ->leftJoin('tb_tambah_wisata', 'tb_tambah_wisata.id', '=', 'tb_transaksi.id_wisata')
             ->orderBy('tb_transaksi.created_at', 'ASC')
-            ->where([$date, $wisata,['id_status_pemb',0]])
+            ->where([$wisata,['id_status_pemb',0]])
+            ->whereBetween('tb_transaksi.created_at',$date_end)
             ->groupByRaw('tb_transaksi.id')
             ->get();
         }

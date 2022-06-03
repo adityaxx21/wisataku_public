@@ -17,7 +17,10 @@
                                         value="{{ isset($search) ? $search : '' }}"></label>
                                 <input id="date-picker" class="date-picker form-control laporanTransaksi"
                                     placeholder="dd-mm-yyyy" type="date" required="required" onfocus="this.type='date'"
-                                    onclick="this.type='date'" name="date"  value="{{ $date }}">
+                                    onclick="this.type='date'" name="date" value="{{ $date }}">
+                                <input id="date-picker" class="date-picker form-control laporanTransaksi"
+                                    placeholder="dd-mm-yyyy" type="date" required="required" onfocus="this.type='date'"
+                                    onclick="this.type='date'" name="date_end" value="{{ $date_end }}">
 
                                 <script type="text/javascript">
                                     // alert($('#date').val());
@@ -60,11 +63,12 @@
                                     // }
                                 </script>
 
-                                <a href="javascript:void(0)" onclick="$('#download_it').submit();"><i class="fa fa-download download"></i></a>
-                                <a href="javascript:void(0)" onclick="$('#submit_it').submit();"><i class="fa fa-search download"></i></a>
+                                <a href="javascript:void(0)" onclick="$('#download_it').submit();"><i
+                                        class="fa fa-download download"></i></a>
+                                <a href="javascript:void(0)" onclick="$('#submit_it').submit();"><i
+                                        class="fa fa-search download"></i></a>
                                 <a href="/laporanTransaksi"><i class="fa fa-refresh download"></i></a>
                                 <select id="jenisLaporan" name="jenisLaporan" class="form-control jenisLaporan" required="">
-
                                     <option value="Mingguan" {{ $jenisLaporan == 'Mingguan' ? 'selected' : null }}>
                                         Mingguan
                                     </option>
@@ -72,10 +76,8 @@
                                     </option>
                                     <option value="Tahunan" {{ $jenisLaporan == 'Tahunan' ? 'selected' : null }}>Tahunan
                                     </option>
-
-                                </select>                            
+                                </select>
                                 <canvas id="myChart" class="myChart"></canvas>
-
                         </div>
                         </form>
                         <form action="/downloadLaporan" method="get" id="download_it">
@@ -91,8 +93,6 @@
                                     <th>Jumlah Pengunjung</th>
                                     <th>Tanggal Transaksi</th>
                                     <th>Nama Pembeli</th>
-
-
                                 </tr>
                             </thead>
 
