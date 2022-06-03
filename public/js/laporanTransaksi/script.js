@@ -8,9 +8,8 @@ $(document).ready(function () {
 function passVar(params) {
     function done() {
         // alert(url);
-        var url = myLine.toBase64Image('image/png');
-        $('#cavas_here').val(url);
-
+        var url = myLine.toBase64Image("image/png");
+        $("#cavas_here").val(url);
     }
     var config = {
         type: "bar",
@@ -31,13 +30,11 @@ function passVar(params) {
                 },
             },
             animation: {
-                onComplete: done
+                onComplete: done,
             },
         },
     };
-    
 
-    
     var myLine = new Chart(document.getElementById("myChart"), config);
     // config.update();
 }
@@ -48,7 +45,7 @@ function passVar(params) {
 //         var url = myLine.toBase64Image('image/png');
 //         $('#cavas_here').val(url);
 //     }
-    
+
 //     var config = {
 //         type: "bar",
 //         data: data(params),
@@ -72,12 +69,13 @@ function passVar(params) {
 //             },
 //         },
 //     };
-    
+
 //     myLine.update();
 // }
 
 if (a == "Bulanan") {
     var labels = [
+        "December",
         "January",
         "February",
         "March",
@@ -89,7 +87,6 @@ if (a == "Bulanan") {
         "September",
         "October",
         "November",
-        "December",
     ];
     var background = [
         "rgba(255, 99, 132, 0.2)",
@@ -122,13 +119,13 @@ if (a == "Bulanan") {
     ];
 } else if (a == "Mingguan") {
     var labels = [
+        "Sunday",
         "Monday",
         "Tuesday",
         "Wednesday",
         "Thursday",
         "Friday",
         "Saturday",
-        "Sunday",
     ];
 
     var background = [
@@ -185,4 +182,3 @@ function data(params) {
     };
     return data;
 }
-

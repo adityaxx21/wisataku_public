@@ -78,7 +78,7 @@ class LaporanTransaksi_Controller extends Controller
         return view("adminpage.laporanTransaksi.laporanTransaksi", $data);
     }
 
-    
+
 
 
     public function downloadLaporan(Request $request)

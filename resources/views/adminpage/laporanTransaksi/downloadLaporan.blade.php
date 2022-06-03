@@ -18,7 +18,7 @@
 
         <div class="mt-5 text-left mb-2" style="font-size: 12px">
             <strong>Total tiket terjual = {{ $transaksi->count() }}</strong><br>
-            <strong>Total pengujung = {{$jumlah_pengunjung}}</strong>
+            <strong>Total pengujung = {{ $jumlah_pengunjung }}</strong>
         </div>
         <table class="table table-bordered mt-2" style="font-size: 12px">
             <thead class="text-center">
@@ -45,9 +45,10 @@
 
             </tbody>
         </table>
-        <strong>Diagram Laporan Transaksi</strong>
-        <img type="hidden"  id="cavas_here" name="cavas_here" src="{{$gambar}}" width="960px">
-        
+        <br>
+        <strong>Diagram Laporan Transaksi</strong><br>
+        <img type="hidden" id="cavas_here" name="cavas_here" src="{{ $gambar }}" width="960px">
+
 
     </div>
     {{-- <strong style="text-align: left !important;margin-top:20px">Total tiket terjual = {{ $transaksi->count() }}
