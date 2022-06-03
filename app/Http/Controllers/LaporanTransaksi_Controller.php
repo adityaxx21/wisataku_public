@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -23,18 +24,43 @@ class LaporanTransaksi_Controller extends Controller
         // pencarian data jika diinputkan
         $date = $data['date'] !== "" ? ['tanggal_kedatangan', 'LIKE', $data['date'] . '%'] : "";
         $wisata = $data['search'] !== "" ? ['nama_wisata', 'LIKE', '%' . $data['search'] . '%'] : "";
-
-        $data['transaksi'] = DB::table('tb_transaksi')
+        $data['jenisLaporan'] = $request->input('jenisLaporan') !== null ? $request->input('jenisLaporan') : 'Bulanan';
+        $last_week = date('Y-m-d', strtotime(date('Y-m-d'). ' - 7 days')); 
+        if ($data['jenisLaporan'] == 'Bulanan' && $data['date'] == null) {
+            $data['transaksi'] = DB::table('tb_transaksi')
             ->selectRaw('tb_transaksi.*,user_reg.*,tb_tambah_wisata.*')
             ->leftJoin('user_reg', 'user_reg.uname', '=', 'tb_transaksi.uname')
             ->leftJoin('tb_tambah_wisata', 'tb_tambah_wisata.id', '=', 'tb_transaksi.id_wisata')
             ->orderBy('tb_transaksi.tanggal_kedatangan', 'ASC')
-            ->where([$date, $wisata])
+            ->where([$date, $wisata,['id_status_pemb',0]])
+            ->whereYear('tb_transaksi.tanggal_kedatangan','=',2022)
             ->groupByRaw('tb_transaksi.id')
             ->get();
+        } else if ($data['jenisLaporan'] == 'Mingguan' && $data['date'] == null) {
+            $data['transaksi'] = DB::table('tb_transaksi')
+            ->selectRaw('tb_transaksi.*,user_reg.*,tb_tambah_wisata.*')
+            ->leftJoin('user_reg', 'user_reg.uname', '=', 'tb_transaksi.uname')
+            ->leftJoin('tb_tambah_wisata', 'tb_tambah_wisata.id', '=', 'tb_transaksi.id_wisata')
+            ->orderBy('tb_transaksi.tanggal_kedatangan', 'ASC')
+            ->where([$date, $wisata,['id_status_pemb',0]])
+            ->whereDate('tb_transaksi.created_at','>=' , $last_week)
+            ->groupByRaw('tb_transaksi.id')
+            ->get();
+        } else {
+            $data['transaksi'] = DB::table('tb_transaksi')
+            ->selectRaw('tb_transaksi.*,user_reg.*,tb_tambah_wisata.*')
+            ->leftJoin('user_reg', 'user_reg.uname', '=', 'tb_transaksi.uname')
+            ->leftJoin('tb_tambah_wisata', 'tb_tambah_wisata.id', '=', 'tb_transaksi.id_wisata')
+            ->orderBy('tb_transaksi.tanggal_kedatangan', 'ASC')
+            ->where([$date, $wisata,['id_status_pemb',0]])
+            ->groupByRaw('tb_transaksi.id')
+            ->get();
+        }
+        
+
+
         $data['day'] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', "Fri", 'Sat'];
         // menentukan jenis laporan jika tidak diubah default bulanan
-        $data['jenisLaporan'] = $request->input('jenisLaporan') !== null ? $request->input('jenisLaporan') : 'Bulanan';
 
         //akan melakukan filter bulanan sesuai data yang ada di database yang mana nama" bulan terdapat di script.js bagian laporan transaksi
         if ($data['jenisLaporan'] == 'Bulanan') {

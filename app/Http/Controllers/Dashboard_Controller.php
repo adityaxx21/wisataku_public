@@ -19,7 +19,7 @@ class Dashboard_Controller extends Controller
         $data['jumlah_akun'] = DB::table('user_reg')->count();
         $data['jumlah_kategori'] = DB::table('tb_kategori_wisata')->count();
         $data['jumlah_360'] = DB::table('tb_gambar360')->count();
-        $data['jumlah_transaksi'] = DB::table('tb_transaksi')->count();
+        $data['jumlah_transaksi'] = DB::table('tb_transaksi')->where('id_status_pemb',0)->count();
         return view("adminpage.dashboard", $data);
 
         // $request->session()->forget('Nama');
