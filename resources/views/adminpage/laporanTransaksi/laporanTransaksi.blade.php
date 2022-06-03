@@ -89,7 +89,7 @@
                                     <th>Nama wisata</th>
                                     <th>Alamat Wisata</th>
                                     <th>Jumlah Pengunjung</th>
-                                    <th>Tanggal Kunjungan</th>
+                                    <th>Tanggal Transaksi</th>
                                     <th>Nama Pembeli</th>
 
 
@@ -104,7 +104,7 @@
                                         <td>{{ $item->nama_wisata }}</td>
                                         <td>{{ $item->alamat }}</td>
                                         <td>{{ $item->jumlah_tiket_dewasa + $item->jumlah_tiket_anak }}</td>
-                                        <td>{{ date('D, d/M/Y', strtotime($item->tanggal_kedatangan)) }}</td>
+                                        <td>{{ date('D, d/M/Y', strtotime($item->tanggal_transaksi)) }}</td>
                                         <td>{{ $item->uname }}</td>
                                     </tr>
                                 @endforeach

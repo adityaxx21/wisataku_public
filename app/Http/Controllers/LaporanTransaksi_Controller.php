@@ -28,17 +28,17 @@ class LaporanTransaksi_Controller extends Controller
         $last_week = date('Y-m-d', strtotime(date('Y-m-d'). ' - 7 days')); 
         if ($data['jenisLaporan'] == 'Bulanan' && $data['date'] == null) {
             $data['transaksi'] = DB::table('tb_transaksi')
-            ->selectRaw('tb_transaksi.*,user_reg.*,tb_tambah_wisata.*')
+            ->selectRaw('tb_transaksi.*,tb_transaksi.created_at as tanggal_transaksi,user_reg.*,tb_tambah_wisata.*')
             ->leftJoin('user_reg', 'user_reg.uname', '=', 'tb_transaksi.uname')
             ->leftJoin('tb_tambah_wisata', 'tb_tambah_wisata.id', '=', 'tb_transaksi.id_wisata')
             ->orderBy('tb_transaksi.tanggal_kedatangan', 'ASC')
             ->where([$date, $wisata,['id_status_pemb',0]])
-            ->whereYear('tb_transaksi.tanggal_kedatangan','=',2022)
+            ->whereYear('tb_transaksi.created_at','=',date('Y'))
             ->groupByRaw('tb_transaksi.id')
             ->get();
         } else if ($data['jenisLaporan'] == 'Mingguan' && $data['date'] == null) {
             $data['transaksi'] = DB::table('tb_transaksi')
-            ->selectRaw('tb_transaksi.*,user_reg.*,tb_tambah_wisata.*')
+            ->selectRaw('tb_transaksi.*,tb_transaksi.created_at as tanggal_transaksi,user_reg.*,tb_tambah_wisata.*')
             ->leftJoin('user_reg', 'user_reg.uname', '=', 'tb_transaksi.uname')
             ->leftJoin('tb_tambah_wisata', 'tb_tambah_wisata.id', '=', 'tb_transaksi.id_wisata')
             ->orderBy('tb_transaksi.tanggal_kedatangan', 'ASC')
@@ -48,7 +48,7 @@ class LaporanTransaksi_Controller extends Controller
             ->get();
         } else {
             $data['transaksi'] = DB::table('tb_transaksi')
-            ->selectRaw('tb_transaksi.*,user_reg.*,tb_tambah_wisata.*')
+            ->selectRaw('tb_transaksi.*,tb_transaksi.created_at as tanggal_transaksi,user_reg.*,tb_tambah_wisata.*')
             ->leftJoin('user_reg', 'user_reg.uname', '=', 'tb_transaksi.uname')
             ->leftJoin('tb_tambah_wisata', 'tb_tambah_wisata.id', '=', 'tb_transaksi.id_wisata')
             ->orderBy('tb_transaksi.tanggal_kedatangan', 'ASC')
@@ -66,14 +66,14 @@ class LaporanTransaksi_Controller extends Controller
         if ($data['jenisLaporan'] == 'Bulanan') {
             $data['total_transaksi'] = array_fill(0, 12, 0);
             foreach ($data['transaksi'] as $key => $value) {
-                $date =  ltrim(date('m', strtotime($value->tanggal_kedatangan)), '0');
+                $date =  ltrim(date('m', strtotime($value->tanggal_transaksi)), '0');
                 $data['total_transaksi'][(int)$date] +=  1;
             }
             //akan melakukan filter mingguan sesuai data yang ada di database 
         } elseif ($data['jenisLaporan'] == 'Mingguan') {
             $data['total_transaksi'] = array_fill(0, 7, 0);
             foreach ($data['transaksi'] as $key => $value) {
-                $date =  date('D', strtotime($value->tanggal_kedatangan));
+                $date =  date('D', strtotime($value->tanggal_transaksi));
                 $data['total_transaksi'][array_search($date, $data['day'], true)] +=  1;
             }
             //akan melakukan filter tahubab sesuai data yang ada di database 
@@ -82,7 +82,7 @@ class LaporanTransaksi_Controller extends Controller
             $date1 = 0;
             $data['year'] = [];
             foreach ($data['transaksi'] as $key => $value) {
-                $date = date('Y', strtotime($value->tanggal_kedatangan));
+                $date = date('Y', strtotime($value->tanggal_transaksi));
                 if ($date > $date1) {
                     // echo($date." ".$date1."    ");
                     $data['total_transaksi'][] = 0;
