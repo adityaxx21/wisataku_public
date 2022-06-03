@@ -29,17 +29,19 @@ class KelolaAkun_Controller extends Controller
     }
 
     public function create_data(Request $request)
-    {  
+    {
         //funsi post dari penambahan akun
-        $sav_date            =date("Y-m-d H:i:s");
+        $sav_date            = date("Y-m-d H:i:s");
         $get_data = array(
             'Nama' => $request->input('nama'),
             'Email' => $request->input('email'),
             'uname' => $request->input('username'),
             'hak_akses' =>  $request->input('role'),
-            'pass' =>$request->input('password'),
+            'pass' => $request->input('password'),
             'created_at' => $sav_date,
         );
+        $get_data = array_merge($get_data, array('gambar' => 'storage/uploads/editakun/operator.png'));
+
         DB::table('user_reg')->insert($get_data);
 
 
@@ -69,8 +71,8 @@ class KelolaAkun_Controller extends Controller
     {
         // fungsi post edit akun setalah melakukan perbaruan
         $id = session()->get('glob_id');
-        $uname = DB::table('user_reg')->where('id',$id)->select('uname','hak_akses')->first();
-        $sav_date            =date("Y-m-d H:i:s");
+        $uname = DB::table('user_reg')->where('id', $id)->select('uname', 'hak_akses')->first();
+        $sav_date            = date("Y-m-d H:i:s");
         $get_data = array(
             'Nama' => $request->input('nama'),
             'Email' => $request->input('email'),
@@ -79,24 +81,24 @@ class KelolaAkun_Controller extends Controller
             'updated_at' => $sav_date,
             'pass' => $request->input('password')
         );
-        $saved = DB::table('user_reg')->where('id',$id)->update($get_data);
-    //    saat merubah username dan role pada akun diri yang dipakai saat ini, maka user perlu login
+        $saved = DB::table('user_reg')->where('id', $id)->update($get_data);
+        //    saat merubah username dan role pada akun diri yang dipakai saat ini, maka user perlu login
         if (!$saved) {
             App::abort(500, 'Error');
-        } else {            
-            $this->update_uname_roles($uname->uname,$request->input('username'),$request->input('role'));
+        } else {
+            $this->update_uname_roles($uname->uname, $request->input('username'), $request->input('role'));
             $get_data_u = DB::table('user_reg')->where([
-                ['uname',"=",session()->get('username')],
-                ['hak_akses',"=",session()->get('hak_akses')]])
+                ['uname', "=", session()->get('username')],
+                ['hak_akses', "=", session()->get('hak_akses')]
+            ])
                 ->first();
             if ($get_data_u == null) {
                 return redirect('/login')->with('alert-notif', 'Hak Akses atau Username Anda Telah Diubah, Anda Harus Login Terlebih Dahulu');
-            } else{
+            } else {
                 return redirect('/editAkun');
-            }         
+            }
             return redirect('/kelolaAkun');
         }
-       
     }
 
     public function delete($id)
@@ -106,7 +108,7 @@ class KelolaAkun_Controller extends Controller
         return redirect('/kelolaAkun');
     }
 
-    public function update_uname_roles($uname,$new_uname,$roles)
+    public function update_uname_roles($uname, $new_uname, $roles)
     {
         //table yang diubah saat update akun
         DB::table('tb_pesan_komentar')->where('username', $uname)->update(['username' => $new_uname]);
