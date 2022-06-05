@@ -12,13 +12,13 @@
 
                             <form action="/laporanTransaksi" method="get" id="submit_it">
                                 @csrf
-                                <label><input type="search" class="form-control input-sm" placeholder="Nama Wisata"
-                                        aria-controls="datatable-fixed-header" id="search" name="search"
-                                        value="{{ isset($search) ? $search : '' }}"></label>
-                                <input id="date-picker" class="date-picker form-control laporanTransaksi"
+                                <label><input type="search" class="form-control input-sm filter-laporan search-form"
+                                        placeholder="Nama Wisata" aria-controls="datatable-fixed-header" id="search"
+                                        name="search" value="{{ isset($search) ? $search : '' }}"></label>
+                                <input id="date-picker" class="date-picker form-control laporanTransaksi filter-laporan"
                                     placeholder="dd-mm-yyyy" type="date" required="required" onfocus="this.type='date'"
                                     onclick="this.type='date'" name="date" value="{{ $date }}">
-                                <input id="date-picker" class="date-picker form-control laporanTransaksi"
+                                <input id="date-picker" class="date-picker form-control laporanTransaksi filter-laporan"
                                     placeholder="dd-mm-yyyy" type="date" required="required" onfocus="this.type='date'"
                                     onclick="this.type='date'" name="date_end" value="{{ $date_end }}">
 
@@ -68,7 +68,8 @@
                                 <a href="javascript:void(0)" onclick="$('#submit_it').submit();"><i
                                         class="fa fa-search download"></i></a>
                                 <a href="/laporanTransaksi"><i class="fa fa-refresh download"></i></a>
-                                <select id="jenisLaporan" name="jenisLaporan" class="form-control jenisLaporan" required="">
+                                <select id="jenisLaporan" name="jenisLaporan"
+                                    class="form-control jenisLaporan filter-laporan" required="">
                                     <option value="Mingguan" {{ $jenisLaporan == 'Mingguan' ? 'selected' : null }}>
                                         Mingguan
                                     </option>
