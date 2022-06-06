@@ -20,32 +20,33 @@
                 <tbody>
                     <?php $no=0;
                         foreach ($get_data  as $value) {
+                            if ($value->hak_akses != 2) {
                             $no++;?>
                     <tr>
                         <th scope="row">{{ $no }}</th>
                         <td>{{ $value->Nama }}</td>
-                        <td>{{$value->uname}}</td>
-                        <td>{{md5($value->pass)}}</td>
-                        <td>{{$value->jenis_akses}}</td>
+                        <td>{{ $value->uname }}</td>
+                        <td>{{ md5($value->pass) }}</td>
+                        <td>{{ $value->jenis_akses }}</td>
                         <td>
-                            <a href="/editAkun/{{ $value->id }}" class="btn btn-primary"><i
-                                class="fa fa-pencil"><span>
-                                    Edit</span></i></a>
-                        <form action='/kelolaAkun/delete/{{ $value->id }}' method='post'>
-                            @method('delete')
-                            @csrf
-                            <button type="submit" class="btn btn-danger"
-                                onclick="return confirm('Are You Sure About This ? ')">
-                                <i class="fa fa-trash">
-                                    <span>Hapus</span>
-                                </i>
-                            </button>
-                        </form>
-                    </td>
+                            <a href="/editAkun/{{ $value->id }}" class="btn btn-primary"><i class="fa fa-pencil"><span>
+                                        Edit</span></i></a>
+                            <form action='/kelolaAkun/delete/{{ $value->id }}' method='post'>
+                                @method('delete')
+                                @csrf
+                                <button type="submit" class="btn btn-danger"
+                                    onclick="return confirm('Are You Sure About This ? ')">
+                                    <i class="fa fa-trash">
+                                        <span>Hapus</span>
+                                    </i>
+                                </button>
+                            </form>
+                        </td>
                     </tr>
                     <?php 
                 
-                }?>
+                }
+            }?>
                 </tbody>
             </table>
         </div>

@@ -19,7 +19,6 @@
         <script>
             mapboxgl.accessToken =
                 "pk.eyJ1IjoiYWZmYW5kMDgiLCJhIjoiY2wxc2xweDJlMHhsNzNmbzNjbHh4b2x1ZiJ9.0QmipmGiXP91O01rclSKNw";
-
             var lat;
             var long;
 

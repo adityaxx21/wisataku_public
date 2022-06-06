@@ -35,6 +35,7 @@
                         <select id="role" name="role" class="form-control role" required="">
                             <?php 
                             foreach($hak_akses as $key => $value) {
+                                if ($value->hak_akses != 2) {
                                 $select="";
                                 if ($value->hak_akses == $akun->hak_akses) {
                                     $select = 'selected';
@@ -42,7 +43,8 @@
                                 ?>
                             <option value={{ $value->hak_akses }} {{ $select }}>{{ $value->jenis_akses }}
                             </option>
-                            <?php }?>
+                            <?php }
+                        }?>
                         </select>
                     </div>
                 </div>

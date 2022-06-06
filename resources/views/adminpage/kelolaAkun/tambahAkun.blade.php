@@ -29,9 +29,12 @@
                     <div class="col-md-6 col-sm-12  form-group">
                         <label for="role" class="label-form">Level User</label>
                         <select id="role" name="role" class="form-control role" required="">
-                            <?php foreach($hak_akses as $key => $value) {?>
+                            <?php foreach($hak_akses as $key => $value) {
+                                if ($value->hak_akses != 2) {
+?>
                             <option value={{ $value->hak_akses }}>{{ $value->jenis_akses }}</option>
-                            <?php }?>
+                            <?php }
+                        }?>
                         </select>
                     </div>
                 </div>

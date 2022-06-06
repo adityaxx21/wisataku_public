@@ -102,7 +102,7 @@ class LaporanTransaksi_Controller extends Controller
         // data disimpan dalam session untuk dilakukan print
         Session::put('datalaporan', $data['transaksi']);
         Session::put('jenislaporan', $data['jenisLaporan']);
-        Session::put('canvas', $request->input('cavas_here'));
+        // Session::put('canvas', $request->input('cavas_here'));
 
         return view("adminpage.laporanTransaksi.laporanTransaksi", $data);
     }
